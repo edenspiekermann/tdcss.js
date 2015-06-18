@@ -22,7 +22,7 @@ module.exports = Backbone.View.extend({
         var type = this.model.get('type');
         if (type === 'coffeesnippet' && window.CoffeeScript) {
           window.CoffeeScript.eval(this.model.get('raw_script'));
-      }
+        }
 
       var textarea = $("pre", this.$el),
       var new_textarea_height = $(".tdcss-dom-example", this.$el).height();
