@@ -7,6 +7,7 @@
   "homepage": "http://jakobloekke.github.io/tdcss.js/",
   "devDependencies": {
     "grunt": "~0.4.1",
+    "grunt-autoprefixer": "^3.0.3",
     "grunt-cli": "~0.1",
     "grunt-contrib-clean": "~0.4.1",
     "grunt-contrib-concat": "~0.3.0",

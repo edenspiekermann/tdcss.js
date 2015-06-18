@@ -7,7 +7,7 @@ module.exports = function (grunt) {
     grunt.registerTask('default', ['watch']);
 
     // Build task.
-    grunt.registerTask('build', ['clean', 'jshint', 'concat', 'sass', 'karma']);
+    grunt.registerTask('build', ['clean', 'jshint', 'concat', 'sass:dist', 'autoprefixer', 'karma']);
 
     // Travis CI task.
     grunt.registerTask('travis', 'concat', 'karma');
@@ -23,14 +23,20 @@ module.exports = function (grunt) {
             '* Copyright (c) <%= grunt.template.today("yyyy") %> <%= pkg.author %>;\n' +
             '* License: <%= pkg.license %> */\n\n\n',
 
+        dirs: {
+            source: 'src',
+            build: 'download',
+            test: 'test'
+        },
+
         src: {
-            js: ['src/tdcss.js', 'src/vendors/jquery-cookie.js', 'src/vendors/prism/prism.js', 'src/vendors/html2canvas.js', 'src/vendors/resemble-modified.js']
+            js: ['<%= dirs.src %>/tdcss.js', '<%= dirs.src %>/vendor/**/*.js']
         },
 
         // Task configuration.
         watch: {
-            files: ['src/**/*', 'test/**/*'],
-            tasks: ['concat', 'sass'],
+            files: ['<%= dirs.source %>/**/*', '<%= dirs.test %>/**/*'],
+            tasks: ['concat', 'sass:watch', 'autoprefixer'],
             options: {
                 livereload: false
             }
@@ -39,24 +45,48 @@ module.exports = function (grunt) {
         clean: { build: ['build'] },
 
         sass: {
-            options: {
-                sourceMap: false
+            watch: {
+                options: {
+                    sourceComments: true
+                },
+                files: [{
+                    expand: true,
+                    cwd: '<%= dirs.source %>',
+                    src: ['**/*.scss'],
+                    dest: '<%= dirs.build %>',
+                    ext: '.css'
+                }]
             },
             dist: {
-              files: [{
-                expand: true,
-                cwd: 'src',
-                src: ['**/*.scss'],
-                dest: 'download',
-                ext: '.css'
-              }]
+                options: {
+                    outputStyle: 'compressed'
+                },
+                files: [{
+                    expand: true,
+                    cwd: '<%= dirs.source %>',
+                    src: ['**/*.scss'],
+                    dest: '<%= dirs.build %>',
+                    ext: '.css'
+                }]
             }
+        },
+
+        autoprefixer: {
+            options: {
+                browsers: ['last 2 versions', 'ie 8', 'ie 9', '> 1%']
+            },
+            dist: {
+                expand: true,
+                flatten: true,
+                src: '<%= dirs.build %>/**/*.css',
+                dest: '<%= dirs.build %>'
+            }            
         },
 
         concat: {
             js: {
                 src: '<%= src.js %>',
-                dest: 'download/tdcss.js',
+                dest: '<%= dirs.build %>/tdcss.js',
                 options: {
                     banner: '<%= banner %>',
                     stripBanners: true
@@ -67,9 +97,9 @@ module.exports = function (grunt) {
         jshint: {
             options: {
                 jshintrc: '.jshintrc',
-                ignores: ['test/**/*']
+                ignores: ['<%= dirs.test %>/**/*']
             },
-            src: 'src/tdcss.js'
+            src: '<%= dirs.source %>/tdcss.js'
         },
 
         karma: {
