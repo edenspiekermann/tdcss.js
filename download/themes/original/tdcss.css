@@ -22,14 +22,22 @@ body {
 }
 
 .tdcss-menu {
-  float: left;
+  position: absolute;
+  top: 100%;
+  left: 0;
+  width: 180px;
+  list-style: none;
+  margin: 0;
+  padding: 2em 0 0 .5em;
+}
+.tdcss-menu__item {
+  display: block;
+  padding: .5em;
 }
 
 .tdcss-elements {
-  float: left;
-  position: relative;
-  top: 3em;
   margin: 1em;
+  margin-left: 180px;
 }
 
 .tdcss-group {
@@ -37,7 +45,12 @@ body {
   padding: 1px 0 0 0;
   vertical-align: bottom;
   cursor: pointer;
-  border: none;
+
+  margin-bottom: 1em;
+
+  /* this is a crappy solution to evade the fixed top bar */
+  padding-top: 3em;
+
 }
 
 .tdcss-group__head {
@@ -61,6 +74,15 @@ body {
   padding: 0;
   margin: 0;
   overflow: hidden;
+
+  border: 1px solid salmon;
+  margin: 1em 0;
+}
+
+.tdcss-fragment__title {
+  background: salmon;
+  margin: 0;
+  padding: .5em;
 }
 
 .tdcss-diff-warning,
@@ -103,7 +125,7 @@ body {
   opacity: 0.5;
 }
 
-.tdcss-description {
+.tdcss-group__description {
   padding: 1em 10px;
   margin-bottom: 1em;
   font-family: verdana, sans-serif;
@@ -113,11 +135,11 @@ body {
   border: 1px solid #e7e7e7;
 }
 
-.tdcss-description strong {
+.tdcss-group__description strong {
   font-weight: bold;
 }
 
-.tdcss-description em {
+.tdcss-group__description em {
   font-style: italic;
 }
 
@@ -147,7 +169,7 @@ body {
   display: none;
 }
 
-.tdcss-code-example .tdcss-h3 {
+.tdcss-code-example .tdcss-fragment__title {
   padding: 0.25em;
   margin-top: 0;
   margin-bottom: 0.5em;
