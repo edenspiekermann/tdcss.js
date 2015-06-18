@@ -9,7 +9,7 @@ var Fragment = Backbone.Model.extend({
 
 
 var Section = Fragment.extend({
-    defautls: {
+    defaults: {
         title: ''
     }
 });
