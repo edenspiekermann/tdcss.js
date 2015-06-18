@@ -13,7 +13,7 @@ module.exports = TDCSSView.extend({
 
     attributes: function() {
         return {
-          id: this.model.toUniqueID()
+          //id: this.model.toUniqueID()
         };
     }
 });

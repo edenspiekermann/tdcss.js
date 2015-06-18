@@ -4,17 +4,23 @@ var Backbone = require('backbone');
 var Fragment = Backbone.Model.extend({
     defaults: {
         type: '',
-        name: ''
+        name: '',
         wip: false
+    },
+
+    initialize: function (data) {
+
+    },
+
+    toUniqueID: function() {
+        var output = this.get('name').replace(/\s+/g, '-').toLowerCase();
+        return encodeURIComponent(output);
     }
 });
 
 
 var Section = Fragment.extend({
-    toUniqueID: function() {
-        var output = this.get('name').replace(/\s+/g, '-').toLowerCase();
-        return encodeURIComponent(output);
-    }
+
 });
 
 

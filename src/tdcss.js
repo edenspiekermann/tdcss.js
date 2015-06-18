@@ -4,10 +4,25 @@
  * @author Jakob Løkke Madsen
  * @url http://www.jakobloekkemadsen.com
  */
-var Prism = require('prismjs'),
-    $     = require('jquery'),
-    sectionView = require('./views/section'),
-    jQuery = $;
+
+var Prism = require('prismjs');
+var $ = require('jquery');
+var jQuery = $;
+var _ = require('underscore');
+
+// models
+var FragmentTypes = require('./models/const.js');
+var Models = require('./models');
+var Section = Models.Section;
+var Description = Models.Description;
+var CodeSnippet = Models.CodeSnippet;
+var JSCodeSnippet = Models.JSCodeSnippet;
+// collections
+var Fragments = require('./collections').Fragments;
+// views
+var TDCSSElementsView = require('./views/tdcss-elements.js');
+var SectionView = require('./views/section.js');
+var FragmentView = require('./views/fragment.js');
 
 (function () {
     "use strict";
@@ -41,7 +56,7 @@ var Prism = require('prismjs'),
             }, options),
             module = {
                 container: null,
-                fragments: [],
+                fragments: new Fragments(),
                 snippet_count: 0
             },
             jump_to_menu_options = '<option>Jump To Section:</option>';
@@ -73,7 +88,7 @@ var Prism = require('prismjs'),
         });
 
         function reset() {
-            module.fragments.length = 0;
+            module.fragments.reset();
         }
 
         function setup() {
@@ -96,91 +111,145 @@ var Prism = require('prismjs'),
                     "</div>");
             } else {
                 comments.each(function () {
-                    module.fragments.push(new Fragment(this));
+                    var fragment = createFragmentFromComment(this);
+                    if (fragment) {
+                        console.log(fragment.toJSON());
+                        module.fragments.add(fragment);
+                    }
                 });
             }
+
 
             $(module.container).empty(); // Now we can empty the container to avoid having duplicate DOM nodes in the background
         }
 
-        function Fragment(raw_comment_node) {
-            var that = this;
 
-            that.raw_comment_node = raw_comment_node;
-            that.type = getFragmentType();
+        function createFragmentFromComment(commentNode) {
+            var type = getFragmentType(commentNode);
+            var customHeight;
+            var fragmentTitle;
+            var fragmentDescription;
+            var fragment;
+            var fragmentHTML;
+            var rawScript;
+            var identifier;
 
-            if (that.type === "section") {
-                that.section_name = $.trim(getCommentMeta(that.raw_comment_node)[0]
-                    .split(settings.fragment_types.section.identifier)[1]);
+            if (type === FragmentTypes.SECTION.name) {
+                identifier = FragmentTypes[type].identifier;
+                fragmentTitle = getFragmentContent(commentNode, identifier);
+                return new Section({
+                    type: type,
+                    name: fragmentTitle
+                });
             }
 
-            if (that.type === "description") {
-                that.description_text = $.trim(getCommentMeta(that.raw_comment_node)[0]
-                    .split(settings.fragment_types.description.identifier)[1]);
+            if (type === FragmentTypes.DESCRIPTION.name) {
+                identifier = FragmentTypes[type].identifier;
+                fragmentDescription = getFragmentContent(commentNode, identifier);
+
+                return new Description({
+                    type: type,
+                    description: fragmentDescription
+                });
             }
 
-            if (that.type === "snippet") {
-                that.snippet_title = $.trim(getCommentMeta(that.raw_comment_node)[0]
-                    .split(settings.fragment_types.snippet.identifier)[1]);
-                that.custom_height = $.trim(getCommentMeta(that.raw_comment_node)[1]);
-                that.html = getFragmentHTML(that.raw_comment_node);
+            if (type === FragmentTypes.SNIPPET.name) {
+                identifier = FragmentTypes[type].identifier;
+                fragmentTitle = getFragmentContent(commentNode, identifier);
+                customHeight = $.trim(getCommentMeta(commentNode)[1]);
+                fragmentHTML = getFragmentHTML(commentNode);
+
+                return new CodeSnippet({
+                    type: type,
+                    title: fragmentTitle,
+                    html: fragmentHTML,
+                    customHeight: customHeight
+                });
+
             }
 
-            if (that.type === "jssnippet") {
-                that.snippet_title = $.trim(getCommentMeta(that.raw_comment_node)[0]
-                    .split(settings.fragment_types[that.type].identifier)[1]);
-                that.raw_script = getFragmentScriptHTML(that.raw_comment_node);
-                that.html = getFragmentHTML(that.raw_comment_node);
+            if (type === FragmentTypes.JS_SNIPPET.name) {
+                identifier = FragmentTypes[type].identifier;
+                fragmentTitle = getFragmentContent(commentNode, identifier);
+                rawScript = getFragmentScriptHTML(commentNode);
+                fragmentHTML = getFragmentHTML(commentNode);
+
+                return new JSCodeSnippet({
+                    type: type,
+                    title: fragmentTitle,
+                    html: fragmentHTML,
+                    rawScript: rawScript
+                });
             }
 
-            if (that.type === "coffeesnippet") {
-                if (!window.CoffeeScript) throw new Error("Include CoffeeScript Compiler to evaluate CoffeeScript with tdcss.");
+            if (type === FragmentTypes.COFFEE_SNIPPET.name) {
+                if (!window.CoffeeScript) {
+                    throw new Error("Include CoffeeScript Compiler to evaluate CoffeeScript with tdcss.");
+                }
+                identifier = FragmentTypes[type].identifier;
+                fragmentTitle = getFragmentContent(commentNode, identifier);
+                rawScript = getFragmentScriptHTML(commentNode);
+                fragmentHTML = getFragmentHTML(commentNode);
 
-                that.snippet_title = $.trim(getCommentMeta(that.raw_comment_node)[0]
-                    .split(settings.fragment_types[that.type].identifier)[1]);
+                return new JSCodeSnippet({
+                    type: type,
+                    title: fragmentTitle,
+                    html: fragmentHTML,
+                    rawScript: rawScript
+                });
 
-                that.raw_script = getFragmentCoffeeScriptHTML(that.raw_comment_node);
-                that.html = getFragmentHTML(that.raw_comment_node);
             }
 
-            if (that.type === "no_snippet") {
-                that.snippet_title = $.trim(getCommentMeta(that.raw_comment_node)[0]
-                    .split(settings.fragment_types.no_snippet.identifier)[1]);
-                that.custom_height = $.trim(getCommentMeta(that.raw_comment_node)[1]);
-                that.html = getFragmentHTML(that.raw_comment_node);
+            if (type === FragmentTypes.NO_SNIPPET.name) {
+                identifier = FragmentTypes[type].identifier;
+                fragmentTitle = getFragmentContent(commentNode, identifier);
+                customHeight = $.trim(getCommentMeta(commentNode)[1]);
+                fragmentHTML = getFragmentHTML(commentNode);
+
+                return new CodeSnippet({
+                    type: type,
+                    title: fragmentTitle,
+                    html: fragmentHTML,
+                    customHeight: customHeight
+                });
             }
 
-            return that;
+            // return undefined if no match is found
+            return undefined;
+        }
 
-            function getFragmentType() {
-                var found_type = "";
-                for (var fragment_type in settings.fragment_types) {
-                    if (settings.fragment_types.hasOwnProperty(fragment_type)) {
-                        var identifier = settings.fragment_types[fragment_type].identifier;
-                        if (that.raw_comment_node.nodeValue.match(new RegExp(identifier))) {
-                            found_type = fragment_type;
-                        }
+        function getFragmentType(element) {
+            var foundType = "";
+            for (var fragmentType in FragmentTypes) {
+                if (FragmentTypes.hasOwnProperty(fragmentType)) {
+                    var identifier = FragmentTypes[fragmentType].identifier;
+                    if (element.nodeValue.match(new RegExp(identifier))) {
+                        foundType = fragmentType;
                     }
                 }
-                return found_type;
             }
+            return foundType;
         }
 
-        function getCommentMeta(elem) {
-            return elem.nodeValue.split(settings.fragment_info_splitter);
+        function getFragmentContent(element, identifier) {
+            return $.trim(getCommentMeta(element)[0].split(identifier)[1]);
         }
 
-        function getFragmentScriptHTML(elem) {
-            return $(elem).nextAll('script[type="text/javascript"]').html().trim();
+        function getCommentMeta(element) {
+            return element.nodeValue.split(settings.fragment_info_splitter);
         }
 
-        function getFragmentCoffeeScriptHTML(elem) {
-            return $(elem).nextAll('script[type="text/coffeescript"]').html().trim();
+        function getFragmentScriptHTML(element) {
+            return $(element).nextAll('script[type="text/javascript"]').html();
         }
 
-        function getFragmentHTML(elem) {
+        function getFragmentCoffeeScriptHTML(element) {
+            return $(element).nextAll('script[type="text/coffeescript"]').html().trim();
+        }
+
+        function getFragmentHTML(element) {
             // The actual HTML fragment is the comment's nextSibling (a carriage return)'s nextSibling:
-            var fragment = elem.nextSibling.nextSibling;
+            var fragment = element.nextSibling.nextSibling;
 
             // Check if nextSibling is a comment or a real html fragment to be rendered
             if (fragment.nodeType !== 8) {
@@ -193,31 +262,42 @@ var Prism = require('prismjs'),
         function render() {
             var sectionCount = 0, insertBackToTop;
 
-            for (var i = 0; i < module.fragments.length; i++) {
-                var fragment = module.fragments[i];
+            module.fragments.each(function (fragment, index) {
+                var type = fragment.get('type');
+                var view;
+                var markup;
 
-                if (fragment.type === "section") {
+                if (type === FragmentTypes.SECTION.name) {
                     //Don't insert the "Back to Top" for very first section
-                    insertBackToTop = sectionCount > 0 ? true : false;
-                    addNewSection(fragment.section_name, insertBackToTop);
-                    jump_to_menu_options += '<option class="tdcss-jumpto-section" href="#' + encodeURIComponent(_spacesToLowerCasedHyphenated(fragment.section_name)) + '">' + fragment.section_name + '</option>';
-                    sectionCount++;
+                    //insertBackToTop = sectionCount > 0 ? true : false;
+                    view = new SectionView({model: fragment});
+                    markup = $(view.render().el).html();
+
+                    $(module.container).next(".tdcss-elements").append(markup);
+                    // addNewSection(fragment.section_name, insertBackToTop);
+                    // jump_to_menu_options += '<option class="tdcss-jumpto-section" href="#' + encodeURIComponent(_spacesToLowerCasedHyphenated(fragment.section_name)) + '">' + fragment.section_name + '</option>';
+                    // sectionCount++;
+                }
+                if (
+                    type === FragmentTypes.SNIPPET.name ||
+                    type === FragmentTypes.JS_SNIPPET.name ||
+                    type === FragmentTypes.COFFEE_SNIPPET.name) {
+
+                    view = new FragmentView({model: fragment});
+                    markup = $(view.render().el).html();
+
+                    $(module.container).next(".tdcss-elements").append(markup);
                 }
 
-                if (fragment.type === "snippet" || fragment.type === 'jssnippet' || fragment.type === 'coffeesnippet') {
-                    module.snippet_count++;
-                    addNewSnippet(fragment);
-                }
+                // if (fragment.type === "no_snippet") {
+                //     module.snippet_count++;
+                //     addNewNoSnippet(fragment);
+                // }
 
-                if (fragment.type === "no_snippet") {
-                    module.snippet_count++;
-                    addNewNoSnippet(fragment);
-                }
-
-                if (fragment.type === "description") {
-                    addNewDescription(fragment);
-                }
-            }
+                // if (fragment.type === "description") {
+                //     addNewDescription(fragment);
+                // }
+            });
         }
 
         function _spacesToLowerCasedHyphenated(str) {
@@ -225,30 +305,24 @@ var Prism = require('prismjs'),
             return str;
         }
 
-        function addNewSection(section_name, insertBackToTop) {
-            // var markup, backToTop;
+        // function addNewSection(section_name, insertBackToTop) {
+        //     var markup, backToTop;
 
-            // //Check if our trimmed section name contains case-insensitive 'wip'
-            // var isWorkInProgress = /^wip/i.test($.trim(section_name));
+        //     //Section boiler-plate markup
+        //     var sectionHyphenated = encodeURIComponent(_spacesToLowerCasedHyphenated(section_name));
 
-            // //Remove WIP from name as we only want to add class for styling
-            // section_name = isWorkInProgress ? $.trim(section_name).replace(/^wip/i, '') : section_name;
+        //     //If work in progress we add the 'wip' class so strikethrough or similar can be applied
+        //     var sectionKlass = isWorkInProgress ? 'tdcss-section wip' : 'tdcss-section';
+        //     markup = '<div class="' + sectionKlass + '" id="' + encodeURIComponent(sectionHyphenated) + '"><h2 class="tdcss-h2">' + section_name + '</h2></div>';
 
-            // //Section boiler-plate markup
-            // var sectionHyphenated = encodeURIComponent(_spacesToLowerCasedHyphenated(section_name));
+        //     if (insertBackToTop) {
+        //         //prepend the back to top link to section markup
+        //         backToTop = '<div class="tdcss-top"><a class="tddcss-top-link" href="#">Back to Top</a></div>';
+        //         markup = backToTop + markup;
+        //     }
 
-            // //If work in progress we add the 'wip' class so strikethrough or similar can be applied
-            // var sectionKlass = isWorkInProgress ? 'tdcss-section wip' : 'tdcss-section';
-            // markup = '<div class="' + sectionKlass + '" id="' + encodeURIComponent(sectionHyphenated) + '"><h2 class="tdcss-h2">' + section_name + '</h2></div>';
-
-            // if (insertBackToTop) {
-            //     //prepend the back to top link to section markup
-            //     backToTop = '<div class="tdcss-top"><a class="tddcss-top-link" href="#">Back to Top</a></div>';
-            //     markup = backToTop + markup;
-            // }
-
-            // $(module.container).next(".tdcss-elements").append(markup);
-        }
+        //     $(module.container).next(".tdcss-elements").append(markup);
+        // }
 
         function _addFragment(fragment, renderSnippet) {
             var title = fragment.snippet_title || '', html = fragment.html;
@@ -304,6 +378,13 @@ var Prism = require('prismjs'),
                 }
             }
 
+            function htmlEscape(html) {
+                return String(html)
+                    .replace(/"/g, '&quot;')
+                    .replace(/'/g, '&#39;')
+                    .replace(/</g, '&lt;')
+                    .replace(/>/g, '&gt;');
+            }
         }
 
         function addNewNoSnippet(fragment) {
