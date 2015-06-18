@@ -12,10 +12,10 @@ module.exports = function (grunt) {
     grunt.registerTask('default', ['clean', 'jshint', 'browserify', 'karma', 'sass:watch', 'autoprefixer', 'watch']);
 
     // Build task.
-    grunt.registerTask('build', ['clean', 'jshint', 'concat', 'sass:dist', 'autoprefixer', 'karma']);
+    grunt.registerTask('build', ['clean', 'jshint', 'sass:dist', 'autoprefixer', 'karma']);
 
     // Travis CI task.
-    grunt.registerTask('travis', 'concat', 'karma');
+    grunt.registerTask('travis', 'karma');
 
     // Project configuration.
     grunt.initConfig({
@@ -41,7 +41,7 @@ module.exports = function (grunt) {
         // Task configuration.
         watch: {
             files: ['<%= dirs.source %>/**/*', '<%= dirs.test %>/**/*'],
-            tasks: ['concat', 'sass:watch', 'autoprefixer'],
+            tasks: ['sass:watch', 'autoprefixer'],
             options: {
                 livereload: false
             }
