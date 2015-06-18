@@ -19,10 +19,12 @@ var CodeSnippet = Models.CodeSnippet;
 var JSCodeSnippet = Models.JSCodeSnippet;
 // collections
 var Fragments = require('./collections').Fragments;
+var Sections = require('./collections').Sections;
 // views
 var TDCSSElementsView = require('./views/tdcss-elements.js');
 var SectionView = require('./views/section.js');
 var FragmentView = require('./views/fragment.js');
+var NavigationView = require('./views/tdcss-nav.js');
 
 (function () {
     "use strict";
@@ -68,11 +70,12 @@ var FragmentView = require('./views/fragment.js');
             reset();
             setup();
             parse();
+            renderNavigation();
             render();
             bindSectionCollapseHandlers();
             restoreCollapsedSectionsFromUrl();
             highlightSyntax();
-            makeTopBar();
+            //makeTopBar();
 
             if (settings.diff) {
                 diff();
@@ -94,7 +97,7 @@ var FragmentView = require('./views/fragment.js');
         function setup() {
             $(module.container)
                 .addClass("tdcss-fragments")
-                .after("<div class='tdcss-elements'></div>");
+                .after('<main class="tdcss-main tdcss-nav__neighbour" role="main"><div class="tdcss-elements"></div></main>');
         }
 
         function parse() {
@@ -113,7 +116,6 @@ var FragmentView = require('./views/fragment.js');
                 comments.each(function () {
                     var fragment = createFragmentFromComment(this);
                     if (fragment) {
-                        console.log(fragment.toJSON());
                         module.fragments.add(fragment);
                     }
                 });
@@ -122,6 +124,7 @@ var FragmentView = require('./views/fragment.js');
 
             $(module.container).empty(); // Now we can empty the container to avoid having duplicate DOM nodes in the background
         }
+
 
 
         function createFragmentFromComment(commentNode) {
@@ -262,6 +265,8 @@ var FragmentView = require('./views/fragment.js');
         function render() {
             var sectionCount = 0, insertBackToTop;
 
+
+
             module.fragments.each(function (fragment, index) {
                 var type = fragment.get('type');
                 var view;
@@ -298,6 +303,14 @@ var FragmentView = require('./views/fragment.js');
                 //     addNewDescription(fragment);
                 // }
             });
+        }
+
+        function renderNavigation() {
+            var sectionModels = module.fragments.getSections();
+            var sections = new Sections(sectionModels);
+            var navigationView = new NavigationView({collection: sections});
+            var navigationMarkup = navigationView.render().$el.html();
+            $('#nav-container').append(navigationMarkup);
         }
 
         function _spacesToLowerCasedHyphenated(str) {
