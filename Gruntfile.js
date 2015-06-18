@@ -30,7 +30,7 @@ module.exports = function (grunt) {
         },
 
         src: {
-            js: ['<%= dirs.src %>/tdcss.js', '<%= dirs.src %>/vendor/**/*.js']
+            js: ['<%= dirs.source %>/tdcss.js', '<%= dirs.source %>/vendor/**/*.js']
         },
 
         // Task configuration.
