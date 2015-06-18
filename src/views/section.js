@@ -14,7 +14,7 @@ module.exports = Backbone.View.extend({
 
   attributes: function() {
     return {
-      id: this.model.toUniqueId()
+      id: this.model.toUniqueID()
     };
   },
 

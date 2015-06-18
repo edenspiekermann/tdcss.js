@@ -2,15 +2,16 @@
 var Fragment = Backbone.Model.extend({
     defaults: {
         type: '',
-        title: '',
+        name: ''
         wip: false
     }
 });
 
 
 var Section = Fragment.extend({
-    defaults: {
-        title: ''
+    toUniqueID: function() {
+        var output = this.get('name').replace(/\s+/g, '-').toLowerCase();
+        return encodeURIComponent(output);
     }
 });
 
