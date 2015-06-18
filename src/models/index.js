@@ -30,9 +30,17 @@ var JSCodeSnippet = CodeSnippet.extend({
     }
 });
 
+
+var Description = Fragment.extend({
+    defaults: {
+        text: ''
+    }
+});
+
 module.exports = {
     Fragment: Fragment,
     Section: Section,
     CodeSnippet: CodeSnippet,
-    JSCodeSnippet: JSCodeSnippet
+    JSCodeSnippet: JSCodeSnippet,
+    Description: Description
 }
