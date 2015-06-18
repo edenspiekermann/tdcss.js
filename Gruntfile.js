@@ -3,11 +3,14 @@ module.exports = function (grunt) {
 
     require('load-grunt-tasks')(grunt);
 
+    // Compile task.
+    grunt.registerTask('compile', ['concat', 'sass:dist', 'autoprefixer']);
+
     // Default task.
-    grunt.registerTask('default', ['watch']);
+    grunt.registerTask('default', ['compile', 'watch']);
 
     // Build task.
-    grunt.registerTask('build', ['clean', 'jshint', 'concat', 'sass:dist', 'autoprefixer', 'karma']);
+    grunt.registerTask('build', ['clean', 'jshint', 'compile', 'karma']);
 
     // Travis CI task.
     grunt.registerTask('travis', 'concat', 'karma');
@@ -36,7 +39,7 @@ module.exports = function (grunt) {
         // Task configuration.
         watch: {
             files: ['<%= dirs.source %>/**/*', '<%= dirs.test %>/**/*'],
-            tasks: ['concat', 'sass:watch', 'autoprefixer'],
+            tasks: ['compile'],
             options: {
                 livereload: false
             }
