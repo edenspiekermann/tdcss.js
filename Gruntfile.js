@@ -78,8 +78,7 @@ module.exports = function (grunt) {
             dist: {
                 expand: true,
                 flatten: true,
-                src: '<%= dirs.build %>/**/*.css',
-                dest: '<%= dirs.build %>'
+                src: '<%= dirs.build %>/**/*.css'
             }            
         },
 
