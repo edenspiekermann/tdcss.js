@@ -33,7 +33,6 @@
 
     "node" : true,
     "browser" : true,
-    "jquery": true,
     "boss" : false,
     "curly": false,
     "debug": false,

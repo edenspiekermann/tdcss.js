@@ -2,33 +2,27 @@
 module.exports = function (grunt) {
 
     // These plugins provide necessary tasks.
-    grunt.loadNpmTasks('grunt-contrib-concat');
     grunt.loadNpmTasks('grunt-contrib-uglify');
     grunt.loadNpmTasks('grunt-karma');
     grunt.loadNpmTasks('grunt-contrib-jshint');
     grunt.loadNpmTasks('grunt-contrib-watch');
     grunt.loadNpmTasks('grunt-contrib-clean');
     grunt.loadNpmTasks('grunt-recess');
+    grunt.loadNpmTasks('grunt-browserify');
 
     // Default task.
-    grunt.registerTask('default', ['clean', 'jshint', 'concat', 'recess', 'karma']);
+    grunt.registerTask('default', ['clean', 'jshint', 'browserify', 'recess', 'karma']);
 
     // Travis CI task.
-    grunt.registerTask('travis', 'concat', 'karma');
+    grunt.registerTask('travis', 'karma');
 
     // Project configuration.
     grunt.initConfig({
         // Metadata.
         pkg: grunt.file.readJSON('package.json'),
 
-        banner: '/* <%= pkg.title || pkg.name %> - v<%= pkg.version %> - ' +
-            '<%= grunt.template.today("yyyy-mm-dd") %>\n' +
-            '<%= pkg.homepage ? "* " + pkg.homepage + "\\n" : "" %>' +
-            '* Copyright (c) <%= grunt.template.today("yyyy") %> <%= pkg.author %>;\n' +
-            '* License: <%= pkg.license %> */\n\n\n',
-
         src: {
-            js: ['src/tdcss.js', 'src/vendors/jquery-cookie.js', 'src/vendors/prism/prism.js', 'src/vendors/html2canvas.js', 'src/vendors/resemble-modified.js'],
+            js: ['src/tdcss.js', 'src/vendors/prism/prism.js', 'src/vendors/html2canvas.js', 'src/vendors/resemble-modified.js'],
             css: ['src/themes/**/*.css', 'src/vendors/prism/prism.css']
         },
 
@@ -60,13 +54,16 @@ module.exports = function (grunt) {
                 }]
             }
         },
-        concat: {
-            js: {
-                src: '<%= src.js %>',
+        browserify: {
+            client: {
+                src: ['src/tdcss.js'],
                 dest: 'download/tdcss.js',
                 options: {
-                    banner: '<%= banner %>',
-                    stripBanners: true
+                    banner: '/* <%= pkg.title || pkg.name %> - v<%= pkg.version %> - ' +
+                        '<%= grunt.template.today("yyyy-mm-dd") %>\n' +
+                        '<%= pkg.homepage ? "* " + pkg.homepage + "\\n" : "" %>' +
+                        '* Copyright (c) <%= grunt.template.today("yyyy") %> <%= pkg.author %>;\n' +
+                        '* License: <%= pkg.license %> */\n\n\n',
                 }
             }
         },

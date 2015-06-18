@@ -4,8 +4,11 @@
  * @author Jakob Løkke Madsen
  * @url http://www.jakobloekkemadsen.com
  */
+var Prism = require('prismjs'),
+    $     = require('jquery'),
+    jQuery = $;
 
-(function ($) {
+(function () {
     "use strict";
 
     $.fn.tdcss = function (options) {
@@ -138,7 +141,7 @@
                 that.raw_script = getFragmentCoffeeScriptHTML(that.raw_comment_node);
                 that.html = getFragmentHTML(that.raw_comment_node);
             }
-            
+
             if (that.type === "no_snippet") {
                 that.snippet_title = $.trim(getCommentMeta(that.raw_comment_node)[0]
                     .split(settings.fragment_types.no_snippet.identifier)[1]);
@@ -249,7 +252,7 @@
         function _addFragment(fragment, renderSnippet) {
             var title = fragment.snippet_title || '', html = fragment.html;
 
-            //If type coffeescript or jssnippet we want to escape the raw script 
+            //If type coffeescript or jssnippet we want to escape the raw script
             var escaped_html = '';
             if (fragment.type === 'coffeesnippet' || fragment.type === 'jssnippet') {
                 escaped_html = htmlEscape(fragment.raw_script);
@@ -564,4 +567,4 @@
     };
 })($);
 
-
+window.$ = $;
