@@ -1,4 +1,4 @@
-/* tdcss.js - v0.7.0 - 2015-06-18
+/* tdcss.js - v0.7.0 - 2015-06-19
 * http://jakobloekke.github.io/tdcss.js/
 * Copyright (c) 2015 Jakob Løkke Madsen;
 * License: MIT */
@@ -20325,6 +20325,7 @@ module.exports = types;
 
 },{}],43:[function(require,module,exports){
 var Backbone = require('backbone');
+var _ = require('underscore');
 
 
 var Fragment = Backbone.Model.extend({
@@ -20342,11 +20343,19 @@ var Fragment = Backbone.Model.extend({
         var output = this.get('name').replace(/\s+/g, '-').toLowerCase();
         return encodeURIComponent(output);
     }
+
 });
 
 
 var Section = Fragment.extend({
+    toJSON: function () {
+        var data = _.clone(this.attributes);
+        data = _.extend({
+            href: this.toUniqueID()
+        }, data);
 
+        return data;
+    }
 });
 
 
@@ -20379,7 +20388,7 @@ module.exports = {
     JSCodeSnippet: JSCodeSnippet
 }
 
-},{"backbone":1}],44:[function(require,module,exports){
+},{"backbone":1,"underscore":40}],44:[function(require,module,exports){
 /**
  * tdcss.js: Super-simple styleguide tool
  * MIT License http://www.opensource.org/licenses/mit-license.php/
@@ -21120,7 +21129,9 @@ var HandlebarsCompiler = require('hbsfy/runtime');
 module.exports = HandlebarsCompiler.template({"compiler":[6,">= 2.0.0-beta.1"],"main":function(depth0,helpers,partials,data) {
     var helper, alias1=helpers.helperMissing, alias2="function", alias3=this.escapeExpression;
 
-  return "<section class=\"tdcss-group\" id=\"\">\n  <header class=\"tdcss-group__head tdcss-slab tdcss-slab--group tdcss-slab--primary tdcss-font\">\n    <h1 class=\"tdcss-group__title\">"
+  return "<section class=\"tdcss-group\" id=\""
+    + alias3(((helper = (helper = helpers.href || (depth0 != null ? depth0.href : depth0)) != null ? helper : alias1),(typeof helper === alias2 ? helper.call(depth0,{"name":"href","hash":{},"data":data}) : helper)))
+    + "\">\n  <header class=\"tdcss-group__head tdcss-slab tdcss-slab--group tdcss-slab--primary tdcss-font\">\n    <h1 class=\"tdcss-group__title\">"
     + alias3(((helper = (helper = helpers.name || (depth0 != null ? depth0.name : depth0)) != null ? helper : alias1),(typeof helper === alias2 ? helper.call(depth0,{"name":"name","hash":{},"data":data}) : helper)))
     + "</h1>\n    <div class=\"tdcss-group__description tdcss-slab tdcss-slab--description tdcss-slab--dimmed tdcss-font\">\n      "
     + alias3(((helper = (helper = helpers.text || (depth0 != null ? depth0.text : depth0)) != null ? helper : alias1),(typeof helper === alias2 ? helper.call(depth0,{"name":"text","hash":{},"data":data}) : helper)))
@@ -21142,9 +21153,7 @@ module.exports = TDCSSView.extend({
     },
 
     attributes: function() {
-        return {
-          //id: this.model.toUniqueID()
-        };
+        return this.model.toJSON();
     }
 });
 
@@ -21158,8 +21167,20 @@ module.exports = Backbone.View.extend({
 },{"backbone":1}],50:[function(require,module,exports){
 // hbsfy compiled Handlebars template
 var HandlebarsCompiler = require('hbsfy/runtime');
-module.exports = HandlebarsCompiler.template({"compiler":[6,">= 2.0.0-beta.1"],"main":function(depth0,helpers,partials,data) {
-    return "<input type=\"checkbox\" id=\"tdcssNavToggle\" aria-hidden=\"true\">\n<div class=\"tdcss-nav\">\n    <label for=\"tdcssNavToggle\" class=\"tdcss-nav__toggle\">\n        <span class=\"tdcss-nav__toggle-label\">groups</span>\n    </label>\n    <ul class=\"tdcss-menu\">\n        <li class=\"tdcss-menu__item\">\n            <a class=\"tdcss-menu__link\" href=\"#wip-javascript-test\">Item title</a>\n        </li>\n        <li>...</li>\n    </ul>\n</div>\n";
+module.exports = HandlebarsCompiler.template({"1":function(depth0,helpers,partials,data) {
+    var alias1=this.lambda, alias2=this.escapeExpression;
+
+  return "        <li class=\"tdcss-menu__item\">\n            <a class=\"tdcss-menu__link\" href=\"#"
+    + alias2(alias1((depth0 != null ? depth0.href : depth0), depth0))
+    + "\">"
+    + alias2(alias1((depth0 != null ? depth0.name : depth0), depth0))
+    + "</a>\n        </li>\n";
+},"compiler":[6,">= 2.0.0-beta.1"],"main":function(depth0,helpers,partials,data) {
+    var stack1;
+
+  return "<input type=\"checkbox\" id=\"tdcssNavToggle\" aria-hidden=\"true\">\n<div class=\"tdcss-nav\">\n    <label for=\"tdcssNavToggle\" class=\"tdcss-nav__toggle\">\n        <span class=\"tdcss-nav__toggle-label\">groups</span>\n    </label>\n    <ul class=\"tdcss-menu\">\n"
+    + ((stack1 = helpers.each.call(depth0,(depth0 != null ? depth0.menuItems : depth0),{"name":"each","hash":{},"fn":this.program(1, data, 0),"inverse":this.noop,"data":data})) != null ? stack1 : "")
+    + "\n    </ul>\n</div>\n";
 },"useData":true});
 
 },{"hbsfy/runtime":37}],51:[function(require,module,exports){
@@ -21174,7 +21195,12 @@ module.exports = TDCSSView.extend({
     template: require('./tdcss-nav.hbs'),
 
     render: function() {
-        var data = {};
+        var menuData = this.collection.map(function (item) {
+            return item.toJSON();
+        });
+        var data = {
+            menuItems: menuData
+        };
 
         this.$el.append(this.template(data));
 
@@ -21189,7 +21215,7 @@ var Handlebars = require('handlebars');
 
 module.exports = Backbone.View.extend({
     render: function() {
-        var data = this.getTemplateData ? this.getTemplateData() : this.model.attributes;
+        var data = this.getTemplateData ? this.getTemplateData() : this.model.toJSON();
 
         this.$el.append(this.template(data));
         if (this.postRender) {
