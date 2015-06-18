@@ -3,7 +3,7 @@ var Handlebars = require('handlebars');
 
 module.exports = Backbone.View.extend({
     render: function() {
-        var data = this.getTemplateData ? this.getTemplateData() : this.model.attributes;
+        var data = this.getTemplateData ? this.getTemplateData() : this.model.toJSON();
 
         this.$el.append(this.template(data));
         if (this.postRender) {

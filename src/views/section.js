@@ -12,8 +12,6 @@ module.exports = TDCSSView.extend({
     },
 
     attributes: function() {
-        return {
-          //id: this.model.toUniqueID()
-        };
+        return this.model.toJSON();
     }
 });

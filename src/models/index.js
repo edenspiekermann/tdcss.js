@@ -1,4 +1,5 @@
 var Backbone = require('backbone');
+var _ = require('underscore');
 
 
 var Fragment = Backbone.Model.extend({
@@ -16,11 +17,19 @@ var Fragment = Backbone.Model.extend({
         var output = this.get('name').replace(/\s+/g, '-').toLowerCase();
         return encodeURIComponent(output);
     }
+
 });
 
 
 var Section = Fragment.extend({
+    toJSON: function () {
+        var data = _.clone(this.attributes);
+        data = _.extend({
+            href: this.toUniqueID()
+        }, data);
 
+        return data;
+    }
 });
 
 
