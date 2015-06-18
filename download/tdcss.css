@@ -10,7 +10,7 @@
  * Based on dabblet (http://dabblet.com)
  * @author Lea Verou
  */
-/* line 8, /Users/mberridge/Sites/tdcss.js/src/vendors/prism/prism.css */
+/* line 8, /Users/mberridge/Sites/tdcss.js/src/vendor/prism/prism.css */
 code[class*="language-"],
 pre[class*="language-"] {
   color: black;
@@ -29,52 +29,52 @@ pre[class*="language-"] {
   hyphens: none; }
 
 /* Code blocks */
-/* line 28, /Users/mberridge/Sites/tdcss.js/src/vendors/prism/prism.css */
+/* line 28, /Users/mberridge/Sites/tdcss.js/src/vendor/prism/prism.css */
 pre[class*="language-"] {
   padding: 1em;
   margin: .5em 0;
   overflow: auto; }
 
-/* line 35, /Users/mberridge/Sites/tdcss.js/src/vendors/prism/prism.css */
+/* line 35, /Users/mberridge/Sites/tdcss.js/src/vendor/prism/prism.css */
 :not(pre) > code[class*="language-"],
 pre[class*="language-"] {
   background: #f5f2f0; }
 
 /* Inline code */
-/* line 40, /Users/mberridge/Sites/tdcss.js/src/vendors/prism/prism.css */
+/* line 40, /Users/mberridge/Sites/tdcss.js/src/vendor/prism/prism.css */
 :not(pre) > code[class*="language-"] {
   padding: .1em;
   border-radius: .3em; }
 
-/* line 48, /Users/mberridge/Sites/tdcss.js/src/vendors/prism/prism.css */
+/* line 48, /Users/mberridge/Sites/tdcss.js/src/vendor/prism/prism.css */
 .token.comment,
 .token.prolog,
 .token.doctype,
 .token.cdata {
   color: slategray; }
 
-/* line 52, /Users/mberridge/Sites/tdcss.js/src/vendors/prism/prism.css */
+/* line 52, /Users/mberridge/Sites/tdcss.js/src/vendor/prism/prism.css */
 .token.punctuation {
   color: #999; }
 
-/* line 56, /Users/mberridge/Sites/tdcss.js/src/vendors/prism/prism.css */
+/* line 56, /Users/mberridge/Sites/tdcss.js/src/vendor/prism/prism.css */
 .namespace {
   opacity: .7; }
 
-/* line 63, /Users/mberridge/Sites/tdcss.js/src/vendors/prism/prism.css */
+/* line 63, /Users/mberridge/Sites/tdcss.js/src/vendor/prism/prism.css */
 .token.property,
 .token.tag,
 .token.boolean,
 .token.number {
   color: #905; }
 
-/* line 69, /Users/mberridge/Sites/tdcss.js/src/vendors/prism/prism.css */
+/* line 69, /Users/mberridge/Sites/tdcss.js/src/vendor/prism/prism.css */
 .token.selector,
 .token.attr-name,
 .token.string {
   color: #690; }
 
-/* line 77, /Users/mberridge/Sites/tdcss.js/src/vendors/prism/prism.css */
+/* line 77, /Users/mberridge/Sites/tdcss.js/src/vendor/prism/prism.css */
 .token.operator,
 .token.entity,
 .token.url,
@@ -83,22 +83,22 @@ pre[class*="language-"] {
   color: #a67f59;
   background: rgba(255, 255, 255, 0.5); }
 
-/* line 84, /Users/mberridge/Sites/tdcss.js/src/vendors/prism/prism.css */
+/* line 84, /Users/mberridge/Sites/tdcss.js/src/vendor/prism/prism.css */
 .token.atrule,
 .token.attr-value,
 .token.keyword {
   color: #07a; }
 
-/* line 90, /Users/mberridge/Sites/tdcss.js/src/vendors/prism/prism.css */
+/* line 90, /Users/mberridge/Sites/tdcss.js/src/vendor/prism/prism.css */
 .token.regex,
 .token.important {
   color: #e90; }
 
-/* line 94, /Users/mberridge/Sites/tdcss.js/src/vendors/prism/prism.css */
+/* line 94, /Users/mberridge/Sites/tdcss.js/src/vendor/prism/prism.css */
 .token.important {
   font-weight: bold; }
 
-/* line 98, /Users/mberridge/Sites/tdcss.js/src/vendors/prism/prism.css */
+/* line 98, /Users/mberridge/Sites/tdcss.js/src/vendor/prism/prism.css */
 .token.entity {
   cursor: help; }
 
