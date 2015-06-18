@@ -1,7 +1,9 @@
+
 var Fragment = Backbone.Model.extend({
     defaults: {
         type: '',
-        title: ''
+        title: '',
+        wip: false
     }
 });
 
@@ -26,7 +28,6 @@ var JSCodeSnippet = CodeSnippet.extend({
         rawScript: ''
     }
 });
-
 
 module.exports = {
     Fragment: Fragment,
