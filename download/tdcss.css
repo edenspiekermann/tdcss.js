@@ -187,6 +187,13 @@ pre[class*="language-"] {
   line-height: 1.5;
   margin-bottom: 0; }
 
+/* line 15, /Users/lmadsen/Sites/tdcss/src/partials/_tdcss-masthead.scss */
+.tdcss-masthead__menu {
+  float: right; }
+  /* line 18, /Users/lmadsen/Sites/tdcss/src/partials/_tdcss-masthead.scss */
+  .tdcss-masthead__menu a {
+    color: inherit; }
+
 /* line 1, /Users/lmadsen/Sites/tdcss/src/partials/_tdcss-menu.scss */
 .tdcss-menu {
   list-style: none;
