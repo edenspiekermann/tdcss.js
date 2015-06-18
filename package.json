@@ -19,7 +19,7 @@
     "grunt-karma": "~0.4.4",
     "grunt-recess": "~0.3.3",
     "grunt-sass": "^1.0.0",
-    "load-grunt-tasks": "^3.2.0"
+    "load-grunt-tasks": "^3.2.0",
     "handlebars": "^3.0.3",
     "hbsfy": "^2.2.1",
     "jquery": "^2.1.4",
