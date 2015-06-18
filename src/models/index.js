@@ -1,3 +1,5 @@
+var Backbone = require('backbone');
+
 
 var Fragment = Backbone.Model.extend({
     defaults: {
@@ -40,7 +42,7 @@ var Description = Fragment.extend({
 module.exports = {
     Fragment: Fragment,
     Section: Section,
+    Description: Description,
     CodeSnippet: CodeSnippet,
-    JSCodeSnippet: JSCodeSnippet,
-    Description: Description
+    JSCodeSnippet: JSCodeSnippet
 }
