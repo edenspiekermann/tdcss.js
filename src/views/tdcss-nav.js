@@ -9,7 +9,12 @@ module.exports = TDCSSView.extend({
     template: require('./tdcss-nav.hbs'),
 
     render: function() {
-        var data = {};
+        var menuData = this.collection.map(function (item) {
+            return item.toJSON();
+        });
+        var data = {
+            menuItems: menuData
+        };
 
         this.$el.append(this.template(data));
 

@@ -4,9 +4,11 @@
         <span class="tdcss-nav__toggle-label">groups</span>
     </label>
     <ul class="tdcss-menu">
+        {{#each menuItems}}
         <li class="tdcss-menu__item">
-            <a class="tdcss-menu__link" href="#wip-javascript-test">Item title</a>
+            <a class="tdcss-menu__link" href="#{{this.href}}">{{this.name}}</a>
         </li>
-        <li>...</li>
+        {{/each}}
+
     </ul>
 </div>
