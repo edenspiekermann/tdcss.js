@@ -21,30 +21,18 @@ body {
   display: none;
 }
 
+.tdcss-menu {
+  float: left;
+}
+
 .tdcss-elements {
+  float: left;
   position: relative;
   top: 3em;
-  width: 100%;
-  padding-top: 1em;
+  margin: 1em;
 }
 
-.tdcss-elements:after {
-  position: absolute;
-  top: 0;
-  right: 0;
-  z-index: -1;
-  width: 40%;
-  height: 100%;
-  background-color: #f5f2f0;
-  border-left: 1px solid #e7e7e7;
-  content: '';
-}
-
-.tdcss-hide-html.tdcss-elements:after {
-  display: none;
-}
-
-.tdcss-section {
+.tdcss-group {
   width: 100%;
   padding: 1px 0 0 0;
   vertical-align: bottom;
@@ -52,7 +40,7 @@ body {
   border: none;
 }
 
-.tdcss-section .tdcss-h2 {
+.tdcss-group__head {
   display: block;
   padding: 10px;
   margin: 0;
@@ -66,21 +54,6 @@ body {
   background: -o-linear-gradient(top, #add8e6, #96cddf);
   background: linear-gradient(top, #add8e6, #96cddf);
   background-color: #add8e6;
-}
-
-.tdcss-section .tdcss-h2:after {
-  float: right;
-  padding: 4px;
-  font-size: 12px;
-  content: "\25BC";
-}
-
-.tdcss-section.is-collapsed .tdcss-h2:after {
-  content: "\25B2";
-}
-
-.tdcss-section:hover .tdcss-h2 {
-  background-color: #44ea85;
 }
 
 .tdcss-fragment {
