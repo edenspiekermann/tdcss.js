@@ -1,4 +1,29 @@
-.slab--dimmed {
-    transform: translateY(504%);
-    background-color: green;
+@import url(http://fonts.googleapis.com/css?family=Raleway:400,700);
+
+.tdcss-font {
+  font-family: 'Raleway', 'Helvetica', sans-serif;
+}
+
+.tdcss-slab--masthead {
+  background-color: #111;
+  color: #FFF;
+}
+
+.tdcss-slab--primary {
+  background-color: cadetblue;
+  color: #FFF;
+}
+
+.tdcss-slab--secondary {
+  background-color: #f90;
+  color: #FFF;
+}
+
+.tdcss-slab--dimmed {
+  background-color: #F5F2F0;
+  color: #999;
+}
+
+.tdcss-box {
+  border-color: #f90;
 }

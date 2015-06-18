@@ -5,64 +5,153 @@
  * @author Jakob Løkke Madsen
  * @url http://www.jakobloekkemadsen.com
  */
-/* line 1, /Users/lmadsen/Sites/tdcss/src/partials/_tdcss-fragment.scss */
+/**
+ * prism.js default theme for JavaScript, CSS and HTML
+ * Based on dabblet (http://dabblet.com)
+ * @author Lea Verou
+ */
+/* line 8, /Users/mberridge/Sites/tdcss.js/src/vendor/prism/prism.css */
+code[class*="language-"],
+pre[class*="language-"] {
+  color: black;
+  text-shadow: 0 1px white;
+  font-family: Consolas, Monaco, 'Andale Mono', monospace;
+  direction: ltr;
+  text-align: left;
+  white-space: pre;
+  word-spacing: normal;
+  -moz-tab-size: 4;
+  -o-tab-size: 4;
+  tab-size: 4;
+  -webkit-hyphens: none;
+  -moz-hyphens: none;
+  -ms-hyphens: none;
+  hyphens: none; }
+
+/* Code blocks */
+/* line 28, /Users/mberridge/Sites/tdcss.js/src/vendor/prism/prism.css */
+pre[class*="language-"] {
+  padding: 1em;
+  margin: .5em 0;
+  overflow: auto; }
+
+/* line 35, /Users/mberridge/Sites/tdcss.js/src/vendor/prism/prism.css */
+:not(pre) > code[class*="language-"],
+pre[class*="language-"] {
+  background: #f5f2f0; }
+
+/* Inline code */
+/* line 40, /Users/mberridge/Sites/tdcss.js/src/vendor/prism/prism.css */
+:not(pre) > code[class*="language-"] {
+  padding: .1em;
+  border-radius: .3em; }
+
+/* line 48, /Users/mberridge/Sites/tdcss.js/src/vendor/prism/prism.css */
+.token.comment,
+.token.prolog,
+.token.doctype,
+.token.cdata {
+  color: slategray; }
+
+/* line 52, /Users/mberridge/Sites/tdcss.js/src/vendor/prism/prism.css */
+.token.punctuation {
+  color: #999; }
+
+/* line 56, /Users/mberridge/Sites/tdcss.js/src/vendor/prism/prism.css */
+.namespace {
+  opacity: .7; }
+
+/* line 63, /Users/mberridge/Sites/tdcss.js/src/vendor/prism/prism.css */
+.token.property,
+.token.tag,
+.token.boolean,
+.token.number {
+  color: #905; }
+
+/* line 69, /Users/mberridge/Sites/tdcss.js/src/vendor/prism/prism.css */
+.token.selector,
+.token.attr-name,
+.token.string {
+  color: #690; }
+
+/* line 77, /Users/mberridge/Sites/tdcss.js/src/vendor/prism/prism.css */
+.token.operator,
+.token.entity,
+.token.url,
+.language-css .token.string,
+.style .token.string {
+  color: #a67f59;
+  background: rgba(255, 255, 255, 0.5); }
+
+/* line 84, /Users/mberridge/Sites/tdcss.js/src/vendor/prism/prism.css */
+.token.atrule,
+.token.attr-value,
+.token.keyword {
+  color: #07a; }
+
+/* line 90, /Users/mberridge/Sites/tdcss.js/src/vendor/prism/prism.css */
+.token.regex,
+.token.important {
+  color: #e90; }
+
+/* line 94, /Users/mberridge/Sites/tdcss.js/src/vendor/prism/prism.css */
+.token.important {
+  font-weight: bold; }
+
+/* line 98, /Users/mberridge/Sites/tdcss.js/src/vendor/prism/prism.css */
+.token.entity {
+  cursor: help; }
+
+/* line 1, /Users/mberridge/Sites/tdcss.js/src/partials/_tdcss-box.scss */
+.tdcss-box {
+  border: 1px solid transparent;
+  overflow: hidden; }
+
+/* line 1, /Users/mberridge/Sites/tdcss.js/src/partials/_tdcss-fragment.scss */
 .tdcss-fragment {
   position: relative;
   padding: 0;
-  margin: 0;
-  overflow: hidden;
-  border: 1px solid salmon;
-  margin: 1em 0; }
+  margin: 1em 0;
+  overflow: hidden; }
 
-/* line 11, /Users/lmadsen/Sites/tdcss/src/partials/_tdcss-fragment.scss */
+/* line 8, /Users/mberridge/Sites/tdcss.js/src/partials/_tdcss-fragment.scss */
 .tdcss-fragment__title {
-  background: salmon;
-  margin: 0;
-  padding: .5em; }
+  font-size: 1em;
+  margin-bottom: 0; }
 
-/* line 1, /Users/lmadsen/Sites/tdcss/src/partials/_tdcss-group.scss */
+/* line 1, /Users/mberridge/Sites/tdcss.js/src/partials/_tdcss-group.scss */
 .tdcss-group {
   width: 100%;
   padding: 1px 0 0 0;
   vertical-align: bottom;
   cursor: pointer;
-  margin-bottom: 1em;
   /* this is a crappy solution to evade the fixed top bar */
   padding-top: 3.8em; }
 
-/* line 14, /Users/lmadsen/Sites/tdcss/src/partials/_tdcss-group.scss */
-.tdcss-group__head {
-  display: block;
-  padding: 10px;
-  margin: 0;
-  font-family: verdana, sans-serif;
-  font-size: 20px;
-  background-color: cadetblue;
-  color: white; }
-
-/* line 27, /Users/lmadsen/Sites/tdcss/src/partials/_tdcss-group.scss */
+/* line 12, /Users/mberridge/Sites/tdcss.js/src/partials/_tdcss-group.scss */
+.tdcss-group__title,
 .tdcss-group__description {
-  padding: 1em 10px;
-  margin-bottom: 1em;
-  font-family: verdana, sans-serif;
-  font-size: 14px;
-  color: #898989;
-  background-color: #f0f0f0;
-  border: 1px solid #e7e7e7; }
+  margin-bottom: 0; }
 
-/* line 37, /Users/lmadsen/Sites/tdcss/src/partials/_tdcss-group.scss */
-.tdcss-group__description strong {
-  font-weight: bold; }
-
-/* line 41, /Users/lmadsen/Sites/tdcss/src/partials/_tdcss-group.scss */
-.tdcss-group__description em {
-  font-style: italic; }
-
-/* line 1, /Users/lmadsen/Sites/tdcss/src/partials/_tdcss-header.scss */
+/* line 1, /Users/mberridge/Sites/tdcss.js/src/partials/_tdcss-header.scss */
 .tdcss-header {
   background-color: #f90; }
 
-/* line 1, /Users/lmadsen/Sites/tdcss/src/partials/_tdcss-menu.scss */
+/* line 1, /Users/mberridge/Sites/tdcss.js/src/partials/_tdcss-masthead.scss */
+.tdcss-masthead {
+  position: fixed;
+  top: 0;
+  z-index: 9999;
+  width: 100%; }
+
+/* line 8, /Users/mberridge/Sites/tdcss.js/src/partials/_tdcss-masthead.scss */
+.tdcss-masthead__title {
+  font-weight: normal;
+  font-size: 1.5em;
+  line-height: 1.5;
+  margin-bottom: 0; }
+
+/* line 1, /Users/mberridge/Sites/tdcss.js/src/partials/_tdcss-menu.scss */
 .tdcss-menu {
   position: absolute;
   top: 100%;
@@ -70,47 +159,67 @@
   width: 180px;
   list-style: none;
   margin: 0;
-  padding: 2em 0 0 0.5em; }
+  padding: 1.5em 0 0 0.5em; }
 
-/* line 11, /Users/lmadsen/Sites/tdcss/src/partials/_tdcss-menu.scss */
+/* line 11, /Users/mberridge/Sites/tdcss.js/src/partials/_tdcss-menu.scss */
 .tdcss-menu__item {
   display: block;
   padding: .5em; }
 
-/* line 1, /Users/lmadsen/Sites/tdcss/src/partials/_tdcss-subgroup.scss */
+/* line 1, /Users/mberridge/Sites/tdcss.js/src/partials/_tdcss-slab.scss */
+.tdcss-slab {
+  padding-left: 20px;
+  padding-right: 20px; }
+
+/* line 6, /Users/mberridge/Sites/tdcss.js/src/partials/_tdcss-slab.scss */
+.tdcss-slab--group {
+  padding-top: 15px;
+  padding-bottom: 15px; }
+
+/* line 13, /Users/mberridge/Sites/tdcss.js/src/partials/_tdcss-slab.scss */
+.tdcss-slab--masthead,
+.tdcss-slab--description,
+.tdcss-slab--fragment {
+  padding-top: 10px;
+  padding-bottom: 10px; }
+
+/* line 1, /Users/mberridge/Sites/tdcss.js/src/partials/_tdcss-subgroup.scss */
 .tdcss-subgroup {
   /* this is a crappy solution to evade the fixed top bar */
   padding-top: 3.8em; }
 
-/* line 1, /Users/lmadsen/Sites/tdcss/src/partials/_tdcss-submenu.scss */
+/* line 1, /Users/mberridge/Sites/tdcss.js/src/partials/_tdcss-submenu.scss */
 .tdcss-submenu {
   list-style: none;
   margin: 0 0 0 1em;
   padding: 1em 0 0 0.5em; }
 
-/* line 7, /Users/lmadsen/Sites/tdcss/src/partials/_tdcss-submenu.scss */
+/* line 7, /Users/mberridge/Sites/tdcss.js/src/partials/_tdcss-submenu.scss */
 .tdcss-submenu__item {
   display: block;
   padding: .5em; }
 
-/* line 16, /Users/lmadsen/Sites/tdcss/src/tdcss.scss */
+/* line 22, /Users/mberridge/Sites/tdcss.js/src/tdcss.scss */
 body {
   margin: 0; }
 
-/* line 20, /Users/lmadsen/Sites/tdcss/src/tdcss.scss */
+/* line 26, /Users/mberridge/Sites/tdcss.js/src/tdcss.scss */
 [class*='tdcss-'] {
   box-sizing: border-box; }
+  /* line 28, /Users/mberridge/Sites/tdcss.js/src/tdcss.scss */
+  [class*='tdcss-'] h1, [class*='tdcss-'] h2, [class*='tdcss-'] h3, [class*='tdcss-'] p, [class*='tdcss-'] ul {
+    margin-top: 0; }
 
-/* line 25, /Users/lmadsen/Sites/tdcss/src/tdcss.scss */
+/* line 33, /Users/mberridge/Sites/tdcss.js/src/tdcss.scss */
 .tdcss-fragments {
   display: none; }
 
-/* line 31, /Users/lmadsen/Sites/tdcss/src/tdcss.scss */
+/* line 39, /Users/mberridge/Sites/tdcss.js/src/tdcss.scss */
 .tdcss-elements {
   margin: 1em;
   margin-left: 180px; }
 
-/* line 39, /Users/lmadsen/Sites/tdcss/src/tdcss.scss */
+/* line 47, /Users/mberridge/Sites/tdcss.js/src/tdcss.scss */
 .tdcss-top {
   position: relative;
   padding: 0;
@@ -118,17 +227,17 @@ body {
   width: 100%;
   height: 2em; }
 
-/* line 47, /Users/lmadsen/Sites/tdcss/src/tdcss.scss */
-.tddcss-top-link {
+/* line 55, /Users/mberridge/Sites/tdcss.js/src/tdcss.scss */
+.tddcss-top__link {
   float: right;
   margin-right: 1.25em;
   color: #558696; }
 
-/* line 53, /Users/lmadsen/Sites/tdcss/src/tdcss.scss */
-.tddcss-top-link:hover {
+/* line 61, /Users/mberridge/Sites/tdcss.js/src/tdcss.scss */
+.tddcss-top__link:hover {
   color: #96cddf; }
 
-/* line 60, /Users/lmadsen/Sites/tdcss/src/tdcss.scss */
+/* line 68, /Users/mberridge/Sites/tdcss.js/src/tdcss.scss */
 .tdcss-diff-warning,
 .tdcss-fragment .tdcss-diff-stats {
   position: absolute;
@@ -140,26 +249,26 @@ body {
   color: white;
   background-color: red; }
 
-/* line 71, /Users/lmadsen/Sites/tdcss/src/tdcss.scss */
+/* line 79, /Users/mberridge/Sites/tdcss.js/src/tdcss.scss */
 .tdcss-diff-warning {
   position: fixed;
   z-index: 10000;
   font-size: 12px; }
 
-/* line 77, /Users/lmadsen/Sites/tdcss/src/tdcss.scss */
+/* line 85, /Users/mberridge/Sites/tdcss.js/src/tdcss.scss */
 .tdcss-diff-warning > a {
   padding-left: 0.25em;
   color: white; }
 
-/* line 82, /Users/lmadsen/Sites/tdcss/src/tdcss.scss */
+/* line 90, /Users/mberridge/Sites/tdcss.js/src/tdcss.scss */
 .tdcss-diff-warning > a:hover {
   text-decoration: none; }
 
-/* line 86, /Users/lmadsen/Sites/tdcss/src/tdcss.scss */
+/* line 94, /Users/mberridge/Sites/tdcss.js/src/tdcss.scss */
 .tdcss-fragment.tdcss-has-diff {
   outline: 1px dotted red; }
 
-/* line 90, /Users/lmadsen/Sites/tdcss/src/tdcss.scss */
+/* line 98, /Users/mberridge/Sites/tdcss.js/src/tdcss.scss */
 .tdcss-diff-image {
   position: absolute;
   top: 0;
@@ -168,33 +277,33 @@ body {
   pointer-events: none;
   opacity: 0.5; }
 
-/* line 101, /Users/lmadsen/Sites/tdcss/src/tdcss.scss */
+/* line 109, /Users/mberridge/Sites/tdcss.js/src/tdcss.scss */
 .tdcss-dom-example,
 .tdcss-code-example {
   float: left; }
 
-/* line 105, /Users/lmadsen/Sites/tdcss/src/tdcss.scss */
+/* line 113, /Users/mberridge/Sites/tdcss.js/src/tdcss.scss */
 .tdcss-dom-example {
   position: relative;
   width: 60%;
   padding: 1em; }
 
-/* line 111, /Users/lmadsen/Sites/tdcss/src/tdcss.scss */
+/* line 119, /Users/mberridge/Sites/tdcss.js/src/tdcss.scss */
 .tdcss-hide-html .tdcss-dom-example {
   width: 100%; }
 
-/* line 115, /Users/lmadsen/Sites/tdcss/src/tdcss.scss */
+/* line 123, /Users/mberridge/Sites/tdcss.js/src/tdcss.scss */
 .tdcss-code-example {
   position: relative;
   z-index: 1000;
   width: 40%;
   padding: 1em; }
 
-/* line 122, /Users/lmadsen/Sites/tdcss/src/tdcss.scss */
+/* line 130, /Users/mberridge/Sites/tdcss.js/src/tdcss.scss */
 .tdcss-hide-html .tdcss-code-example {
   display: none; }
 
-/* line 126, /Users/lmadsen/Sites/tdcss/src/tdcss.scss */
+/* line 134, /Users/mberridge/Sites/tdcss.js/src/tdcss.scss */
 .tdcss-code-example .tdcss-h3 {
   padding: 0.25em;
   margin-top: 0;
@@ -205,48 +314,23 @@ body {
   color: white;
   background-color: #add8e6; }
 
-/* line 137, /Users/lmadsen/Sites/tdcss/src/tdcss.scss */
-.tdcss-control-bar {
-  position: fixed;
-  top: 0;
-  z-index: 9999;
-  display: table;
-  width: 100%;
-  padding: 0 2em;
-  font-size: 14px;
-  font-weight: 200;
-  background-color: #2f2f2f;
-  box-shadow: 0 1px 5px rgba(0, 0, 0, 0.5); }
-
-/* line 151, /Users/lmadsen/Sites/tdcss/src/tdcss.scss */
-.tdcss-title,
-.tdcss-controls {
-  display: table-cell;
-  height: 2em;
-  vertical-align: middle; }
-
-/* line 157, /Users/lmadsen/Sites/tdcss/src/tdcss.scss */
+/* line 145, /Users/mberridge/Sites/tdcss.js/src/tdcss.scss */
 .tdcss-title {
   font-size: 2em;
-  font-weight: 200;
   color: #7A888D; }
 
-/* line 163, /Users/lmadsen/Sites/tdcss/src/tdcss.scss */
-.tdcss-controls {
-  text-align: right; }
-
-/* line 167, /Users/lmadsen/Sites/tdcss/src/tdcss.scss */
+/* line 150, /Users/mberridge/Sites/tdcss.js/src/tdcss.scss */
 .tdcss-html-snippet-toggle {
   display: inline-block;
   padding: 0.75em;
   color: #afafaf;
   text-decoration: none; }
 
-/* line 174, /Users/lmadsen/Sites/tdcss/src/tdcss.scss */
+/* line 157, /Users/mberridge/Sites/tdcss.js/src/tdcss.scss */
 .tdcss-html-snippet-toggle:hover {
   color: #ebebeb; }
 
-/* line 178, /Users/lmadsen/Sites/tdcss/src/tdcss.scss */
+/* line 161, /Users/mberridge/Sites/tdcss.js/src/tdcss.scss */
 .tdcss-no-fragments {
   font-weight: 200;
   color: gray;

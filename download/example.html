@@ -11,98 +11,99 @@
 			
 		</div>
 
-		<div class="tdcss-control-bar">
-			<h1 class="tdcss-title">tdcss.js demo</h1>
-			<div class="tdcss-controls">
-				<select class="tdcss-jump-to">
-					<option>Jump To Section:</option>
-					<option class="tdcss-jumpto-section" href="#wip-javascript-test">WIP JavaScript Test</option>
-					<option class="tdcss-jumpto-section" href="#coffeescript-test">CoffeeScript Test</option>
-					<option class="tdcss-jumpto-section" href="#box-styles">Box styles</option>
-					<option class="tdcss-jumpto-section" href="#typography">Typography</option>
-					<option class="tdcss-jumpto-section" href="#no-snippet">No Snippet</option>
-					<option class="tdcss-jumpto-section" href="#custom-height">Custom height</option>
-				</select>
-				<a href="#" class="tdcss-html-snippet-toggle">Hide HTML</a>
-				
-			</div>
-			
-			<ul class="tdcss-menu">
-				<li class="tdcss-menu__item">
-					<a class="tdcss-jumpto-section" href="#wip-javascript-test">WIP JavaScript Test</a>
-				</li>
-				<li class="tdcss-menu__item">
-					<a class="tdcss-jumpto-section" href="#coffeescript-test">CoffeeScript Test</a>
-				</li>
-				<li class="tdcss-menu__item">
-					<a class="tdcss-jumpto-section" href="#box-styles">Box styles</a>
-				</li>
-				<li class="tdcss-menu__item typography">
-					<a class="tdcss-jumpto-section" href="#typography">Typography</a>
-					<ul class="tdcss-submenu">
-						<li class="tdcss-submenu__item">
-							<a href="#typography__headers">Headers</a>
+		<header class="tdcss-masthead">
+			<div class="tdcss-slab tdcss-slab--masthead tdcss-font">
+				<h1 class="tdcss-masthead__title">Styleguide</h1>
+				<nav role="navigation">
+					<ul class="tdcss-menu">
+						<li class="tdcss-menu__item">
+							<a class="tdcss-jumpto-section" href="#wip-javascript-test">WIP JavaScript Test</a>
 						</li>
-						<li class="tdcss-submenu__item">
-							<a href="#typography__quotes">Quotes</a>
+						<li class="tdcss-menu__item">
+							<a class="tdcss-jumpto-section" href="#coffeescript-test">CoffeeScript Test</a>
+						</li>
+						<li class="tdcss-menu__item">
+							<a class="tdcss-jumpto-section" href="#box-styles">Box styles</a>
+						</li>
+						<li class="tdcss-menu__item typography">
+							<a class="tdcss-jumpto-section" href="#typography">Typography</a>
+							<ul class="tdcss-submenu">
+								<li class="tdcss-submenu__item">
+									<a href="#typography__headers">Headers</a>
+								</li>
+								<li class="tdcss-submenu__item">
+									<a href="#typography__quotes">Quotes</a>
+								</li>
+							</ul>
+						</li>
+						<li class="tdcss-menu__item">
+							<a class="tdcss-jumpto-section" href="#no-snippet">No Snippet</a>
+						</li>
+						<li class="tdcss-menu__item">
+							<a class="tdcss-jumpto-section" href="#custom-height">Custom height</a>
 						</li>
 					</ul>
-				</li>
-				<li class="tdcss-menu__item">
-					<a class="tdcss-jumpto-section" href="#no-snippet">No Snippet</a>
-				</li>
-				<li class="tdcss-menu__item">
-					<a class="tdcss-jumpto-section" href="#custom-height">Custom height</a>
-				</li>
-			</ul>
-		</div>
+				</nav>
+			</div>
+		</header>
 
 
-		<div class="tdcss-main">
+		<main class="tdcss-main" role="main">
 			<div class="tdcss-elements">
-				<div class="tdcss-group" id="wip-javascript-test">
-					<div class="tdcss-group__head">
-						<h1 class="tdcss-group__title">JavaScript Test</h1>
-					</div>
-					<div class="tdcss-group__description">
-						This is a test of a js component.
-					</div>
-					<div class="tdcss-fragment" id="fragment-1">
-						<h3 class="tdcss-fragment__title">js fragment example</h3>
-						<div class="tdcss-dom-example">
-							<div id="js-test">
-								<h1>Test is fini!</h1>
+				<section class="tdcss-group" id="wip-javascript-test">
+					<header class="tdcss-group__head">
+						<div class="tdcss-slab tdcss-slab--group tdcss-slab--primary tdcss-font">
+							<h1 class="tdcss-group__title">JavaScript Test</h1>
+						</div>
+						<div class="tdcss-slab tdcss-slab--description tdcss-slab--dimmed tdcss-font">
+							<p class="tdcss-group__description">
+								This is a test of a js component.
+							</p>
+						</div>
+					</header>
+					<article class="tdcss-fragment" id="fragment-1">
+						<div class="tdcss-box tdcss-box--fragment">
+							<div class="tdcss-slab tdcss-slab--fragment tdcss-slab--secondary tdcss-font">
+								<h3 class="tdcss-fragment__title ">js fragment example</h3>
+							</div>
+							<!-- component content -->
+							<div class="tdcss-dom-example">
+								<div id="js-test">
+									<h1>Test is fini!</h1>
+								</div>
+							</div>
+							<div class="tdcss-code-example">
+								<pre class="language-markup" style="height: auto;">
+									<code class="language-markup">$('#js-test').append('
+									<span class="token tag">
+										<span class="token tag">
+											<span class="token punctuation">&lt;
+											</span>h1
+										</span>
+										<span class="token punctuation">&gt;
+										</span>
+										
+									</span>Test is fini!
+									<span class="token tag">
+										<span class="token tag">
+											<span class="token punctuation">&lt;/
+											</span>h1
+										</span>
+										<span class="token punctuation">&gt;
+										</span>
+										
+									</span>');
+									</code>
+								</pre>
 							</div>
 						</div>
-						<div class="tdcss-code-example">
-							<pre class="language-markup" style="height: auto;">
-								<code class="language-markup">$('#js-test').append('
-								<span class="token tag">
-									<span class="token tag">
-										<span class="token punctuation">&lt;
-										</span>h1
-									</span>
-									<span class="token punctuation">&gt;
-									</span>
-									
-								</span>Test is fini!
-								<span class="token tag">
-									<span class="token tag">
-										<span class="token punctuation">&lt;/
-										</span>h1
-									</span>
-									<span class="token punctuation">&gt;
-									</span>
-									
-								</span>');
-								</code>
-							</pre>
-						</div>
-					</div>
-					<div class="tdcss-top">
-						<a class="tddcss-top-link" href="#">Back to Top</a>
-					</div>
-				</div>
+					</article>
+					<footer class="tdcss-top">
+						<a class="tddcss-top__link" href="#">Back to Top</a>
+					</footer>
+				</section>
+
+
 				<div class="tdcss-group" id="coffeescript-test">
 					<div class="tdcss-group__head">
 						<h1 class="tdcss-group__title">CoffeeScript Test</h1>
