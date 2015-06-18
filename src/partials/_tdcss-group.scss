@@ -4,8 +4,6 @@
   vertical-align: bottom;
   cursor: pointer;
 
-  margin-bottom: 1em;
-
   /* this is a crappy solution to evade the fixed top bar */
   padding-top: 3.8em;
 
@@ -15,23 +13,11 @@
   display: block;
   padding: 10px;
   margin: 0;
-  font-family: verdana, sans-serif;
-  font-size: 20px;
-
-
-  background-color: cadetblue;
-  color: white;
 }
 
-
+.tdcss-group__title,
 .tdcss-group__description {
-  padding: 1em 10px;
-  margin-bottom: 1em;
-  font-family: verdana, sans-serif;
-  font-size: 14px;
-  color: #898989;
-  background-color: #f0f0f0;
-  border: 1px solid #e7e7e7;
+  margin-bottom: 0;
 }
 
 .tdcss-group__description strong {

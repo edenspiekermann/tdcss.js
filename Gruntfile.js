@@ -4,7 +4,7 @@ module.exports = function (grunt) {
     require('load-grunt-tasks')(grunt);
 
     // Default task.
-    grunt.registerTask('default', ['watch']);
+    grunt.registerTask('default', ['concat', 'sass:watch', 'autoprefixer', 'watch']);
 
     // Build task.
     grunt.registerTask('build', ['clean', 'jshint', 'concat', 'sass:dist', 'autoprefixer', 'karma']);
@@ -76,10 +76,12 @@ module.exports = function (grunt) {
                 browsers: ['last 2 versions', 'ie 8', 'ie 9', '> 1%']
             },
             dist: {
-                expand: true,
-                flatten: true,
-                src: '<%= dirs.build %>/**/*.css',
-                dest: '<%= dirs.build %>'
+                files: [{
+                    expand: true,
+                    cwd: '<%= dirs.build %>',
+                    src: ['**/*.css'],
+                    dest: '<%= dirs.build %>',
+                }]
             }            
         },
 

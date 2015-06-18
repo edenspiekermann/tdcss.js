@@ -5,13 +5,19 @@
  * @url http://www.jakobloekkemadsen.com
  */
 
-// @import 'vendor/prism/prism';
+// Import Vendor Styles
+@import 'vendor/prism/prism';
+
+// Import Component Styles
+@import 'partials/tdcss-box';
 @import 'partials/tdcss-code-example';
 @import 'partials/tdcss-fragment';
 @import 'partials/tdcss-group';
 @import 'partials/tdcss-header';
+@import 'partials/tdcss-masthead';
 @import 'partials/tdcss-menu';
 @import 'partials/tdcss-nav';
+@import 'partials/tdcss-slab';
 @import 'partials/tdcss-subgroup';
 @import 'partials/tdcss-submenu';
 
@@ -24,14 +30,13 @@ body {
 }
 
 
-.tdcss-fragments {
-	// what?!
-	display: none;
-}
-
-
 .tdcss-elements {
 	margin: 1em;
+
+	box-sizing: border-box;
+	h1, h2, h3, p, ul {
+		margin-top: 0;
+	}
 }
 
 
@@ -45,13 +50,13 @@ body {
 		height: 2em;
 }
 
-.tddcss-top-link {
+.tddcss-top__link {
 		float: right;
 		margin-right: 1.25em;
 		color: #558696;
 }
 
-.tddcss-top-link:hover {
+.tddcss-top__link:hover {
 		color: #96cddf;
 }
 
@@ -97,12 +102,8 @@ body {
 		opacity: 0.5;
 }
 
-
 .tdcss-dom-example {
 		float: left;
-}
-
-.tdcss-dom-example {
 		position: relative;
 		width: 60%;
 		padding: 1em;
@@ -110,45 +111,13 @@ body {
 
 
 
-.tdcss-control-bar {
-		position: fixed;
-		top: 0;
-		z-index: 9999;
-		display: table;
-		width: 100%;
-		padding: 0 2em;
-		font-size: 14px;
-		font-weight: 200;
-		background-color: #2f2f2f;
-		box-shadow: 0 1px 5px rgba(0, 0, 0, 0.50);
-}
 
-.tdcss-title,
-.tdcss-controls {
-		display: table-cell;
-		height: 2em;
-		vertical-align: middle;
-}
+
+
 
 .tdcss-title {
 		font-size: 2em;
-		font-weight: 200;
 		color: #7A888D;
-}
-
-.tdcss-controls {
-		text-align: right;
-}
-
-.tdcss-html-snippet-toggle {
-		display: inline-block;
-		padding: 0.75em;
-		color: #afafaf;
-		text-decoration: none;
-}
-
-.tdcss-html-snippet-toggle:hover {
-		color: #ebebeb;
 }
 
 .tdcss-no-fragments {

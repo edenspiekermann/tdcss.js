@@ -4,14 +4,17 @@
   margin: 0;
   overflow: hidden;
 
-  border: 1px solid salmon;
   margin: 1em 0;
 }
 
+.tdcss-fragment__head {
+  float: left;
+  width: 100%;
+}
+
 .tdcss-fragment__title {
-  background: salmon;
   margin: 0;
-  padding: .5em;
+  padding: 0 0 .5em;
 }
 
 .tdcss-fragment__details {
