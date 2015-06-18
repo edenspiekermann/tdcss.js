@@ -97,7 +97,7 @@ var NavigationView = require('./views/tdcss-nav.js');
         function setup() {
             $(module.container)
                 .addClass("tdcss-fragments")
-                .after('<main class="tdcss-main tdcss-nav__neighbour" role="main"><div class="tdcss-elements"></div></main>');
+                .after('<div class="tdcss-elements"></div>');
         }
 
         function parse() {

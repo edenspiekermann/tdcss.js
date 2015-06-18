@@ -20268,16 +20268,24 @@ if (Prism.languages.markup) {
 arguments[4][2][0].apply(exports,arguments)
 },{"dup":2}],41:[function(require,module,exports){
 var Backbone = require('backbone');
-
+var Types = require('../models/const.js');
 var Section = require('../models/').Section;
 var Fragment = require('../models/').Fragment;
+
 
 var Sections = Backbone.Collection.extend({
     model: Section
 });
 
 var Fragments = Backbone.Collection.extend({
-    model: Fragment
+    model: Fragment,
+
+    getSections: function () {
+        return this.filter(function (item) {
+            return item.get('type') === Types.SECTION.name;
+        });
+    }
+
 });
 
 module.exports = {
@@ -20285,7 +20293,7 @@ module.exports = {
     Fragments: Fragments
 }
 
-},{"../models/":43,"backbone":1}],42:[function(require,module,exports){
+},{"../models/":43,"../models/const.js":42,"backbone":1}],42:[function(require,module,exports){
 var types = {
     SECTION: {
         name: 'SECTION',
@@ -20393,10 +20401,12 @@ var CodeSnippet = Models.CodeSnippet;
 var JSCodeSnippet = Models.JSCodeSnippet;
 // collections
 var Fragments = require('./collections').Fragments;
+var Sections = require('./collections').Sections;
 // views
 var TDCSSElementsView = require('./views/tdcss-elements.js');
 var SectionView = require('./views/section.js');
 var FragmentView = require('./views/fragment.js');
+var NavigationView = require('./views/tdcss-nav.js');
 
 (function () {
     "use strict";
@@ -20442,11 +20452,12 @@ var FragmentView = require('./views/fragment.js');
             reset();
             setup();
             parse();
+            renderNavigation();
             render();
             bindSectionCollapseHandlers();
             restoreCollapsedSectionsFromUrl();
             highlightSyntax();
-            makeTopBar();
+            //makeTopBar();
 
             if (settings.diff) {
                 diff();
@@ -20468,7 +20479,7 @@ var FragmentView = require('./views/fragment.js');
         function setup() {
             $(module.container)
                 .addClass("tdcss-fragments")
-                .after("<div class='tdcss-elements'></div>");
+                .after('<div class="tdcss-elements"></div>');
         }
 
         function parse() {
@@ -20487,7 +20498,6 @@ var FragmentView = require('./views/fragment.js');
                 comments.each(function () {
                     var fragment = createFragmentFromComment(this);
                     if (fragment) {
-                        console.log(fragment.toJSON());
                         module.fragments.add(fragment);
                     }
                 });
@@ -20496,6 +20506,7 @@ var FragmentView = require('./views/fragment.js');
 
             $(module.container).empty(); // Now we can empty the container to avoid having duplicate DOM nodes in the background
         }
+
 
 
         function createFragmentFromComment(commentNode) {
@@ -20636,6 +20647,8 @@ var FragmentView = require('./views/fragment.js');
         function render() {
             var sectionCount = 0, insertBackToTop;
 
+
+
             module.fragments.each(function (fragment, index) {
                 var type = fragment.get('type');
                 var view;
@@ -20672,6 +20685,14 @@ var FragmentView = require('./views/fragment.js');
                 //     addNewDescription(fragment);
                 // }
             });
+        }
+
+        function renderNavigation() {
+            var sectionModels = module.fragments.getSections();
+            var sections = new Sections(sectionModels);
+            var navigationView = new NavigationView({collection: sections});
+            var navigationMarkup = navigationView.render().$el.html();
+            $('#nav-container').append(navigationMarkup);
         }
 
         function _spacesToLowerCasedHyphenated(str) {
@@ -21018,25 +21039,25 @@ var FragmentView = require('./views/fragment.js');
 
 window.$ = $;
 
-},{"./collections":41,"./models":43,"./models/const.js":42,"./views/fragment.js":46,"./views/section.js":48,"./views/tdcss-elements.js":49,"jquery":38,"prismjs":39,"underscore":40}],45:[function(require,module,exports){
+},{"./collections":41,"./models":43,"./models/const.js":42,"./views/fragment.js":46,"./views/section.js":48,"./views/tdcss-elements.js":49,"./views/tdcss-nav.js":51,"jquery":38,"prismjs":39,"underscore":40}],45:[function(require,module,exports){
 // hbsfy compiled Handlebars template
 var HandlebarsCompiler = require('hbsfy/runtime');
 module.exports = HandlebarsCompiler.template({"1":function(depth0,helpers,partials,data) {
-    var helper, alias1=helpers.helperMissing, alias2="function", alias3=this.escapeExpression;
+    var helper;
 
-  return "      <div class='tdcss-code-example'>\n        <h3 class='tdcss-h3'>"
-    + alias3(((helper = (helper = helpers.title || (depth0 != null ? depth0.title : depth0)) != null ? helper : alias1),(typeof helper === alias2 ? helper.call(depth0,{"name":"title","hash":{},"data":data}) : helper)))
-    + "</h3>\n        <pre><code class='language-markup'>"
-    + alias3(((helper = (helper = helpers.html || (depth0 != null ? depth0.html : depth0)) != null ? helper : alias1),(typeof helper === alias2 ? helper.call(depth0,{"name":"html","hash":{},"data":data}) : helper)))
-    + "</code></pre>\n      </div>\n";
+  return "      <div class='tdcss-code-example'>\n        <pre>\n          <code class=\"language-markup\">\n            "
+    + this.escapeExpression(((helper = (helper = helpers.html || (depth0 != null ? depth0.html : depth0)) != null ? helper : helpers.helperMissing),(typeof helper === "function" ? helper.call(depth0,{"name":"html","hash":{},"data":data}) : helper)))
+    + "\n          </code>\n        </pre>\n      </div>\n";
 },"compiler":[6,">= 2.0.0-beta.1"],"main":function(depth0,helpers,partials,data) {
-    var stack1, helper;
+    var stack1, helper, alias1=helpers.helperMissing, alias2="function";
 
-  return "<div class='tdcss-code-example'>\n  <div class='tdcss-dom-example'>"
-    + ((stack1 = ((helper = (helper = helpers.html || (depth0 != null ? depth0.html : depth0)) != null ? helper : helpers.helperMissing),(typeof helper === "function" ? helper.call(depth0,{"name":"html","hash":{},"data":data}) : helper))) != null ? stack1 : "")
-    + "</div>\n"
+  return "<div class=\"tdcss-fragment tdcss-box tdcss-box--fragment\" id=\"fragment-1\">\n  <div class=\"tdcss-fragment__head tdcss-slab tdcss-slab--fragment tdcss-slab--secondary tdcss-font\">\n    <h3 class=\"tdcss-fragment__title\">"
+    + this.escapeExpression(((helper = (helper = helpers.title || (depth0 != null ? depth0.title : depth0)) != null ? helper : alias1),(typeof helper === alias2 ? helper.call(depth0,{"name":"title","hash":{},"data":data}) : helper)))
+    + "</h3>\n    <div class=\"tdcss-fragment__details\">\n      these are details\n"
     + ((stack1 = helpers['if'].call(depth0,(depth0 != null ? depth0.renderSnippet : depth0),{"name":"if","hash":{},"fn":this.program(1, data, 0),"inverse":this.noop,"data":data})) != null ? stack1 : "")
-    + "</div>\n";
+    + "    </div>\n  </div>\n  <div class=\"tdcss-dom-example\">\n    "
+    + ((stack1 = ((helper = (helper = helpers.html || (depth0 != null ? depth0.html : depth0)) != null ? helper : alias1),(typeof helper === alias2 ? helper.call(depth0,{"name":"html","hash":{},"data":data}) : helper))) != null ? stack1 : "")
+    + "\n  </div>\n</div>\n";
 },"useData":true});
 
 },{"hbsfy/runtime":37}],46:[function(require,module,exports){
@@ -21093,15 +21114,17 @@ module.exports = TDCSSView.extend({
     },
 });
 
-},{"../models/const.js":42,"./fragment.hbs":45,"./tdcss-view":50,"jquery":38,"underscore":40}],47:[function(require,module,exports){
+},{"../models/const.js":42,"./fragment.hbs":45,"./tdcss-view":52,"jquery":38,"underscore":40}],47:[function(require,module,exports){
 // hbsfy compiled Handlebars template
 var HandlebarsCompiler = require('hbsfy/runtime');
 module.exports = HandlebarsCompiler.template({"compiler":[6,">= 2.0.0-beta.1"],"main":function(depth0,helpers,partials,data) {
-    var helper;
+    var helper, alias1=helpers.helperMissing, alias2="function", alias3=this.escapeExpression;
 
-  return "<h2 class=\"tdcss-h2\">"
-    + this.escapeExpression(((helper = (helper = helpers.name || (depth0 != null ? depth0.name : depth0)) != null ? helper : helpers.helperMissing),(typeof helper === "function" ? helper.call(depth0,{"name":"name","hash":{},"data":data}) : helper)))
-    + "</h2>\n<div class=\"tdcss-top\">\n  <a class=\"tddcss-top-link\" href=\"#\">Back to Top</a>\n</div>\n";
+  return "<section class=\"tdcss-group\" id=\"\">\n  <header class=\"tdcss-group__head tdcss-slab tdcss-slab--group tdcss-slab--primary tdcss-font\">\n    <h1 class=\"tdcss-group__title\">"
+    + alias3(((helper = (helper = helpers.name || (depth0 != null ? depth0.name : depth0)) != null ? helper : alias1),(typeof helper === alias2 ? helper.call(depth0,{"name":"name","hash":{},"data":data}) : helper)))
+    + "</h1>\n    <div class=\"tdcss-group__description tdcss-slab tdcss-slab--description tdcss-slab--dimmed tdcss-font\">\n      "
+    + alias3(((helper = (helper = helpers.text || (depth0 != null ? depth0.text : depth0)) != null ? helper : alias1),(typeof helper === alias2 ? helper.call(depth0,{"name":"text","hash":{},"data":data}) : helper)))
+    + "\n    </div>\n  </header>\n\n  content\n\n  <div class=\"tdcss-top\">\n    <a class=\"tddcss-top-link\" href=\"#\">Back to Top</a>\n  </div>\n</section>\n";
 },"useData":true});
 
 },{"hbsfy/runtime":37}],48:[function(require,module,exports){
@@ -21125,7 +21148,7 @@ module.exports = TDCSSView.extend({
     }
 });
 
-},{"./section.hbs":47,"./tdcss-view":50}],49:[function(require,module,exports){
+},{"./section.hbs":47,"./tdcss-view":52}],49:[function(require,module,exports){
 var Backbone = require('backbone');
 
 module.exports = Backbone.View.extend({
@@ -21133,6 +21156,34 @@ module.exports = Backbone.View.extend({
 });
 
 },{"backbone":1}],50:[function(require,module,exports){
+// hbsfy compiled Handlebars template
+var HandlebarsCompiler = require('hbsfy/runtime');
+module.exports = HandlebarsCompiler.template({"compiler":[6,">= 2.0.0-beta.1"],"main":function(depth0,helpers,partials,data) {
+    return "<input type=\"checkbox\" id=\"tdcssNavToggle\" aria-hidden=\"true\">\n<div class=\"tdcss-nav\">\n    <label for=\"tdcssNavToggle\" class=\"tdcss-nav__toggle\">\n        <span class=\"tdcss-nav__toggle-label\">groups</span>\n    </label>\n    <ul class=\"tdcss-menu\">\n        <li class=\"tdcss-menu__item\">\n            <a class=\"tdcss-menu__link\" href=\"#wip-javascript-test\">Item title</a>\n        </li>\n        <li>...</li>\n    </ul>\n</div>\n";
+},"useData":true});
+
+},{"hbsfy/runtime":37}],51:[function(require,module,exports){
+var _ = require('underscore');
+var TDCSSView = require('./tdcss-view');
+var FacetTypes = require ('../models/const.js');
+var $ = require('jquery');
+
+
+module.exports = TDCSSView.extend({
+    className: "tdcss-nav",
+    template: require('./tdcss-nav.hbs'),
+
+    render: function() {
+        var data = {};
+
+        this.$el.append(this.template(data));
+
+        return this;
+    }
+
+});
+
+},{"../models/const.js":42,"./tdcss-nav.hbs":50,"./tdcss-view":52,"jquery":38,"underscore":40}],52:[function(require,module,exports){
 var Backbone = require('backbone');
 var Handlebars = require('handlebars');
 
