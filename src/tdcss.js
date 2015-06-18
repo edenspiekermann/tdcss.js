@@ -6,6 +6,7 @@
  */
 var Prism = require('prismjs'),
     $     = require('jquery'),
+    sectionView = require('./views/section'),
     jQuery = $;
 
 (function () {
@@ -225,28 +226,28 @@ var Prism = require('prismjs'),
         }
 
         function addNewSection(section_name, insertBackToTop) {
-            var markup, backToTop;
+            // var markup, backToTop;
 
-            //Check if our trimmed section name contains case-insensitive 'wip'
-            var isWorkInProgress = /^wip/i.test($.trim(section_name));
+            // //Check if our trimmed section name contains case-insensitive 'wip'
+            // var isWorkInProgress = /^wip/i.test($.trim(section_name));
 
-            //Remove WIP from name as we only want to add class for styling
-            section_name = isWorkInProgress ? $.trim(section_name).replace(/^wip/i, '') : section_name;
+            // //Remove WIP from name as we only want to add class for styling
+            // section_name = isWorkInProgress ? $.trim(section_name).replace(/^wip/i, '') : section_name;
 
-            //Section boiler-plate markup
-            var sectionHyphenated = encodeURIComponent(_spacesToLowerCasedHyphenated(section_name));
+            // //Section boiler-plate markup
+            // var sectionHyphenated = encodeURIComponent(_spacesToLowerCasedHyphenated(section_name));
 
-            //If work in progress we add the 'wip' class so strikethrough or similar can be applied
-            var sectionKlass = isWorkInProgress ? 'tdcss-section wip' : 'tdcss-section';
-            markup = '<div class="' + sectionKlass + '" id="' + encodeURIComponent(sectionHyphenated) + '"><h2 class="tdcss-h2">' + section_name + '</h2></div>';
+            // //If work in progress we add the 'wip' class so strikethrough or similar can be applied
+            // var sectionKlass = isWorkInProgress ? 'tdcss-section wip' : 'tdcss-section';
+            // markup = '<div class="' + sectionKlass + '" id="' + encodeURIComponent(sectionHyphenated) + '"><h2 class="tdcss-h2">' + section_name + '</h2></div>';
 
-            if (insertBackToTop) {
-                //prepend the back to top link to section markup
-                backToTop = '<div class="tdcss-top"><a class="tddcss-top-link" href="#">Back to Top</a></div>';
-                markup = backToTop + markup;
-            }
+            // if (insertBackToTop) {
+            //     //prepend the back to top link to section markup
+            //     backToTop = '<div class="tdcss-top"><a class="tddcss-top-link" href="#">Back to Top</a></div>';
+            //     markup = backToTop + markup;
+            // }
 
-            $(module.container).next(".tdcss-elements").append(markup);
+            // $(module.container).next(".tdcss-elements").append(markup);
         }
 
         function _addFragment(fragment, renderSnippet) {
@@ -303,13 +304,6 @@ var Prism = require('prismjs'),
                 }
             }
 
-            function htmlEscape(html) {
-                return String(html)
-                    .replace(/"/g, '&quot;')
-                    .replace(/'/g, '&#39;')
-                    .replace(/</g, '&lt;')
-                    .replace(/>/g, '&gt;');
-            }
         }
 
         function addNewNoSnippet(fragment) {

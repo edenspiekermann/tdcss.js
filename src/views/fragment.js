@@ -1,7 +1,7 @@
-var Backbone = require('backbone');
-var Handlebars = require('handlebars');
+var _        = require('underscore');
+var TDCSSView = require('./tdcss-view');
 
-module.exports = Backbone.View.extend({
+module.exports = TDCSSView.extend({
     className: "tdcss-fragment",
     template: require('./fragment.hbs'),
 
@@ -38,14 +38,10 @@ module.exports = Backbone.View.extend({
         }
     },
 
-    render: function() {
-        var data = _.extend{
+    getTemplateData: function() {
+      return _.extend{
             // TODO: this should be equivalent to https://github.com/edenspiekermann/tdcss.js/blob/5155de2d607f9353b0873046def3158221650bc4/src/tdcss.js#L203
             renderSnippet: true
         }, this.model.attributes);
-
-        this.$el.html(this.template(data));
-        this.postRender();
-        return this;
-    }
+    },
 });
