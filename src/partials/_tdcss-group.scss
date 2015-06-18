@@ -1,0 +1,29 @@
+.tdcss-group {
+  width: 100%;
+  padding: 1px 0 0 0;
+  vertical-align: bottom;
+  cursor: pointer;
+
+  /* this is a crappy solution to evade the fixed top bar */
+  padding-top: 3.8em;
+
+}
+
+.tdcss-group__head {
+  display: block;
+  padding: 10px;
+  margin: 0;
+}
+
+.tdcss-group__title,
+.tdcss-group__description {
+  margin-bottom: 0;
+}
+
+.tdcss-group__description strong {
+  font-weight: bold;
+}
+
+.tdcss-group__description em {
+  font-style: italic;
+}

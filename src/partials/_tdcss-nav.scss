@@ -1,0 +1,134 @@
+$off-canvas-max: 700px;
+$on-canvas-min: $off-canvas-max + 1;
+
+
+/**
+ * Offcanvas navigation
+ * 1. Arbitrary width, feel free to adapt
+ * 2. Full height nav
+ * 3. Off-canvas
+ * 4. Responsible for opening/closing animation
+ */
+.tdcss-nav {
+  position: absolute;
+  top: 100%;
+  left: 0;
+  width: 180px;
+  list-style: none;
+  margin: .5em;
+  background: deepskyblue;
+  padding: 2em .5em;
+
+  @media (max-width: $off-canvas-max) {
+    transform: translateX(-100%); /* 3 */
+    transition: 0.15s; /* 4 */
+  }  
+}
+
+/**
+ * Button thingie
+ * 1. Absolutely positioning
+ * 2. ... on the right side of the nav (make sure overflow is visible)
+ */
+.tdcss-nav__toggle {
+  display: none;
+
+  @media (max-width: $off-canvas-max) {
+    display: block;
+    position: absolute; /* 1 */
+    left: 100%; /* 2 */
+    top: 1em;
+    
+    padding: 0.5em;  
+    background: inherit;
+    color: white;
+    cursor: pointer;
+    font-size: 1.2em;
+    line-height: 1;
+  }
+}
+
+/**
+ * Checkbox responsible for the toggle hack
+ * Hidden, no matter what
+ */
+#tdcssNavToggle {
+  position: absolute;
+  clip: rect(0 0 0 0);
+  opacity: 0;
+}
+
+/**
+ * When checkbox is checked, open the nav
+ */
+#tdcssNavToggle:checked ~ .tdcss-nav {
+  transform: translateX(0);
+}
+
+/**
+ * Rotate the label when nav is opened
+ * Purely aesthetic
+ */
+#tdcssNavToggle:checked ~ .tdcss-nav > .tdcss-nav__toggle {
+  .tdcss-nav__toggle-label {
+    opacity: 0;
+  }
+  &:after {
+    content: "x";
+    font-size: 20px;
+    font-weight: bold;
+    position: absolute;
+    left: 50%;
+    transform: translateX(-50%);
+  }
+}
+
+/**
+ * Fixing a bug in Android <= 4.1.2
+ * See: http://timpietrusky.com/advanced-checkbox-hack
+ * Beware, can be costly: http://codepen.io/HugoGiraudel/details/jPOREG#comment-id-89799
+ */
+body { 
+  -webkit-animation: bugfix infinite 1s; 
+}
+
+@-webkit-keyframes bugfix { 
+  to { padding: 0; } 
+}
+
+/**
+ * Take care of small screens
+ */
+@media (max-width: 350px) {
+  .tdcss-nav {
+    width: 100%;
+  }
+  
+  [id='tdcssNavToggle']:checked ~ .tdcss-nav > .tdcss-nav__toggle {
+    left: auto;
+    right: 0;
+    top: 0;
+  }
+}
+
+/**
+ * Provide a fallback for browsers that do not support CSS transforms
+ */
+.no-csstransforms .tdcss-nav {
+  left: -350px;
+}
+
+.no-csstransforms [id='tdcssNavToggle']:checked ~ .tdcss-nav {
+  left: 0;
+}
+
+
+
+
+
+// off-canvas nav moves on-canvas here
+@media (min-width: $on-canvas-min) {
+  .tdcss-nav__neighbour {
+    margin-left: 180px;
+  }
+}

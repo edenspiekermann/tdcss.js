@@ -10,49 +10,48 @@ body {
 }
 
 [class*='tdcss-'] {
-  -webkit-box-sizing: border-box;
-     -moz-box-sizing: border-box;
-      -ms-box-sizing: border-box;
-       -o-box-sizing: border-box;
-          box-sizing: border-box;
+  -ms-box-sizing: border-box;
+   -o-box-sizing: border-box;
+      box-sizing: border-box;
 }
 
 .tdcss-fragments {
   display: none;
 }
 
-.tdcss-elements {
-  position: relative;
-  top: 3em;
-  width: 100%;
-  padding-top: 1em;
-}
-
-.tdcss-elements:after {
+.tdcss-menu {
   position: absolute;
-  top: 0;
-  right: 0;
-  z-index: -1;
-  width: 40%;
-  height: 100%;
-  background-color: #f5f2f0;
-  border-left: 1px solid #e7e7e7;
-  content: '';
+  top: 100%;
+  left: 0;
+  width: 180px;
+  list-style: none;
+  margin: 0;
+  padding: 2em 0 0 .5em;
+}
+.tdcss-menu__item {
+  display: block;
+  padding: .5em;
 }
 
-.tdcss-hide-html.tdcss-elements:after {
-  display: none;
+.tdcss-elements {
+  margin: 1em;
+  margin-left: 180px;
 }
 
-.tdcss-section {
+.tdcss-group {
   width: 100%;
   padding: 1px 0 0 0;
   vertical-align: bottom;
   cursor: pointer;
-  border: none;
+
+  margin-bottom: 1em;
+
+  /* this is a crappy solution to evade the fixed top bar */
+  padding-top: 3em;
+
 }
 
-.tdcss-section .tdcss-h2 {
+.tdcss-group__head {
   display: block;
   padding: 10px;
   margin: 0;
@@ -62,25 +61,8 @@ body {
   text-shadow: 0 -1px rgba(0, 0, 0, 0.1);
   background: -webkit-gradient(linear, 50% 0%, 50% 100%, color-stop(0%, #add8e6), color-stop(100%, #96cddf));
   background: -webkit-linear-gradient(top, #add8e6, #96cddf);
-  background: -moz-linear-gradient(top, #add8e6, #96cddf);
-  background: -o-linear-gradient(top, #add8e6, #96cddf);
   background: linear-gradient(top, #add8e6, #96cddf);
   background-color: #add8e6;
-}
-
-.tdcss-section .tdcss-h2:after {
-  float: right;
-  padding: 4px;
-  font-size: 12px;
-  content: "\25BC";
-}
-
-.tdcss-section.is-collapsed .tdcss-h2:after {
-  content: "\25B2";
-}
-
-.tdcss-section:hover .tdcss-h2 {
-  background-color: #44ea85;
 }
 
 .tdcss-fragment {
@@ -88,6 +70,15 @@ body {
   padding: 0;
   margin: 0;
   overflow: hidden;
+
+  border: 1px solid salmon;
+  margin: 1em 0;
+}
+
+.tdcss-fragment__title {
+  background: salmon;
+  margin: 0;
+  padding: .5em;
 }
 
 .tdcss-diff-warning,
@@ -130,7 +121,7 @@ body {
   opacity: 0.5;
 }
 
-.tdcss-description {
+.tdcss-group__description {
   padding: 1em 10px;
   margin-bottom: 1em;
   font-family: verdana, sans-serif;
@@ -140,11 +131,11 @@ body {
   border: 1px solid #e7e7e7;
 }
 
-.tdcss-description strong {
+.tdcss-group__description strong {
   font-weight: bold;
 }
 
-.tdcss-description em {
+.tdcss-group__description em {
   font-style: italic;
 }
 
@@ -174,7 +165,7 @@ body {
   display: none;
 }
 
-.tdcss-code-example .tdcss-h3 {
+.tdcss-code-example .tdcss-fragment__title {
   padding: 0.25em;
   margin-top: 0;
   margin-bottom: 0.5em;

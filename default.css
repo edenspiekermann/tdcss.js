@@ -1,0 +1,6 @@
+/* line 1, /Users/mberridge/Sites/tdcss.js/src/themes/default.scss */
+.slab--dimmed {
+  -webkit-transform: translateY(504%);
+      -ms-transform: translateY(504%);
+          transform: translateY(504%);
+  background-color: green; }

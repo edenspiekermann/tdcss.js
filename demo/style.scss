@@ -16,7 +16,7 @@ body {
 }
 
 .box-notice {
-    @include box(green);
+  @include box(green);
 }
 
 .box-warning {

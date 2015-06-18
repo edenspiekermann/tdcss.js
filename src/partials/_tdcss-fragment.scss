@@ -1,0 +1,26 @@
+.tdcss-fragment {
+  position: relative;
+  padding: 0;
+  margin: 0;
+  overflow: hidden;
+
+  margin: 1em 0;
+}
+
+.tdcss-fragment__head {
+  float: left;
+  width: 100%;
+}
+
+.tdcss-fragment__title {
+  margin: 0;
+  padding: 0 0 .5em;
+}
+
+.tdcss-fragment__details {
+  background: yellow;
+  float: left;
+  width: 100%;
+  margin: 0;
+  padding: .5em;
+}
