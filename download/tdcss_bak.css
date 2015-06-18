@@ -10,11 +10,9 @@ body {
 }
 
 [class*='tdcss-'] {
-  -webkit-box-sizing: border-box;
-     -moz-box-sizing: border-box;
-      -ms-box-sizing: border-box;
-       -o-box-sizing: border-box;
-          box-sizing: border-box;
+  -ms-box-sizing: border-box;
+   -o-box-sizing: border-box;
+      box-sizing: border-box;
 }
 
 .tdcss-fragments {
@@ -63,8 +61,6 @@ body {
   text-shadow: 0 -1px rgba(0, 0, 0, 0.1);
   background: -webkit-gradient(linear, 50% 0%, 50% 100%, color-stop(0%, #add8e6), color-stop(100%, #96cddf));
   background: -webkit-linear-gradient(top, #add8e6, #96cddf);
-  background: -moz-linear-gradient(top, #add8e6, #96cddf);
-  background: -o-linear-gradient(top, #add8e6, #96cddf);
   background: linear-gradient(top, #add8e6, #96cddf);
   background-color: #add8e6;
 }
