@@ -59,6 +59,7 @@ module.exports = function (grunt) {
                 src: ['src/tdcss.js'],
                 dest: 'download/tdcss.js',
                 options: {
+                    transform: ['hbsfy'],
                     banner: '/* <%= pkg.title || pkg.name %> - v<%= pkg.version %> - ' +
                         '<%= grunt.template.today("yyyy-mm-dd") %>\n' +
                         '<%= pkg.homepage ? "* " + pkg.homepage + "\\n" : "" %>' +

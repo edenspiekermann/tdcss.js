@@ -6,6 +6,7 @@
   "license": "MIT",
   "homepage": "http://jakobloekke.github.io/tdcss.js/",
   "devDependencies": {
+    "backbone": "^1.2.1",
     "grunt": "~0.4.1",
     "grunt-browserify": "^3.8.0",
     "grunt-cli": "~0.1",
@@ -16,6 +17,8 @@
     "grunt-contrib-watch": "~0.4.4",
     "grunt-karma": "~0.4.4",
     "grunt-recess": "~0.3.3",
+    "handlebars": "^3.0.3",
+    "hbsfy": "^2.2.1",
     "jquery": "^2.1.4",
     "prismjs": "0.0.1"
   },

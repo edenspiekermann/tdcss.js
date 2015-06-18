@@ -4,7 +4,7 @@ var Handlebars = require('handlebars');
 module.exports = Backbone.View.extend({
   className: "tdcss-section",
 
-  template: Handlebars.compile(require('./section.hbs')),
+  template: require('./section.hbs'),
 
   initialize: function() {
     if (this.model.get('wip')) {
