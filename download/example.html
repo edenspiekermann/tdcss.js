@@ -5,11 +5,22 @@
 		<link rel="stylesheet" href="themes/default.css" type="text/css" media="screen">
 		<!-- Project CSS -->
 		<link rel="stylesheet" href="../demo/style.css" type="text/css" media="screen">
+
+		<!--
+		<script type="text/javascript" src="http://cdnjs.cloudflare.com/ajax/libs/jquery/2.0.3/jquery.js"></script>
+
+		<script type="text/javascript" src="../src/vendor/coffee-script.js"></script>
+
+		<script type="text/javascript" src="tdcss.js"></script>
+		<script type="text/javascript">
+				$(function () {
+						$("#tdcss").tdcss();
+				})
+		</script>
+		-->
+
 	</head>
 	<body>
-		<div id="tdcss" class="tdcss-fragments">
-			
-		</div>
 
 		<div class="tdcss-control-bar">
 
@@ -78,35 +89,18 @@
 						This is a test of a js component.
 					</div>
 					<div class="tdcss-fragment" id="fragment-1">
-						<h3 class="tdcss-fragment__title">js fragment example</h3>
+						<div class="tdcss-fragment__head">
+							<h3 class="tdcss-fragment__title">js fragment example</h3>
+							<div class="tdcss-fragment__details">
+								these are details
+								<code class="tdcss-code-example">
+								</code>
+							</div>
+						</div>
 						<div class="tdcss-dom-example">
 							<div id="js-test">
 								<h1>Test is fini!</h1>
 							</div>
-						</div>
-						<div class="tdcss-code-example">
-							<pre class="language-markup" style="height: auto;">
-								<code class="language-markup">$('#js-test').append('
-								<span class="token tag">
-									<span class="token tag">
-										<span class="token punctuation">&lt;
-										</span>h1
-									</span>
-									<span class="token punctuation">&gt;
-									</span>
-									
-								</span>Test is fini!
-								<span class="token tag">
-									<span class="token tag">
-										<span class="token punctuation">&lt;/
-										</span>h1
-									</span>
-									<span class="token punctuation">&gt;
-									</span>
-									
-								</span>');
-								</code>
-							</pre>
 						</div>
 					</div>
 					<div class="tdcss-top">
@@ -121,33 +115,17 @@
 						This is a test of a coffeescript component.
 					</div>
 					<div class="tdcss-fragment" id="fragment-2">
-						<h3 class="tdcss-fragment__title">coffeescript</h3>
+						<div class="tdcss-fragment__head">
+							<h3 class="tdcss-fragment__title">coffeescript</h3>
+							<div class="tdcss-fragment__details">
+								these are details
+								<code class="tdcss-code-example">
+								</code>
+							</div>
+						</div>
 						<div class="tdcss-dom-example">
 							<div id="coffee">
 								<h1>Test from coffeescript</h1>
-							</div>
-						</div>
-						<div class="tdcss-code-example">
-							<pre class="language-markup" style="height: auto;">
-								<code class="language-markup">$('#coffee').append '
-								<span class="token tag">
-									<span class="token tag">
-										<span class="token punctuation">&lt;</span>
-										h1
-									</span>
-									<span class="token punctuation">&gt;
-									</span></span>Test from coffeescript
-									<span class="token tag">
-										<span class="token tag">
-											<span class="token punctuation">&lt;/
-											</span>h1
-										</span>
-										<span class="token punctuation">&gt;
-										</span>
-										
-									</span>'
-									</code>
-								</pre>
 							</div>
 						</div>
 						<div class="tdcss-top">
@@ -162,247 +140,63 @@
 							Box styles is a collection of generic boxes.
 						</div>
 						<div class="tdcss-fragment" id="fragment-3">
-							<h3 class="tdcss-fragment__title">Basic box</h3>
+							<div class="tdcss-fragment__head">
+								<h3 class="tdcss-fragment__title">Basic box</h3>
+								<div class="tdcss-fragment__details">
+									these are details
+									<code class="tdcss-code-example">
+									</code>
+								</div>
+							</div>
 							<div class="tdcss-dom-example">
 								<div class="box">
 									<p>This is a basic box.</p>
 								</div>
 							</div>
-							<div class="tdcss-code-example">
-								<pre class="language-markup" style="height: 60px;">
-									<code class="language-markup">
-									<span class="token tag">
-										<span class="token tag">
-											<span class="token punctuation">&lt;
-											</span>div
-										</span> 
-										<span class="token attr-name">class
-										</span>
-										<span class="token attr-value">
-											<span class="token punctuation">=
-											</span>
-											<span class="token punctuation">"
-											</span>box
-											<span class="token punctuation">"
-											</span>
-											
-										</span>
-										<span class="token punctuation">&gt;
-										</span>
-										
-									</span>
-									<span class="token tag">
-										<span class="token tag">
-											<span class="token punctuation">&lt;
-											</span>p
-										</span>
-										<span class="token punctuation">&gt;
-										</span>
-										
-									</span>This is a basic box.
-									<span class="token tag">
-										<span class="token tag">
-											<span class="token punctuation">&lt;/
-											</span>p
-										</span>
-										<span class="token punctuation">&gt;
-										</span>
-										
-									</span>
-									<span class="token tag">
-										<span class="token tag">
-											<span class="token punctuation">&lt;/
-											</span>div
-										</span>
-										<span class="token punctuation">&gt;
-										</span>
-										
-									</span>
-									</code>
-								</pre>
-							</div>
 						</div>
 						<div class="tdcss-fragment" id="fragment-4">
-							<h3 class="tdcss-fragment__title">Notice box</h3>
+							<div class="tdcss-fragment__head">
+								<h3 class="tdcss-fragment__title">Notice box</h3>
+								<div class="tdcss-fragment__details">
+									these are details
+									<code class="tdcss-code-example">
+									</code>
+								</div>
+							</div>
 							<div class="tdcss-dom-example">
 								<div class="box-notice">
 									<p>This is a notice box.</p>
 								</div>
 							</div>
-							<div class="tdcss-code-example">
-								<pre class="language-markup" style="height: 60px;">
-									<code class="language-markup">
-									<span class="token tag">
-										<span class="token tag">
-											<span class="token punctuation">&lt;
-											</span>div
-										</span> 
-										<span class="token attr-name">class
-										</span>
-										<span class="token attr-value">
-											<span class="token punctuation">=
-											</span>
-											<span class="token punctuation">"
-											</span>box-notice
-											<span class="token punctuation">"
-											</span>
-											
-										</span>
-										<span class="token punctuation">&gt;
-										</span>
-										
-									</span>
-									<span class="token tag">
-										<span class="token tag">
-											<span class="token punctuation">&lt;
-											</span>p
-										</span>
-										<span class="token punctuation">&gt;
-										</span>
-										
-									</span>This is a notice box.
-									<span class="token tag">
-										<span class="token tag">
-											<span class="token punctuation">&lt;/
-											</span>p
-										</span>
-										<span class="token punctuation">&gt;
-										</span>
-										
-									</span>
-									<span class="token tag">
-										<span class="token tag">
-											<span class="token punctuation">&lt;/
-											</span>div
-										</span>
-										<span class="token punctuation">&gt;
-										</span>
-										
-									</span>
-									</code>
-								</pre>
-							</div>
 						</div>
 						<div class="tdcss-fragment" id="fragment-5">
-							<h3 class="tdcss-fragment__title">Warning box</h3>
+							<div class="tdcss-fragment__head">
+								<h3 class="tdcss-fragment__title">Warning box</h3>
+								<div class="tdcss-fragment__details">
+									these are details
+									<code class="tdcss-code-example">
+									</code>
+								</div>
+							</div>
 							<div class="tdcss-dom-example">
 								<div class="box-warning">
 									<p>This is a warning box.</p>
 								</div>
 							</div>
-							<div class="tdcss-code-example">
-								<pre class="language-markup" style="height: 60px;">
-									<code class="language-markup">
-									<span class="token tag">
-										<span class="token tag">
-											<span class="token punctuation">&lt;
-											</span>div
-										</span> 
-										<span class="token attr-name">class
-										</span>
-										<span class="token attr-value">
-											<span class="token punctuation">=
-											</span>
-											<span class="token punctuation">"
-											</span>box-warning
-											<span class="token punctuation">"
-											</span>
-											
-										</span>
-										<span class="token punctuation">&gt;
-										</span>
-										
-									</span>
-									
-									<span class="token tag">
-										<span class="token tag">
-											<span class="token punctuation">&lt;
-											</span>p
-										</span>
-										<span class="token punctuation">&gt;
-										</span>
-									</span>This is a warning box.
-									<span class="token tag">
-										<span class="token tag">
-											<span class="token punctuation">&lt;/
-											</span>p
-										</span>
-										<span class="token punctuation">&gt;
-										</span>
-										
-									</span>
-									<span class="token tag">
-										<span class="token tag">
-											<span class="token punctuation">&lt;/
-											</span>div
-										</span>
-										<span class="token punctuation">&gt;
-										</span>
-										
-									</span>
-									</code>
-								</pre>
-							</div>
 						</div>
 						<div class="tdcss-fragment" id="fragment-6">
-							<h3 class="tdcss-fragment__title">Alert box</h3>
+							<div class="tdcss-fragment__head">
+								<h3 class="tdcss-fragment__title">Alert box</h3>
+								<div class="tdcss-fragment__details">
+									these are details
+									<code class="tdcss-code-example">
+									</code>
+								</div>
+							</div>
 							<div class="tdcss-dom-example">
 								<div class="box-alert">
 									<p>This is an alert box.</p>
 								</div>
-							</div>
-							<div class="tdcss-code-example">
-								<pre class="language-markup" style="height: 60px;">
-									<code class="language-markup">
-									<span class="token tag">
-										<span class="token tag">
-											<span class="token punctuation">&lt;
-											</span>div
-										</span> 
-										<span class="token attr-name">class
-										</span>
-										<span class="token attr-value">
-											<span class="token punctuation">=
-											</span>
-											<span class="token punctuation">"
-											</span>box-alert
-											<span class="token punctuation">"
-											</span>
-											
-										</span>
-										<span class="token punctuation">&gt;
-										</span>
-									</span>
-									
-									<span class="token tag">
-										<span class="token tag">
-											<span class="token punctuation">&lt;
-											</span>p
-										</span>
-										<span class="token punctuation">&gt;
-										</span>
-										
-									</span>This is an alert box.
-									<span class="token tag">
-										<span class="token tag">
-											<span class="token punctuation">&lt;/
-											</span>p
-										</span>
-										<span class="token punctuation">&gt;
-										</span>
-										
-									</span>
-									<span class="token tag">
-										<span class="token tag">
-											<span class="token punctuation">&lt;/
-											</span>div
-										</span>
-										<span class="token punctuation">&gt;
-										</span>
-										
-									</span>
-									</code>
-								</pre>
 							</div>
 						</div>
 						<div class="tdcss-top">
@@ -418,92 +212,42 @@
 								<h2 class="tdcss-subgroup__title">Headers</h2>
 							</div>
 							<div class="tdcss-fragment" id="fragment-7">
-								<h3 class="tdcss-fragment__title">H1</h3>
+								<div class="tdcss-fragment__head">
+									<h3 class="tdcss-fragment__title">H1</h3>
+									<div class="tdcss-fragment__details">
+										these are details
+										<code class="tdcss-code-example">
+										</code>
+									</div>
+								</div>
 								<div class="tdcss-dom-example">
 									<h1>This is an H1 header.</h1>
 								</div>
-								<div class="tdcss-code-example">
-									<pre class="language-markup" style="height: 80px;">
-										<code class="language-markup">
-										<span class="token tag">
-											<span class="token tag">
-												<span class="token punctuation">&lt;
-												</span>h1
-											</span>
-											<span class="token punctuation">&gt;
-											</span>
-											
-										</span>This is an H1 header.
-										<span class="token tag">
-											<span class="token tag">
-												<span class="token punctuation">&lt;/
-												</span>h1
-											</span>
-											<span class="token punctuation">&gt;
-											</span>
-										</span>
-										</code>
-									</pre>
-								</div>
 							</div>
 							<div class="tdcss-fragment" id="fragment-8">
-								<h3 class="tdcss-fragment__title">H2</h3>
+								<div class="tdcss-fragment__head">
+									<h3 class="tdcss-fragment__title">H2</h3>
+									<div class="tdcss-fragment__details">
+										these are details
+										<code class="tdcss-code-example">
+										</code>
+									</div>
+								</div>
 								<div class="tdcss-dom-example">
 									<h2>This is an H2 header</h2>
 								</div>
-								<div class="tdcss-code-example">
-									<pre class="language-markup" style="height: 68px;">
-										<code class="language-markup">
-										<span class="token tag">
-											<span class="token tag">
-												<span class="token punctuation">&lt;
-												</span>h2
-											</span>
-											<span class="token punctuation">&gt;
-											</span>
-											
-										</span>This is an H2 header
-										<span class="token tag">
-											<span class="token tag">
-												<span class="token punctuation">&lt;/
-												</span>h2
-											</span>
-											<span class="token punctuation">&gt;
-											</span>
-											
-										</span>
-										</code>
-									</pre>
-								</div>
 							</div>
 							<div class="tdcss-fragment" id="fragment-9">
-								<h3 class="tdcss-fragment__title">H3</h3>
+								<div class="tdcss-fragment__head">
+									<h3 class="tdcss-fragment__title">H3</h3>
+									<div class="tdcss-fragment__details">
+										these are details
+										<code class="tdcss-code-example">
+										</code>
+									</div>
+								</div>
 								<div class="tdcss-dom-example">
 									<h3>This is an H3 header</h3>
-								</div>
-								<div class="tdcss-code-example">
-									<pre class="language-markup" style="height: 58px;">
-										<code class="language-markup">
-										<span class="token tag">
-											<span class="token tag">
-												<span class="token punctuation">&lt;
-												</span>h3
-											</span>
-											<span class="token punctuation">&gt;
-											</span>
-											
-										</span>This is an H3 header
-										<span class="token tag">
-											<span class="token tag">
-												<span class="token punctuation">&lt;/
-												</span>h3
-											</span>
-											<span class="token punctuation">&gt;
-											</span>
-											
-										</span>
-										</code>
-									</pre>
 								</div>
 							</div>
 						</div>
@@ -535,36 +279,22 @@
 							<h1 class="tdcss-group__title">Custom height</h1>
 						</div>
 						<div class="tdcss-fragment" id="fragment-11">
-							<h3 class="tdcss-fragment__title">Some element that needs a lot of space</h3>
+							<div class="tdcss-fragment__head">
+								<h3 class="tdcss-fragment__title">Some element that needs a lot of space</h3>
+								<div class="tdcss-fragment__details">
+									these are details
+									<code class="tdcss-code-example">
+									</code>
+								</div>
+							</div>
 							<div class="tdcss-dom-example">
 								<h3>This is a test.</h3>
-							</div>
-							<div class="tdcss-code-example">
-								<pre class="language-markup">
-									<code class="language-markup">
-									<span class="token tag">
-										<span class="token tag">
-											<span class="token punctuation">&lt;
-											</span>h3
-										</span>
-										<span class="token punctuation">&gt;
-										</span>
-									</span>This is a test.
-									<span class="token tag">
-										<span class="token tag">
-											<span class="token punctuation">&lt;/
-											</span>h3
-										</span>
-										<span class="token punctuation">&gt;
-										</span>
-										
-									</span>
-									</code>
-								</pre>
 							</div>
 						</div>
 					</div>
 				</div>
-
-			</body>
-		</html>
+			</div>
+		</div>
+		
+	</body>
+</html>

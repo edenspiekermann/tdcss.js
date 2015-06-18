@@ -6,6 +6,7 @@
  */
 
 // @import 'vendor/prism/prism';
+@import 'partials/tdcss-code-example';
 @import 'partials/tdcss-fragment';
 @import 'partials/tdcss-group';
 @import 'partials/tdcss-header';
@@ -97,8 +98,7 @@ body {
 }
 
 
-.tdcss-dom-example,
-.tdcss-code-example {
+.tdcss-dom-example {
 		float: left;
 }
 
@@ -108,31 +108,7 @@ body {
 		padding: 1em;
 }
 
-.tdcss-hide-html .tdcss-dom-example {
-		width: 100%;
-}
 
-.tdcss-code-example {
-		position: relative;
-		z-index: 1000;
-		width: 40%;
-		padding: 1em;
-}
-
-.tdcss-hide-html .tdcss-code-example {
-		display: none;
-}
-
-.tdcss-code-example .tdcss-h3 {
-		padding: 0.25em;
-		margin-top: 0;
-		margin-bottom: 0.5em;
-		font-family: verdana, sans-serif;
-		font-size: 14px;
-		font-weight: bold;
-		color: white;
-		background-color: #add8e6;
-}
 
 .tdcss-control-bar {
 		position: fixed;
