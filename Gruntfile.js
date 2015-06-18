@@ -1,17 +1,13 @@
 /*global module:false*/
 module.exports = function (grunt) {
 
-    // These plugins provide necessary tasks.
-    grunt.loadNpmTasks('grunt-contrib-concat');
-    grunt.loadNpmTasks('grunt-contrib-uglify');
-    grunt.loadNpmTasks('grunt-karma');
-    grunt.loadNpmTasks('grunt-contrib-jshint');
-    grunt.loadNpmTasks('grunt-contrib-watch');
-    grunt.loadNpmTasks('grunt-contrib-clean');
-    grunt.loadNpmTasks('grunt-recess');
+    require('load-grunt-tasks')(grunt);
 
     // Default task.
-    grunt.registerTask('default', ['clean', 'jshint', 'concat', 'recess', 'karma']);
+    grunt.registerTask('default', ['watch']);
+
+    // Build task.
+    grunt.registerTask('build', ['clean', 'jshint', 'concat', 'sass:dist', 'autoprefixer', 'karma']);
 
     // Travis CI task.
     grunt.registerTask('travis', 'concat', 'karma');
@@ -27,56 +23,85 @@ module.exports = function (grunt) {
             '* Copyright (c) <%= grunt.template.today("yyyy") %> <%= pkg.author %>;\n' +
             '* License: <%= pkg.license %> */\n\n\n',
 
+        dirs: {
+            source: 'src',
+            build: 'download',
+            test: 'test'
+        },
+
         src: {
-            js: ['src/tdcss.js', 'src/vendors/jquery-cookie.js', 'src/vendors/prism/prism.js', 'src/vendors/html2canvas.js', 'src/vendors/resemble-modified.js'],
-            css: ['src/themes/**/*.css', 'src/vendors/prism/prism.css']
+            js: ['<%= dirs.source %>/tdcss.js', '<%= dirs.source %>/vendor/**/*.js']
         },
 
         // Task configuration.
-
         watch: {
-            files: ['src/**/*', 'test/**/*'],
-            tasks: ['default'],
+            files: ['<%= dirs.source %>/**/*', '<%= dirs.test %>/**/*'],
+            tasks: ['concat', 'sass:watch', 'autoprefixer'],
             options: {
                 livereload: false
             }
         },
 
-        clean: {build: ['build']},
+        clean: { build: ['build'] },
 
-        recess: {
+        sass: {
+            watch: {
+                options: {
+                    sourceComments: true
+                },
+                files: [{
+                    expand: true,
+                    cwd: '<%= dirs.source %>',
+                    src: ['**/*.scss'],
+                    dest: '<%= dirs.build %>',
+                    ext: '.css'
+                }]
+            },
             dist: {
                 options: {
-                    compile: true,
-                    banner: '<%= banner %>',
-                    stripBanners: true
+                    outputStyle: 'compressed'
                 },
-                files:[{
-                    expand:true,
-                    dest: 'download/',
-                    cwd: 'src',      // Src matches are relative to this path.
-                    src: ['themes/**/*.css'],
-                    ext:'.css'
+                files: [{
+                    expand: true,
+                    cwd: '<%= dirs.source %>',
+                    src: ['**/*.scss'],
+                    dest: '<%= dirs.build %>',
+                    ext: '.css'
                 }]
             }
         },
+
+        autoprefixer: {
+            options: {
+                browsers: ['last 2 versions', 'ie 8', 'ie 9', '> 1%']
+            },
+            dist: {
+                expand: true,
+                flatten: true,
+                src: '<%= dirs.build %>/**/*.css',
+                dest: '<%= dirs.build %>'
+            }            
+        },
+
         concat: {
             js: {
                 src: '<%= src.js %>',
-                dest: 'download/tdcss.js',
+                dest: '<%= dirs.build %>/tdcss.js',
                 options: {
                     banner: '<%= banner %>',
                     stripBanners: true
                 }
             }
         },
+
         jshint: {
             options: {
                 jshintrc: '.jshintrc',
-                ignores: ['test/**/*']
+                ignores: ['<%= dirs.test %>/**/*']
             },
-            src: 'src/tdcss.js'
+            src: '<%= dirs.source %>/tdcss.js'
         },
+
         karma: {
             unit: {
                 configFile: 'karma.conf.js'
