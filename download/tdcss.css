@@ -5,6 +5,9 @@
  * @author Jakob Løkke Madsen
  * @url http://www.jakobloekkemadsen.com
  */
+.tdcss-header {
+  background-color: #f90; }
+
 body {
   margin: 0; }
 
