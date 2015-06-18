@@ -1,17 +1,13 @@
 /*global module:false*/
 module.exports = function (grunt) {
 
-    // These plugins provide necessary tasks.
-    grunt.loadNpmTasks('grunt-contrib-concat');
-    grunt.loadNpmTasks('grunt-contrib-uglify');
-    grunt.loadNpmTasks('grunt-karma');
-    grunt.loadNpmTasks('grunt-contrib-jshint');
-    grunt.loadNpmTasks('grunt-contrib-watch');
-    grunt.loadNpmTasks('grunt-contrib-clean');
-    grunt.loadNpmTasks('grunt-recess');
+    require('load-grunt-tasks')(grunt);
 
     // Default task.
-    grunt.registerTask('default', ['clean', 'jshint', 'concat', 'recess', 'karma']);
+    grunt.registerTask('default', ['watch']);
+
+    // Build task.
+    grunt.registerTask('build', ['clean', 'jshint', 'concat', 'sass', 'karma']);
 
     // Travis CI task.
     grunt.registerTask('travis', 'concat', 'karma');
@@ -28,38 +24,35 @@ module.exports = function (grunt) {
             '* License: <%= pkg.license %> */\n\n\n',
 
         src: {
-            js: ['src/tdcss.js', 'src/vendors/jquery-cookie.js', 'src/vendors/prism/prism.js', 'src/vendors/html2canvas.js', 'src/vendors/resemble-modified.js'],
-            css: ['src/themes/**/*.css', 'src/vendors/prism/prism.css']
+            js: ['src/tdcss.js', 'src/vendors/jquery-cookie.js', 'src/vendors/prism/prism.js', 'src/vendors/html2canvas.js', 'src/vendors/resemble-modified.js']
         },
 
         // Task configuration.
-
         watch: {
             files: ['src/**/*', 'test/**/*'],
-            tasks: ['default'],
+            tasks: ['concat', 'sass'],
             options: {
                 livereload: false
             }
         },
 
-        clean: {build: ['build']},
+        clean: { build: ['build'] },
 
-        recess: {
+        sass: {
+            options: {
+                sourceMap: false
+            },
             dist: {
-                options: {
-                    compile: true,
-                    banner: '<%= banner %>',
-                    stripBanners: true
-                },
-                files:[{
-                    expand:true,
-                    dest: 'download/',
-                    cwd: 'src',      // Src matches are relative to this path.
-                    src: ['themes/**/*.css'],
-                    ext:'.css'
-                }]
+              files: [{
+                expand: true,
+                cwd: 'src',
+                src: ['**/*.scss'],
+                dest: 'download',
+                ext: '.css'
+              }]
             }
         },
+
         concat: {
             js: {
                 src: '<%= src.js %>',
@@ -70,6 +63,7 @@ module.exports = function (grunt) {
                 }
             }
         },
+
         jshint: {
             options: {
                 jshintrc: '.jshintrc',
@@ -77,6 +71,7 @@ module.exports = function (grunt) {
             },
             src: 'src/tdcss.js'
         },
+
         karma: {
             unit: {
                 configFile: 'karma.conf.js'
