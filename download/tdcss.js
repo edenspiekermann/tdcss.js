@@ -20364,7 +20364,7 @@ function createFragmentFromComment(commentNode) {
         identifier = FragmentTypes[type].identifier;
         fragmentTitle = getFragmentContent(commentNode, identifier);
         description = $.trim(getCommentMeta(commentNode)[1]);
-        fragmentHTML = getFragmentHTML(commentNode);
+        fragmentHTML = $.trim(getFragmentHTML(commentNode));
 
         return new CodeSnippet({
             type: type,
@@ -20379,7 +20379,7 @@ function createFragmentFromComment(commentNode) {
         identifier = FragmentTypes[type].identifier;
         fragmentTitle = getFragmentContent(commentNode, identifier);
         rawScript = getFragmentScriptHTML(commentNode);
-        fragmentHTML = getFragmentHTML(commentNode);
+        fragmentHTML = $.trim(getFragmentHTML(commentNode));
         description = $.trim(getCommentMeta(commentNode)[1]);
 
         return new JSCodeSnippet({
@@ -20398,7 +20398,7 @@ function createFragmentFromComment(commentNode) {
         identifier = FragmentTypes[type].identifier;
         fragmentTitle = getFragmentContent(commentNode, identifier);
         rawScript = getFragmentScriptHTML(commentNode);
-        fragmentHTML = getFragmentHTML(commentNode);
+        fragmentHTML = $.trim(getFragmentHTML(commentNode));
         description = $.trim(getCommentMeta(commentNode)[1]);
 
         return new JSCodeSnippet({
@@ -20415,7 +20415,7 @@ function createFragmentFromComment(commentNode) {
         identifier = FragmentTypes[type].identifier;
         fragmentTitle = getFragmentContent(commentNode, identifier);
         description = $.trim(getCommentMeta(commentNode)[1]);
-        fragmentHTML = getFragmentHTML(commentNode);
+        fragmentHTML = $.trim(getFragmentHTML(commentNode));
 
         return new CodeSnippet({
             type: type,
@@ -20451,11 +20451,13 @@ function getCommentMeta(element) {
 }
 
 function getFragmentScriptHTML(element) {
-    return $(element).nextAll('script[type="text/javascript"]').html();
+    var markup = $(element).nextAll('script[type="text/javascript"]').html();
+    return jQuery.trim(markup);
 }
 
 function getFragmentCoffeeScriptHTML(element) {
-    return $(element).nextAll('script[type="text/coffeescript"]').html().trim();
+    var markup = $(element).nextAll('script[type="text/coffeescript"]').html();
+    return jQuery.trim(markup);
 }
 
 function getFragmentHTML(element) {
@@ -21166,19 +21168,19 @@ var HandlebarsCompiler = require('hbsfy/runtime');
 module.exports = HandlebarsCompiler.template({"1":function(depth0,helpers,partials,data) {
     var helper;
 
-  return "      <div class='tdcss-code-example tdcss-slab tdcss-slab--secondary'>\n        <pre>\n          <code class=\"language-markup\">\n            "
+  return "      <div class='tdcss-code-example tdcss-slab tdcss-slab--secondary'>\n<pre>\n    <code class=\"language-markup\">"
     + this.escapeExpression(((helper = (helper = helpers.html || (depth0 != null ? depth0.html : depth0)) != null ? helper : helpers.helperMissing),(typeof helper === "function" ? helper.call(depth0,{"name":"html","hash":{},"data":data}) : helper)))
-    + "\n          </code>\n        </pre>\n      </div>\n";
+    + "</code>\n</pre>\n      </div>\n";
 },"compiler":[6,">= 2.0.0-beta.1"],"main":function(depth0,helpers,partials,data) {
     var stack1, helper, alias1=helpers.helperMissing, alias2="function", alias3=this.escapeExpression;
 
   return "<div class=\"tdcss-fragment tdcss-box tdcss-box--fragment tdcss-slab--primary\" id=\"fragment-1\">\n  <div class=\"tdcss-fragment__head tdcss-font\">\n    <button type=\"button\" class=\"tdcss-fragment__toggle\" onclick=\" this.parentNode.parentNode.classList.contains('is-fragment-details-expanded')?this.parentNode.parentNode.classList.remove('is-fragment-details-expanded'):this.parentNode.parentNode.classList.add('is-fragment-details-expanded'); return false;\" >\n      <h3 class=\"tdcss-fragment__title\">"
     + alias3(((helper = (helper = helpers.title || (depth0 != null ? depth0.title : depth0)) != null ? helper : alias1),(typeof helper === alias2 ? helper.call(depth0,{"name":"title","hash":{},"data":data}) : helper)))
-    + "</h3>\n    </button>\n    \n    <div class=\"tdcss-fragment__details\">\n"
-    + ((stack1 = helpers['if'].call(depth0,(depth0 != null ? depth0.renderSnippet : depth0),{"name":"if","hash":{},"fn":this.program(1, data, 0),"inverse":this.noop,"data":data})) != null ? stack1 : "")
-    + "\n      "
+    + "</h3>\n    </button>\n\n    <div class=\"tdcss-fragment__details\">\n      <div class=\"tdcss-fragment__usage\">\n        <h3 class=\"tdcss-fragment__usage-heading tdcss-text--dimmed\">Usage:</h3>\n              "
     + alias3(((helper = (helper = helpers.description || (depth0 != null ? depth0.description : depth0)) != null ? helper : alias1),(typeof helper === alias2 ? helper.call(depth0,{"name":"description","hash":{},"data":data}) : helper)))
-    + "\n\n    </div>\n  </div>\n  <div class=\"tdcss-fragment__preview tdcss-slab tdcss-slab--secondary\">\n    <div class=\"tdcss-dom-example\">\n      "
+    + "\n\n      </div>\n"
+    + ((stack1 = helpers['if'].call(depth0,(depth0 != null ? depth0.renderSnippet : depth0),{"name":"if","hash":{},"fn":this.program(1, data, 0),"inverse":this.noop,"data":data})) != null ? stack1 : "")
+    + "  </div>\n  <div class=\"tdcss-fragment__preview tdcss-slab tdcss-slab--secondary\">\n    <div class=\"tdcss-dom-example\">\n      "
     + ((stack1 = ((helper = (helper = helpers.html || (depth0 != null ? depth0.html : depth0)) != null ? helper : alias1),(typeof helper === alias2 ? helper.call(depth0,{"name":"html","hash":{},"data":data}) : helper))) != null ? stack1 : "")
     + "\n    </div>\n  </div>\n</div>\n";
 },"useData":true});
@@ -21247,7 +21249,7 @@ module.exports = HandlebarsCompiler.template({"compiler":[6,">= 2.0.0-beta.1"],"
     + alias3(((helper = (helper = helpers.href || (depth0 != null ? depth0.href : depth0)) != null ? helper : alias1),(typeof helper === alias2 ? helper.call(depth0,{"name":"href","hash":{},"data":data}) : helper)))
     + "\">\n  <header class=\"tdcss-group__head tdcss-font\">\n    <h1 class=\"tdcss-group__title\">"
     + alias3(((helper = (helper = helpers.name || (depth0 != null ? depth0.name : depth0)) != null ? helper : alias1),(typeof helper === alias2 ? helper.call(depth0,{"name":"name","hash":{},"data":data}) : helper)))
-    + "</h1>\n    <div class=\"tdcss-group__description tdcss-slab tdcss-slab--description tdcss-slab--dimmed tdcss-font\">\n      "
+    + "</h1>\n    <div class=\"tdcss-group__description tdcss-font tdcss-text--dimmed\">\n      "
     + alias3(((helper = (helper = helpers.description || (depth0 != null ? depth0.description : depth0)) != null ? helper : alias1),(typeof helper === alias2 ? helper.call(depth0,{"name":"description","hash":{},"data":data}) : helper)))
     + "\n    </div>\n  </header>\n\n  "
     + ((stack1 = ((helper = (helper = helpers.content || (depth0 != null ? depth0.content : depth0)) != null ? helper : alias1),(typeof helper === alias2 ? helper.call(depth0,{"name":"content","hash":{},"data":data}) : helper))) != null ? stack1 : "")

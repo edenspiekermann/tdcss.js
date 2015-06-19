@@ -407,6 +407,7 @@ blockquote cite {
   box-shadow: 1px 1px 1px 0 rgba(0, 0, 0, 0.1);
   font-family: Dosis, sans-serif;
   line-height: normal;
+  color: inherit;
 }
 .button:hover, .button--strong:hover, .button--focus:hover, .button--small:hover, .button--huge:hover {
   background-color: #e2e2e2;
@@ -469,6 +470,7 @@ blockquote cite {
 
 .kitten-card__image {
   position: relative;
+
 }
 .kitten-card__image:after {
   content: "";
@@ -505,6 +507,7 @@ blockquote cite {
 }
 .kitten-card--large .kitten-card__image {
   width: 100%;
+  margin-bottom: 10px;
 }
 .kitten-card--large .button, .kitten-card--large .button--strong, .kitten-card--large .button--focus, .kitten-card--large .button--small, .kitten-card--large .button--huge {
   margin: 16px 0;

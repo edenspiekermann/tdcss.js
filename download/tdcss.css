@@ -125,7 +125,7 @@ pre[class*="language-"] {
 
 /* line 1, /Users/mberridge/Sites/tdcss.js/src/partials/_tdcss-elements.scss */
 .tdcss-elements {
-  padding: 5%; }
+  padding: 0 5% 5%; }
   /* line 4, /Users/mberridge/Sites/tdcss.js/src/partials/_tdcss-elements.scss */
   .tdcss-elements h1, .tdcss-elements h2, .tdcss-elements h3, .tdcss-elements p, .tdcss-elements ul {
     margin-top: 0; }
@@ -133,11 +133,10 @@ pre[class*="language-"] {
 @media (min-width: 701px) {
   /* line 10, /Users/mberridge/Sites/tdcss.js/src/partials/_tdcss-elements.scss */
   .tdcss-elements {
-    margin-top: 50px;
     margin-left: 30%; } }
 
 @media (min-width: 850px) {
-  /* line 17, /Users/mberridge/Sites/tdcss.js/src/partials/_tdcss-elements.scss */
+  /* line 16, /Users/mberridge/Sites/tdcss.js/src/partials/_tdcss-elements.scss */
   .tdcss-elements {
     margin-left: 250px; } }
 
@@ -188,6 +187,19 @@ pre[class*="language-"] {
     display: block; }
 
 /* line 53, /Users/mberridge/Sites/tdcss.js/src/partials/_tdcss-fragment.scss */
+.tdcss-fragment__usage {
+  float: left;
+  width: 48%;
+  font-size: .9em;
+  line-height: 1.4; }
+
+/* line 60, /Users/mberridge/Sites/tdcss.js/src/partials/_tdcss-fragment.scss */
+.tdcss-fragment__usage-heading {
+  font-size: .9em;
+  margin-bottom: .7em;
+  font-weight: normal; }
+
+/* line 66, /Users/mberridge/Sites/tdcss.js/src/partials/_tdcss-fragment.scss */
 .tdcss-fragment__preview {
   float: left;
   width: 100%;
@@ -207,34 +219,37 @@ pre[class*="language-"] {
 /* line 15, /Users/mberridge/Sites/tdcss.js/src/partials/_tdcss-group.scss */
 .tdcss-group__head {
   display: block;
-  padding: 2em 0;
+  padding: 1em 0;
   margin: 0;
   font-size: 2em; }
 
 /* line 24, /Users/mberridge/Sites/tdcss.js/src/partials/_tdcss-group.scss */
 .tdcss-group__title,
 .tdcss-group__description {
-  margin-bottom: 0; }
+  margin-bottom: .5em; }
 
 /* line 28, /Users/mberridge/Sites/tdcss.js/src/partials/_tdcss-group.scss */
+.tdcss-group__description {
+  font-size: .7em; }
+
+/* line 32, /Users/mberridge/Sites/tdcss.js/src/partials/_tdcss-group.scss */
 .tdcss-group__description strong {
   font-weight: bold; }
 
-/* line 32, /Users/mberridge/Sites/tdcss.js/src/partials/_tdcss-group.scss */
+/* line 36, /Users/mberridge/Sites/tdcss.js/src/partials/_tdcss-group.scss */
 .tdcss-group__description em {
   font-style: italic; }
 
-/* line 36, /Users/mberridge/Sites/tdcss.js/src/partials/_tdcss-group.scss */
+/* line 40, /Users/mberridge/Sites/tdcss.js/src/partials/_tdcss-group.scss */
 .tdcss-group__to-top {
-  position: absolute;
-  top: 100%;
-  background-color: red;
-  right: 0; }
+  text-align: right; }
 
 /* line 44, /Users/mberridge/Sites/tdcss.js/src/partials/_tdcss-group.scss */
 .tdcss-group__to-top-link {
-  display: block;
-  padding: 0.1em 0.2em; }
+  display: inline-block;
+  padding: 1em 0;
+  color: inherit;
+  text-decoration: none; }
 
 /* line 1, /Users/mberridge/Sites/tdcss.js/src/partials/_tdcss-header.scss */
 .tdcss-header {

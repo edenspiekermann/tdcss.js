@@ -72,3 +72,7 @@
 /* line 8, /Users/mberridge/Sites/tdcss.js/src/themes/default.scss */
 .tdcss-font {
   font-family: 'Raleway', 'Helvetica', sans-serif; }
+
+/* line 12, /Users/mberridge/Sites/tdcss.js/src/themes/default.scss */
+.tdcss-text--dimmed {
+  color: #999; }
