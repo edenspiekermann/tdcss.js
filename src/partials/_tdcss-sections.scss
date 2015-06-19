@@ -5,30 +5,15 @@
  * 3. Off-canvas
  * 4. Responsible for opening/closing animation
  */
-.tdcss-nav {
-  padding-top: $header-height;
+.tdcss-sections {
 
   @media (max-width: $off-canvas-max) {
-    transform: translateX(-100%); /* 3 */
-    transition: 0.15s; /* 4 */
-    border-right: none !important;
-    position: absolute;
-    top: 0;
-    right: 0;
-    bottom: 0;
-    left: 0;
-    z-index: 1;
+    max-height: 0;
+    overflow: hidden;
   }
 
   @media (min-width: $on-canvas-min) {
-    position: fixed;
-    height: 100%;
-    top: 0;
-    left: 0;
-    z-index: 0;
-    border-right: 1px solid transparent;
-    width: $on-canvas-width;
-    max-width: $on-canvas-max-width;
+      float: right;
   }
 }
 
@@ -37,7 +22,7 @@
  * 1. Absolutely positioning
  * 2. ... on the right side of the nav (make sure overflow is visible)
  */
-.tdcss-nav__toggle {
+.tdcss-sections__toggle {
   @media (min-width: $on-canvas-min) {
     display: none;
   }
@@ -57,7 +42,6 @@
     // padding-right: 16px;
     // line-height: $header-height;
     // cursor: pointer;
-    // z-index: 9999;
   }
 }
 
@@ -65,7 +49,7 @@
  * Checkbox responsible for the toggle hack
  * Hidden, no matter what
  */
-#tdcssMenuToggle {
+#tdcssSectionsToggle {
   position: absolute;
   clip: rect(0 0 0 0);
   opacity: 0;
@@ -74,8 +58,9 @@
 /**
  * When checkbox is checked, open the nav
  */
-#tdcssMenuToggle:checked ~ .tdcss-nav {
-  transform: translateX(0);
+#tdcssSectionsToggle:checked ~ .tdcss-sections {
+  max-height: 500px;
+  //transform: translateX(0);
 }
 
 /**
@@ -124,7 +109,7 @@ body {
 //     width: 100%;
 //   }
 
-//   [id='tdcssMenuToggle']:checked ~ .tdcss-nav > .tdcss-nav__toggle {
+//   [id='tdcssSectionsToggle']:checked ~ .tdcss-sections > .tdcss-nav__toggle {
 //     left: auto;
 //     right: 0;
 //     top: 0;
@@ -134,10 +119,10 @@ body {
 /**
  * Provide a fallback for browsers that do not support CSS transforms
  */
-.no-csstransforms .tdcss-nav {
+.no-csstransforms .tdcss-sections {
   left: -350px;
 }
 
-.no-csstransforms [id='tdcssMenuToggle']:checked ~ .tdcss-nav {
+.no-csstransforms [id='tdcssSectionsToggle']:checked ~ .tdcss-sections {
   left: 0;
 }

@@ -4,8 +4,8 @@ var $ = require('jquery');
 
 
 module.exports = Backbone.View.extend({
-    className: "tdcss-masthead",
-    template: require('./tdcss-masthead.hbs'),
+    className: "tdcss-header",
+    template: require('./tdcss-header.hbs'),
 
     render: function() {
         var data = {};

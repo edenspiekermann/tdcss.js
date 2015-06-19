@@ -1,3 +1,19 @@
 .tdcss-header {
-  background-color: #f90;
+  position: fixed;
+  top: 0;
+  width: 100%;
+  z-index: 9999;
+  overflow-y: hidden;
+
+  @media (min-width: $on-canvas-min) {
+    padding-right: 16px;
+    height: $header-height;
+  }
+}
+
+.tdcss-header__title {
+  font-size: 1.5em;
+  padding-left: 16px;
+  line-height: $header-height;
+  margin-bottom: 0;
 }

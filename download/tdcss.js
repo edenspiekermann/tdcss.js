@@ -20643,7 +20643,7 @@ var TDCSSElementsView = require('./views/tdcss-elements.js');
 var SectionView = require('./views/section.js');
 var FragmentView = require('./views/fragment.js');
 var NavigationView = require('./views/tdcss-nav.js');
-var HeaderView = require('./views/tdcss-masthead.js');
+var HeaderView = require('./views/tdcss-header.js');
 
 var createFragmentFromComment = require('./dom_utils').createFragmentFromComment;
 
@@ -20716,7 +20716,7 @@ var createFragmentFromComment = require('./dom_utils').createFragmentFromComment
         function setup() {
             $(module.container)
                 .addClass("tdcss-fragments")
-                .after('<div class="tdcss-elements tdcss-nav__neighbour"></div>');
+                .after('<div class="tdcss-elements"></div>');
         }
 
         function parse() {
@@ -20754,8 +20754,8 @@ var createFragmentFromComment = require('./dom_utils').createFragmentFromComment
         // TODO: all of this is super hacky, should be moved into own view
 
         function render() {
-            renderHeader();
             renderNavigation();
+            renderHeader();
             renderBody();
         }
 
@@ -20800,12 +20800,13 @@ var createFragmentFromComment = require('./dom_utils').createFragmentFromComment
             });
         }
 
+
         function renderNavigation() {
             var sectionModels = module.fragments.getSections();
             var sections = new Sections(sectionModels);
             var navigationView = new NavigationView({collection: sections});
             var navigationMarkup = navigationView.render().$el.html();
-            $('#nav-container').append(navigationMarkup);
+            $('body').prepend(navigationMarkup);
         }
 
         function renderHeader() {
@@ -20813,6 +20814,7 @@ var createFragmentFromComment = require('./dom_utils').createFragmentFromComment
             var headerMarkup = headerView.render().$el.html();
             $('body').prepend(headerMarkup);
         }
+
 
         function _spacesToLowerCasedHyphenated(str) {
             str = str.replace(/\s+/g, '-').toLowerCase();
@@ -21158,7 +21160,7 @@ var createFragmentFromComment = require('./dom_utils').createFragmentFromComment
 
 window.$ = $;
 
-},{"./collections":40,"./dom_utils":42,"./models":44,"./models/const.js":43,"./views/fragment.js":47,"./views/section.js":49,"./views/tdcss-elements.js":50,"./views/tdcss-masthead.js":52,"./views/tdcss-nav.js":54,"jquery":37,"prismjs":38,"underscore":39}],46:[function(require,module,exports){
+},{"./collections":40,"./dom_utils":42,"./models":44,"./models/const.js":43,"./views/fragment.js":47,"./views/section.js":49,"./views/tdcss-elements.js":50,"./views/tdcss-header.js":52,"./views/tdcss-nav.js":54,"jquery":37,"prismjs":38,"underscore":39}],46:[function(require,module,exports){
 // hbsfy compiled Handlebars template
 var HandlebarsCompiler = require('hbsfy/runtime');
 module.exports = HandlebarsCompiler.template({"1":function(depth0,helpers,partials,data) {
@@ -21295,14 +21297,14 @@ module.exports = TDCSSView.extend({
 var Backbone = require('backbone');
 
 module.exports = Backbone.View.extend({
-    className: 'tdcss-elements tdcss-nav__neighbour'
+    className: 'tdcss-elements'
 });
 
 },{"backbone":1}],51:[function(require,module,exports){
 // hbsfy compiled Handlebars template
 var HandlebarsCompiler = require('hbsfy/runtime');
 module.exports = HandlebarsCompiler.template({"compiler":[6,">= 2.0.0-beta.1"],"main":function(depth0,helpers,partials,data) {
-    return "<header class=\"tdcss-masthead tdcss-font\">\n  <div class=\"your-custom-header\">\n    <h1 class=\"your-custom-header__title\">TDCSS</h1>\n    <nav role=\"navigation\" class=\"your-custom-header__nav\">\n        <ul class=\"your-custom-header__menu\">\n            <li class=\"your-custom-header__menu-item\">\n                <a href=\"#\" class=\"your-custom-header__link tdcss-nav-item--primary\">Colors</a>\n            </li><li class=\"your-custom-header__menu-item\">\n                <a href=\"#\" class=\"your-custom-header__link tdcss-nav-item--primary\">Type</a>\n            </li><li class=\"your-custom-header__menu-item\">\n                <a href=\"example.html\" class=\"your-custom-header__link tdcss-nav-item--primary\">Components</a>\n            </li>\n        </ul>\n    </nav>\n  </div>\n  <div id=\"nav-container\"></div>\n</header>\n";
+    return "<input type=\"checkbox\" id=\"tdcssMenuToggle\" aria-hidden=\"true\">\n<header class=\"tdcss-header tdcss-font\">\n    <input type=\"checkbox\" id=\"tdcssSectionsToggle\" aria-hidden=\"true\">\n    <nav role=\"navigation\" class=\"tdcss-sections\">\n        <ul class=\"tdcss-mainmenu\">\n            <li class=\"tdcss-mainmenu__item tdcss-nav-border\">\n                <a href=\"index.html\" class=\"tdcss-nav-item--primary\">Basic</a>\n            </li><li class=\"tdcss-mainmenu__item tdcss-nav-border\">\n                <a href=\"components.html\" class=\"tdcss-nav-item--primary\">Components</a>\n            </li>\n        </ul>\n    </nav>\n    <label for=\"tdcssSectionsToggle\" class=\"tdcss-sections__toggle tdcss-nav-item--primary\">\n        <span class=\"tdcss-nav__toggle-label\">Sections</span>\n    </label>\n    <label for=\"tdcssMenuToggle\" class=\"tdcss-nav__toggle tdcss-nav-item--primary\">\n        <span class=\"tdcss-nav__toggle-label\">Groups</span>\n    </label>\n    <h1 class=\"tdcss-header__title\">TDCSS</h1>\n    <div class=\"nav-container\"></div>\n</header>\n";
 },"useData":true});
 
 },{"hbsfy/runtime":36}],52:[function(require,module,exports){
@@ -21312,8 +21314,8 @@ var $ = require('jquery');
 
 
 module.exports = Backbone.View.extend({
-    className: "tdcss-masthead",
-    template: require('./tdcss-masthead.hbs'),
+    className: "tdcss-header",
+    template: require('./tdcss-header.hbs'),
 
     render: function() {
         var data = {};
@@ -21325,7 +21327,7 @@ module.exports = Backbone.View.extend({
 
 });
 
-},{"./tdcss-masthead.hbs":51,"backbone":1,"jquery":37,"underscore":39}],53:[function(require,module,exports){
+},{"./tdcss-header.hbs":51,"backbone":1,"jquery":37,"underscore":39}],53:[function(require,module,exports){
 // hbsfy compiled Handlebars template
 var HandlebarsCompiler = require('hbsfy/runtime');
 module.exports = HandlebarsCompiler.template({"1":function(depth0,helpers,partials,data) {
@@ -21339,7 +21341,7 @@ module.exports = HandlebarsCompiler.template({"1":function(depth0,helpers,partia
 },"compiler":[6,">= 2.0.0-beta.1"],"main":function(depth0,helpers,partials,data) {
     var stack1;
 
-  return "<input type=\"checkbox\" id=\"tdcssMenuToggle\" aria-hidden=\"true\">\n<label for=\"tdcssMenuToggle\" class=\"tdcss-nav__toggle tdcss-nav-item--primary\">\n    <span class=\"tdcss-nav__toggle-label\">Groups</span>\n</label>\n<div class=\"tdcss-nav tdcss-nav-border\">\n    <ul class=\"tdcss-menu\">\n"
+  return "<div class=\"tdcss-nav tdcss-nav-border\">\n    <ul class=\"tdcss-menu\">\n"
     + ((stack1 = helpers.each.call(depth0,(depth0 != null ? depth0.menuItems : depth0),{"name":"each","hash":{},"fn":this.program(1, data, 0),"inverse":this.noop,"data":data})) != null ? stack1 : "")
     + "    </ul>\n</div>\n";
 },"useData":true});

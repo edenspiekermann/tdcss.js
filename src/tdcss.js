@@ -25,7 +25,7 @@ var TDCSSElementsView = require('./views/tdcss-elements.js');
 var SectionView = require('./views/section.js');
 var FragmentView = require('./views/fragment.js');
 var NavigationView = require('./views/tdcss-nav.js');
-var HeaderView = require('./views/tdcss-masthead.js');
+var HeaderView = require('./views/tdcss-header.js');
 
 var createFragmentFromComment = require('./dom_utils').createFragmentFromComment;
 
@@ -98,7 +98,7 @@ var createFragmentFromComment = require('./dom_utils').createFragmentFromComment
         function setup() {
             $(module.container)
                 .addClass("tdcss-fragments")
-                .after('<div class="tdcss-elements tdcss-nav__neighbour"></div>');
+                .after('<div class="tdcss-elements"></div>');
         }
 
         function parse() {
@@ -136,8 +136,8 @@ var createFragmentFromComment = require('./dom_utils').createFragmentFromComment
         // TODO: all of this is super hacky, should be moved into own view
 
         function render() {
-            renderHeader();
             renderNavigation();
+            renderHeader();
             renderBody();
         }
 
@@ -182,12 +182,13 @@ var createFragmentFromComment = require('./dom_utils').createFragmentFromComment
             });
         }
 
+
         function renderNavigation() {
             var sectionModels = module.fragments.getSections();
             var sections = new Sections(sectionModels);
             var navigationView = new NavigationView({collection: sections});
             var navigationMarkup = navigationView.render().$el.html();
-            $('#nav-container').append(navigationMarkup);
+            $('body').prepend(navigationMarkup);
         }
 
         function renderHeader() {
@@ -195,6 +196,7 @@ var createFragmentFromComment = require('./dom_utils').createFragmentFromComment
             var headerMarkup = headerView.render().$el.html();
             $('body').prepend(headerMarkup);
         }
+
 
         function _spacesToLowerCasedHyphenated(str) {
             str = str.replace(/\s+/g, '-').toLowerCase();
