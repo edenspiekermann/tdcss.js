@@ -6,7 +6,6 @@
 
 .your-custom-header {
   height: $header-height;
-  line-height: $header-height;
   padding-left: 16px;
   padding-right: 16px;
   overflow-y: hidden;
@@ -19,10 +18,12 @@
   float: left;
   margin: 0;
   font-size: 1.5em;
+  line-height: $header-height;
 }
 
 .your-custom-header__nav {
   float: right;
+  line-height: $header-height;
 }
 
 .your-custom-header__menu {

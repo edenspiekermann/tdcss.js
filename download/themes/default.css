@@ -71,33 +71,34 @@
 /* line 7, /Users/mberridge/Sites/tdcss.js/src/themes/_your-custom-header.scss */
 .your-custom-header {
   height: 50px;
-  line-height: 50px;
   padding-left: 16px;
   padding-right: 16px;
   overflow-y: hidden;
   background-color: #111;
   color: white; }
 
-/* line 18, /Users/mberridge/Sites/tdcss.js/src/themes/_your-custom-header.scss */
+/* line 17, /Users/mberridge/Sites/tdcss.js/src/themes/_your-custom-header.scss */
 .your-custom-header__title {
   float: left;
   margin: 0;
-  font-size: 1.5em; }
+  font-size: 1.5em;
+  line-height: 50px; }
 
 /* line 24, /Users/mberridge/Sites/tdcss.js/src/themes/_your-custom-header.scss */
 .your-custom-header__nav {
-  float: right; }
+  float: right;
+  line-height: 50px; }
 
-/* line 28, /Users/mberridge/Sites/tdcss.js/src/themes/_your-custom-header.scss */
+/* line 29, /Users/mberridge/Sites/tdcss.js/src/themes/_your-custom-header.scss */
 .your-custom-header__menu {
   margin-top: 0;
   margin-bottom: 0;
   list-style: none; }
 
-/* line 34, /Users/mberridge/Sites/tdcss.js/src/themes/_your-custom-header.scss */
+/* line 35, /Users/mberridge/Sites/tdcss.js/src/themes/_your-custom-header.scss */
 .your-custom-header__menu-item {
   display: inline-block; }
-  /* line 37, /Users/mberridge/Sites/tdcss.js/src/themes/_your-custom-header.scss */
+  /* line 38, /Users/mberridge/Sites/tdcss.js/src/themes/_your-custom-header.scss */
   .your-custom-header__menu-item a {
     display: block;
     padding-left: 24px;
