@@ -21,7 +21,7 @@ function createFragmentFromComment(commentNode) {
     var type = getFragmentType(commentNode);
     var customHeight;
     var fragmentTitle;
-    var fragmentDescription;
+    var description;
     var fragment;
     var fragmentHTML;
     var rawScript;
@@ -30,33 +30,36 @@ function createFragmentFromComment(commentNode) {
     if (type === FragmentTypes.SECTION.name) {
         identifier = FragmentTypes[type].identifier;
         fragmentTitle = getFragmentContent(commentNode, identifier);
+        description = $.trim(getCommentMeta(commentNode)[1]);
+
         return new Section({
             type: type,
-            name: fragmentTitle
+            name: fragmentTitle,
+            description: description
         });
     }
 
     if (type === FragmentTypes.DESCRIPTION.name) {
         identifier = FragmentTypes[type].identifier;
-        fragmentDescription = getFragmentContent(commentNode, identifier);
+        description = getFragmentContent(commentNode, identifier);
 
         return new Description({
             type: type,
-            description: fragmentDescription
+            description: description
         });
     }
 
     if (type === FragmentTypes.SNIPPET.name) {
         identifier = FragmentTypes[type].identifier;
         fragmentTitle = getFragmentContent(commentNode, identifier);
-        customHeight = $.trim(getCommentMeta(commentNode)[1]);
+        description = $.trim(getCommentMeta(commentNode)[1]);
         fragmentHTML = getFragmentHTML(commentNode);
 
         return new CodeSnippet({
             type: type,
             title: fragmentTitle,
             html: fragmentHTML,
-            customHeight: customHeight
+            description: description
         });
 
     }
@@ -66,12 +69,14 @@ function createFragmentFromComment(commentNode) {
         fragmentTitle = getFragmentContent(commentNode, identifier);
         rawScript = getFragmentScriptHTML(commentNode);
         fragmentHTML = getFragmentHTML(commentNode);
+        description = $.trim(getCommentMeta(commentNode)[1]);
 
         return new JSCodeSnippet({
             type: type,
             title: fragmentTitle,
             html: fragmentHTML,
-            rawScript: rawScript
+            rawScript: rawScript,
+            description: description
         });
     }
 
@@ -83,12 +88,14 @@ function createFragmentFromComment(commentNode) {
         fragmentTitle = getFragmentContent(commentNode, identifier);
         rawScript = getFragmentScriptHTML(commentNode);
         fragmentHTML = getFragmentHTML(commentNode);
+        description = $.trim(getCommentMeta(commentNode)[1]);
 
         return new JSCodeSnippet({
             type: type,
             title: fragmentTitle,
             html: fragmentHTML,
-            rawScript: rawScript
+            rawScript: rawScript,
+            description: description
         });
 
     }
@@ -96,14 +103,14 @@ function createFragmentFromComment(commentNode) {
     if (type === FragmentTypes.NO_SNIPPET.name) {
         identifier = FragmentTypes[type].identifier;
         fragmentTitle = getFragmentContent(commentNode, identifier);
-        customHeight = $.trim(getCommentMeta(commentNode)[1]);
+        description = $.trim(getCommentMeta(commentNode)[1]);
         fragmentHTML = getFragmentHTML(commentNode);
 
         return new CodeSnippet({
             type: type,
             title: fragmentTitle,
             html: fragmentHTML,
-            customHeight: customHeight
+            description: description
         });
     }
 

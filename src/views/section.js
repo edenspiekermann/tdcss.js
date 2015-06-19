@@ -14,7 +14,7 @@ module.exports = TDCSSView.extend({
 
     render: function() {
         var data = this.getTemplateData ? this.getTemplateData() : this.model.toJSON();
-        data.content = this.renderChildren();
+        data.content = this.renderChildren().join('\n');
         this.$el.append(this.template(data));
         if (this.postRender) {
             this.postRender();
