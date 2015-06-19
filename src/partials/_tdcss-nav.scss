@@ -31,7 +31,7 @@
  * 2. ... on the right side of the nav (make sure overflow is visible)
  */
 .tdcss-nav__toggle {
-  @media (min-width: $on-canvas-max) {
+  @media (min-width: $on-canvas-min) {
     display: none;
   }
 

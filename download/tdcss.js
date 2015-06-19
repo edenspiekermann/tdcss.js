@@ -20282,6 +20282,16 @@ var Fragments = Backbone.Collection.extend({
         return this.filter(function (item) {
             return item.get('type') === Types.SECTION.name;
         });
+    },
+
+    getSectionIndex: function (section) {
+        var index;
+
+        if(section) {
+            index = this.indexOf(section);
+            return index;
+        }
+        return -1;
     }
 
 });
@@ -20505,10 +20515,6 @@ var Fragment = Backbone.Model.extend({
         wip: false
     },
 
-    initialize: function (data) {
-
-    },
-
     toUniqueID: function() {
         var output = this.get('name').replace(/\s+/g, '-').toLowerCase();
         return encodeURIComponent(output);
@@ -20518,8 +20524,51 @@ var Fragment = Backbone.Model.extend({
 
 
 var Section = Fragment.extend({
+
+    children: new Backbone.Collection(),
+
+    getSectionFragments: function () {
+        var fragments = this.collection;
+        var currentSectionIndex;
+        var nextSectionIndex;
+        var items;
+
+        if(fragments) {
+            currentSectionIndex = this.getSectionIndex();
+            nextSectionIndex = this.getNextSectionIndex();
+            if(nextSectionIndex === -1) {
+                nextSectionIndex = fragments.length;
+            }
+            console.log('current:', currentSectionIndex, 'next: ', nextSectionIndex);
+            items = fragments.slice(currentSectionIndex + 1, nextSectionIndex);
+            items = new Backbone.Collection(items);
+
+            this.children = items;
+        }
+
+    },
+
+    getSectionIndex: function () {
+        return this.collection.getSectionIndex(this);
+    },
+
+    getNextSectionIndex: function () {
+        var fragments = this.collection;
+        var index;
+        var sections = fragments.getSections();
+        var sectionIndex = _.indexOf(sections, this);
+        var numberOfSections = sections.length;
+        var nextSection = sections[sectionIndex + 1];
+
+        if(nextSection) {
+            return this.collection.getSectionIndex(nextSection);
+        }
+        return -1;
+    },
+
     toJSON: function () {
         var data = _.clone(this.attributes);
+
         data = _.extend({
             href: this.toUniqueID()
         }, data);
@@ -20659,7 +20708,7 @@ var createFragmentFromComment = require('./dom_utils').createFragmentFromComment
         function setup() {
             $(module.container)
                 .addClass("tdcss-fragments")
-                .after('<div class="tdcss-elements"></div>');
+                .after('<div class="tdcss-elements tdcss-nav__neighbour"></div>');
         }
 
         function parse() {
@@ -20681,6 +20730,12 @@ var createFragmentFromComment = require('./dom_utils').createFragmentFromComment
                         module.fragments.add(fragment);
                     }
                 });
+
+                // populate the sections with their fragments
+                var sections = module.fragments.getSections();
+                _.each(sections, function (section) {
+                    section.getSectionFragments();
+                });
             }
 
 
@@ -20698,8 +20753,6 @@ var createFragmentFromComment = require('./dom_utils').createFragmentFromComment
         function renderBody() {
             var sectionCount = 0, insertBackToTop;
 
-
-
             module.fragments.each(function (fragment, index) {
                 var type = fragment.get('type');
                 var view;
@@ -20716,16 +20769,16 @@ var createFragmentFromComment = require('./dom_utils').createFragmentFromComment
                     // jump_to_menu_options += '<option class="tdcss-jumpto-section" href="#' + encodeURIComponent(_spacesToLowerCasedHyphenated(fragment.section_name)) + '">' + fragment.section_name + '</option>';
                     // sectionCount++;
                 }
-                if (
-                    type === FragmentTypes.SNIPPET.name ||
-                    type === FragmentTypes.JS_SNIPPET.name ||
-                    type === FragmentTypes.COFFEE_SNIPPET.name) {
+                // if (
+                //     type === FragmentTypes.SNIPPET.name ||
+                //     type === FragmentTypes.JS_SNIPPET.name ||
+                //     type === FragmentTypes.COFFEE_SNIPPET.name) {
 
-                    view = new FragmentView({model: fragment});
-                    markup = $(view.render().el).html();
+                //     view = new FragmentView({model: fragment});
+                //     markup = $(view.render().el).html();
 
-                    $(module.container).next(".tdcss-elements").append(markup);
-                }
+                //     $(module.container).next(".tdcss-elements").append(markup);
+                // }
 
                 // if (fragment.type === "no_snippet") {
                 //     module.snippet_count++;
@@ -21102,9 +21155,9 @@ module.exports = HandlebarsCompiler.template({"1":function(depth0,helpers,partia
 },"compiler":[6,">= 2.0.0-beta.1"],"main":function(depth0,helpers,partials,data) {
     var stack1, helper, alias1=helpers.helperMissing, alias2="function";
 
-  return "<div class=\"tdcss-fragment tdcss-box tdcss-box--fragment tdcss-slab--primary\" id=\"fragment-1\">\n  <div class=\"tdcss-fragment__head tdcss-font\">\n    <h3 class=\"tdcss-fragment__title\">"
+  return "<div class=\"tdcss-fragment tdcss-box tdcss-box--fragment tdcss-slab--primary\" id=\"fragment-1\">\n  <div class=\"tdcss-fragment__head tdcss-font\">\n    <button type=\"button\" class=\"tdcss-fragment__toggle\" onclick=\" this.parentNode.parentNode.classList.contains('is-fragment-details-expanded')?this.parentNode.parentNode.classList.remove('is-fragment-details-expanded'):this.parentNode.parentNode.classList.add('is-fragment-details-expanded'); return false;\" >\n      <h3 class=\"tdcss-fragment__title\">"
     + this.escapeExpression(((helper = (helper = helpers.title || (depth0 != null ? depth0.title : depth0)) != null ? helper : alias1),(typeof helper === alias2 ? helper.call(depth0,{"name":"title","hash":{},"data":data}) : helper)))
-    + "</h3>\n    <div class=\"tdcss-fragment__details\">\n"
+    + "</h3>\n    </button>\n    \n    <div class=\"tdcss-fragment__details\">\n"
     + ((stack1 = helpers['if'].call(depth0,(depth0 != null ? depth0.renderSnippet : depth0),{"name":"if","hash":{},"fn":this.program(1, data, 0),"inverse":this.noop,"data":data})) != null ? stack1 : "")
     + "\n      these are details\n\n    </div>\n  </div>\n  <div class=\"tdcss-fragment__preview tdcss-slab tdcss-slab--secondary\">\n    <div class=\"tdcss-dom-example\">\n      "
     + ((stack1 = ((helper = (helper = helpers.html || (depth0 != null ? depth0.html : depth0)) != null ? helper : alias1),(typeof helper === alias2 ? helper.call(depth0,{"name":"html","hash":{},"data":data}) : helper))) != null ? stack1 : "")
@@ -21169,7 +21222,7 @@ module.exports = TDCSSView.extend({
 // hbsfy compiled Handlebars template
 var HandlebarsCompiler = require('hbsfy/runtime');
 module.exports = HandlebarsCompiler.template({"compiler":[6,">= 2.0.0-beta.1"],"main":function(depth0,helpers,partials,data) {
-    var helper, alias1=helpers.helperMissing, alias2="function", alias3=this.escapeExpression;
+    var stack1, helper, alias1=helpers.helperMissing, alias2="function", alias3=this.escapeExpression;
 
   return "<section class=\"tdcss-group\" id=\""
     + alias3(((helper = (helper = helpers.href || (depth0 != null ? depth0.href : depth0)) != null ? helper : alias1),(typeof helper === alias2 ? helper.call(depth0,{"name":"href","hash":{},"data":data}) : helper)))
@@ -21177,11 +21230,14 @@ module.exports = HandlebarsCompiler.template({"compiler":[6,">= 2.0.0-beta.1"],"
     + alias3(((helper = (helper = helpers.name || (depth0 != null ? depth0.name : depth0)) != null ? helper : alias1),(typeof helper === alias2 ? helper.call(depth0,{"name":"name","hash":{},"data":data}) : helper)))
     + "</h1>\n    <div class=\"tdcss-group__description tdcss-slab tdcss-slab--description tdcss-slab--dimmed tdcss-font\">\n      "
     + alias3(((helper = (helper = helpers.text || (depth0 != null ? depth0.text : depth0)) != null ? helper : alias1),(typeof helper === alias2 ? helper.call(depth0,{"name":"text","hash":{},"data":data}) : helper)))
-    + "\n    </div>\n  </header>\n\n  content\n\n  <div class=\"tdcss-group__to-top\">\n    <a class=\"tdcss-group__to-top-link\" href=\"#\">Back to Top</a>\n  </div>\n</section>\n";
+    + "\n    </div>\n  </header>\n\n  "
+    + ((stack1 = ((helper = (helper = helpers.content || (depth0 != null ? depth0.content : depth0)) != null ? helper : alias1),(typeof helper === alias2 ? helper.call(depth0,{"name":"content","hash":{},"data":data}) : helper))) != null ? stack1 : "")
+    + "\n\n  <div class=\"tdcss-group__to-top\">\n    <a class=\"tdcss-group__to-top-link\" href=\"#\">Back to Top</a>\n  </div>\n</section>\n";
 },"useData":true});
 
 },{"hbsfy/runtime":36}],49:[function(require,module,exports){
 var TDCSSView = require('./tdcss-view');
+var FragmentView = require('./fragment');
 
 module.exports = TDCSSView.extend({
     className: "tdcss-section",
@@ -21194,16 +21250,35 @@ module.exports = TDCSSView.extend({
         }
     },
 
+    render: function() {
+        var data = this.getTemplateData ? this.getTemplateData() : this.model.toJSON();
+        data.content = this.renderChildren();
+        this.$el.append(this.template(data));
+        if (this.postRender) {
+            this.postRender();
+        };
+        return this;
+    },
+
+    renderChildren: function () {
+        var childMarkup = this.model.children.map(function (child) {
+            var view = new FragmentView({model: child});
+            return view.render().$el.html();
+        });
+        return childMarkup;
+    },
+
+
     attributes: function() {
         return this.model.toJSON();
     }
 });
 
-},{"./section.hbs":48,"./tdcss-view":53}],50:[function(require,module,exports){
+},{"./fragment":47,"./section.hbs":48,"./tdcss-view":53}],50:[function(require,module,exports){
 var Backbone = require('backbone');
 
 module.exports = Backbone.View.extend({
-    className: 'tdcss-elements'
+    className: 'tdcss-elements tdcss-nav__neighbour'
 });
 
 },{"backbone":1}],51:[function(require,module,exports){
@@ -21212,7 +21287,7 @@ var HandlebarsCompiler = require('hbsfy/runtime');
 module.exports = HandlebarsCompiler.template({"1":function(depth0,helpers,partials,data) {
     var alias1=this.lambda, alias2=this.escapeExpression;
 
-  return "        <li class=\"tdcss-menu__item\">\n            <a class=\"tdcss-menu__link\" href=\"#"
+  return "        <li class=\"tdcss-menu__item tdcss-nav-border\">\n            <a class=\"tdcss-menu__link tdcss-nav-item--secondary\" href=\"#"
     + alias2(alias1((depth0 != null ? depth0.href : depth0), depth0))
     + "\">"
     + alias2(alias1((depth0 != null ? depth0.name : depth0), depth0))
@@ -21220,9 +21295,9 @@ module.exports = HandlebarsCompiler.template({"1":function(depth0,helpers,partia
 },"compiler":[6,">= 2.0.0-beta.1"],"main":function(depth0,helpers,partials,data) {
     var stack1;
 
-  return "<input type=\"checkbox\" id=\"tdcssNavToggle\" aria-hidden=\"true\">\n<div class=\"tdcss-nav\">\n    <label for=\"tdcssNavToggle\" class=\"tdcss-nav__toggle\">\n        <span class=\"tdcss-nav__toggle-label\">groups</span>\n    </label>\n    <ul class=\"tdcss-menu\">\n"
+  return "<input type=\"checkbox\" id=\"tdcssMenuToggle\" aria-hidden=\"true\">\n<label for=\"tdcssMenuToggle\" class=\"tdcss-nav__toggle tdcss-nav-item--primary\">\n    <span class=\"tdcss-nav__toggle-label\">Groups</span>\n</label>\n<div class=\"tdcss-nav tdcss-nav-border\">\n    <ul class=\"tdcss-menu\">\n"
     + ((stack1 = helpers.each.call(depth0,(depth0 != null ? depth0.menuItems : depth0),{"name":"each","hash":{},"fn":this.program(1, data, 0),"inverse":this.noop,"data":data})) != null ? stack1 : "")
-    + "\n    </ul>\n</div>\n";
+    + "    </ul>\n</div>\n";
 },"useData":true});
 
 },{"hbsfy/runtime":36}],52:[function(require,module,exports){

@@ -14,15 +14,16 @@
 // Import Component Styles
 @import 'partials/tdcss-code-example';
 @import 'partials/tdcss-dom-example';
+@import 'partials/tdcss-elements';
 @import 'partials/tdcss-fragment';
 @import 'partials/tdcss-group';
 @import 'partials/tdcss-header';
-@import 'partials/tdcss-main';
 @import 'partials/tdcss-masthead';
 @import 'partials/tdcss-menu';
 @import 'partials/tdcss-nav';
 @import 'partials/tdcss-subgroup';
 @import 'partials/tdcss-submenu';
+@import 'partials/tdcss-top';
 
 body {
 	margin: 0;
@@ -30,35 +31,6 @@ body {
 
 [class*='tdcss-'] {
 	box-sizing: border-box;
-}
-
-
-.tdcss-elements {
-    padding: 5%;
-
-	h1, h2, h3, p, ul {
-		margin-top: 0;
-	}
-}
-
-
-
-.tdcss-top {
-	position: relative;
-	padding: 0;
-	margin: 0;
-	width: 100%;
-	height: 2em;
-}
-
-.tddcss-top__link {
-	float: right;
-	margin-right: 1.25em;
-	color: #558696;
-}
-
-.tddcss-top__link:hover {
-	color: #96cddf;
 }
 
 
@@ -101,8 +73,6 @@ body {
 	pointer-events: none;
 	opacity: 0.5;
 }
-
-
 
 .tdcss-no-fragments {
 	font-weight: 200;

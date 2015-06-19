@@ -1,14 +1,13 @@
-<input type="checkbox" id="tdcssNavToggle" aria-hidden="true">
-<div class="tdcss-nav">
-    <label for="tdcssNavToggle" class="tdcss-nav__toggle">
-        <span class="tdcss-nav__toggle-label">groups</span>
-    </label>
+<input type="checkbox" id="tdcssMenuToggle" aria-hidden="true">
+<label for="tdcssMenuToggle" class="tdcss-nav__toggle tdcss-nav-item--primary">
+    <span class="tdcss-nav__toggle-label">Groups</span>
+</label>
+<div class="tdcss-nav tdcss-nav-border">
     <ul class="tdcss-menu">
         {{#each menuItems}}
-        <li class="tdcss-menu__item">
-            <a class="tdcss-menu__link" href="#{{this.href}}">{{this.name}}</a>
+        <li class="tdcss-menu__item tdcss-nav-border">
+            <a class="tdcss-menu__link tdcss-nav-item--secondary" href="#{{this.href}}">{{this.name}}</a>
         </li>
         {{/each}}
-
     </ul>
 </div>

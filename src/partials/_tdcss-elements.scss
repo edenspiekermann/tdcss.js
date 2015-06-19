@@ -1,0 +1,20 @@
+.tdcss-elements {
+  padding: 5%;
+
+  h1, h2, h3, p, ul {
+    margin-top: 0;
+  }
+}
+
+@media (min-width: $on-canvas-min) {
+  .tdcss-elements {
+    margin-top: $header-height;
+    margin-left: $on-canvas-width;
+  }
+}
+
+@media (min-width: 850px) {
+  .tdcss-elements {
+    margin-left: $on-canvas-max-width;
+  }
+}

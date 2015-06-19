@@ -104,16 +104,42 @@ pre[class*="language-"] {
 
 /* line 1, /Users/mberridge/Sites/tdcss.js/src/partials/_tdcss-code-example.scss */
 .tdcss-code-example {
-  padding: 1em;
   float: right;
   width: 50%; }
-  /* line 8, /Users/mberridge/Sites/tdcss.js/src/partials/_tdcss-code-example.scss */
+  /* line 5, /Users/mberridge/Sites/tdcss.js/src/partials/_tdcss-code-example.scss */
   .tdcss-code-example pre {
-    min-height: 6em; }
+    min-height: 6em;
+    margin: 0;
+    height: auto !important; }
   /* line 13, /Users/mberridge/Sites/tdcss.js/src/partials/_tdcss-code-example.scss */
   .tdcss-code-example :not(pre) > code[class*="language-"],
   .tdcss-code-example pre[class*="language-"] {
     background-color: inherit; }
+
+/* line 1, /Users/mberridge/Sites/tdcss.js/src/partials/_tdcss-dom-example.scss */
+.tdcss-dom-example {
+  float: left;
+  position: relative;
+  width: 100%;
+  padding: 1em; }
+
+/* line 1, /Users/mberridge/Sites/tdcss.js/src/partials/_tdcss-elements.scss */
+.tdcss-elements {
+  padding: 5%; }
+  /* line 4, /Users/mberridge/Sites/tdcss.js/src/partials/_tdcss-elements.scss */
+  .tdcss-elements h1, .tdcss-elements h2, .tdcss-elements h3, .tdcss-elements p, .tdcss-elements ul {
+    margin-top: 0; }
+
+@media (min-width: 701px) {
+  /* line 10, /Users/mberridge/Sites/tdcss.js/src/partials/_tdcss-elements.scss */
+  .tdcss-elements {
+    margin-top: 50px;
+    margin-left: 30%; } }
+
+@media (min-width: 850px) {
+  /* line 17, /Users/mberridge/Sites/tdcss.js/src/partials/_tdcss-elements.scss */
+  .tdcss-elements {
+    margin-left: 250px; } }
 
 /* line 1, /Users/mberridge/Sites/tdcss.js/src/partials/_tdcss-fragment.scss */
 .tdcss-fragment {
@@ -128,19 +154,40 @@ pre[class*="language-"] {
   float: left;
   width: 100%; }
 
-/* line 15, /Users/mberridge/Sites/tdcss.js/src/partials/_tdcss-fragment.scss */
+/* line 16, /Users/mberridge/Sites/tdcss.js/src/partials/_tdcss-fragment.scss */
+.tdcss-fragment__toggle {
+  float: left;
+  border: 0;
+  background: transparent;
+  margin: .5em; }
+  /* line 22, /Users/mberridge/Sites/tdcss.js/src/partials/_tdcss-fragment.scss */
+  .tdcss-fragment__toggle:before {
+    content: "\25b6";
+    display: inline-block;
+    font-size: .8em;
+    width: 10px;
+    vertical-align: text-top; }
+  /* line 30, /Users/mberridge/Sites/tdcss.js/src/partials/_tdcss-fragment.scss */
+  .is-fragment-details-expanded .tdcss-fragment__toggle:before {
+    content: "\25bc"; }
+
+/* line 36, /Users/mberridge/Sites/tdcss.js/src/partials/_tdcss-fragment.scss */
 .tdcss-fragment__title {
   margin: 0;
-  padding: .5em; }
+  display: inline-block; }
 
-/* line 20, /Users/mberridge/Sites/tdcss.js/src/partials/_tdcss-fragment.scss */
+/* line 41, /Users/mberridge/Sites/tdcss.js/src/partials/_tdcss-fragment.scss */
 .tdcss-fragment__details {
   float: left;
   width: 100%;
   margin: 0;
-  padding: .5em; }
+  padding: .5em;
+  display: none; }
+  /* line 48, /Users/mberridge/Sites/tdcss.js/src/partials/_tdcss-fragment.scss */
+  .is-fragment-details-expanded .tdcss-fragment__details {
+    display: block; }
 
-/* line 27, /Users/mberridge/Sites/tdcss.js/src/partials/_tdcss-fragment.scss */
+/* line 53, /Users/mberridge/Sites/tdcss.js/src/partials/_tdcss-fragment.scss */
 .tdcss-fragment__preview {
   float: left;
   width: 100%;
@@ -193,30 +240,12 @@ pre[class*="language-"] {
 .tdcss-header {
   background-color: #f90; }
 
-@media (min-width: 701px) {
-  /* line 2, /Users/mberridge/Sites/tdcss.js/src/partials/_tdcss-main.scss */
-  .tdcss-main {
-    padding-top: 50px;
-    padding-left: 30%; } }
-
-@media (min-width: 850px) {
-  /* line 9, /Users/mberridge/Sites/tdcss.js/src/partials/_tdcss-main.scss */
-  .tdcss-main {
-    padding-left: 250px; } }
-
 /* line 1, /Users/mberridge/Sites/tdcss.js/src/partials/_tdcss-masthead.scss */
 .tdcss-masthead {
   position: fixed;
   top: 0;
-  z-index: 9999;
-  width: 100%; }
-
-/* line 8, /Users/mberridge/Sites/tdcss.js/src/partials/_tdcss-masthead.scss */
-.tdcss-masthead__title {
-  font-weight: normal;
-  font-size: 1.5em;
-  line-height: 1.5;
-  margin-bottom: 0; }
+  width: 100%;
+  z-index: 9999; }
 
 /* line 1, /Users/mberridge/Sites/tdcss.js/src/partials/_tdcss-menu.scss */
 .tdcss-menu {
@@ -271,27 +300,28 @@ pre[class*="language-"] {
  * 1. Absolutely positioning
  * 2. ... on the right side of the nav (make sure overflow is visible)
  */
-/* line 33, /Users/mberridge/Sites/tdcss.js/src/partials/_tdcss-nav.scss */
-.tdcss-nav__toggle {
-  display: none; }
-  @media (max-width: 700px) {
-    /* line 33, /Users/mberridge/Sites/tdcss.js/src/partials/_tdcss-nav.scss */
-    .tdcss-nav__toggle {
-      display: block;
-      position: fixed;
-      /* 1 */
-      top: 0;
-      right: 0;
-      padding-left: 16px;
-      padding-right: 16px;
-      line-height: 50px;
-      cursor: pointer; } }
+@media (min-width: 701px) {
+  /* line 33, /Users/mberridge/Sites/tdcss.js/src/partials/_tdcss-nav.scss */
+  .tdcss-nav__toggle {
+    display: none; } }
+
+@media (max-width: 700px) {
+  /* line 33, /Users/mberridge/Sites/tdcss.js/src/partials/_tdcss-nav.scss */
+  .tdcss-nav__toggle {
+    position: fixed;
+    /* 1 */
+    top: 0;
+    right: 0;
+    padding-left: 16px;
+    padding-right: 16px;
+    line-height: 50px;
+    cursor: pointer; } }
 
 /**
  * Checkbox responsible for the toggle hack
  * Hidden, no matter what
  */
-/* line 55, /Users/mberridge/Sites/tdcss.js/src/partials/_tdcss-nav.scss */
+/* line 54, /Users/mberridge/Sites/tdcss.js/src/partials/_tdcss-nav.scss */
 #tdcssMenuToggle {
   position: absolute;
   clip: rect(0 0 0 0);
@@ -300,7 +330,7 @@ pre[class*="language-"] {
 /**
  * When checkbox is checked, open the nav
  */
-/* line 64, /Users/mberridge/Sites/tdcss.js/src/partials/_tdcss-nav.scss */
+/* line 63, /Users/mberridge/Sites/tdcss.js/src/partials/_tdcss-nav.scss */
 #tdcssMenuToggle:checked ~ .tdcss-nav {
   -webkit-transform: translateX(0);
       -ms-transform: translateX(0);
@@ -315,7 +345,7 @@ pre[class*="language-"] {
  * See: http://timpietrusky.com/advanced-checkbox-hack
  * Beware, can be costly: http://codepen.io/HugoGiraudel/details/jPOREG#comment-id-89799
  */
-/* line 98, /Users/mberridge/Sites/tdcss.js/src/partials/_tdcss-nav.scss */
+/* line 97, /Users/mberridge/Sites/tdcss.js/src/partials/_tdcss-nav.scss */
 body {
   -webkit-animation: bugfix infinite 1s; }
 
@@ -327,10 +357,10 @@ body {
  * Take care of small screens
  */
 @media (max-width: 700px) {
-  /* line 110, /Users/mberridge/Sites/tdcss.js/src/partials/_tdcss-nav.scss */
+  /* line 109, /Users/mberridge/Sites/tdcss.js/src/partials/_tdcss-nav.scss */
   .tdcss-nav {
     width: 100%; }
-  /* line 114, /Users/mberridge/Sites/tdcss.js/src/partials/_tdcss-nav.scss */
+  /* line 113, /Users/mberridge/Sites/tdcss.js/src/partials/_tdcss-nav.scss */
   [id='tdcssMenuToggle']:checked ~ .tdcss-nav > .tdcss-nav__toggle {
     left: auto;
     right: 0;
@@ -339,11 +369,11 @@ body {
 /**
  * Provide a fallback for browsers that do not support CSS transforms
  */
-/* line 124, /Users/mberridge/Sites/tdcss.js/src/partials/_tdcss-nav.scss */
+/* line 123, /Users/mberridge/Sites/tdcss.js/src/partials/_tdcss-nav.scss */
 .no-csstransforms .tdcss-nav {
   left: -350px; }
 
-/* line 128, /Users/mberridge/Sites/tdcss.js/src/partials/_tdcss-nav.scss */
+/* line 127, /Users/mberridge/Sites/tdcss.js/src/partials/_tdcss-nav.scss */
 .no-csstransforms [id='tdcssMenuToggle']:checked ~ .tdcss-nav {
   left: 0; }
 
@@ -370,22 +400,7 @@ body {
       content: '—';
       margin-right: 8px; }
 
-/* line 26, /Users/mberridge/Sites/tdcss.js/src/tdcss.scss */
-body {
-  margin: 0; }
-
-/* line 30, /Users/mberridge/Sites/tdcss.js/src/tdcss.scss */
-[class*='tdcss-'] {
-  box-sizing: border-box; }
-
-/* line 35, /Users/mberridge/Sites/tdcss.js/src/tdcss.scss */
-.tdcss-elements {
-  padding: 5%; }
-  /* line 38, /Users/mberridge/Sites/tdcss.js/src/tdcss.scss */
-  .tdcss-elements h1, .tdcss-elements h2, .tdcss-elements h3, .tdcss-elements p, .tdcss-elements ul {
-    margin-top: 0; }
-
-/* line 45, /Users/mberridge/Sites/tdcss.js/src/tdcss.scss */
+/* line 1, /Users/mberridge/Sites/tdcss.js/src/partials/_tdcss-top.scss */
 .tdcss-top {
   position: relative;
   padding: 0;
@@ -393,17 +408,25 @@ body {
   width: 100%;
   height: 2em; }
 
-/* line 53, /Users/mberridge/Sites/tdcss.js/src/tdcss.scss */
+/* line 9, /Users/mberridge/Sites/tdcss.js/src/partials/_tdcss-top.scss */
 .tddcss-top__link {
   float: right;
   margin-right: 1.25em;
   color: #558696; }
 
-/* line 59, /Users/mberridge/Sites/tdcss.js/src/tdcss.scss */
+/* line 15, /Users/mberridge/Sites/tdcss.js/src/partials/_tdcss-top.scss */
 .tddcss-top__link:hover {
   color: #96cddf; }
 
-/* line 66, /Users/mberridge/Sites/tdcss.js/src/tdcss.scss */
+/* line 28, /Users/mberridge/Sites/tdcss.js/src/tdcss.scss */
+body {
+  margin: 0; }
+
+/* line 32, /Users/mberridge/Sites/tdcss.js/src/tdcss.scss */
+[class*='tdcss-'] {
+  box-sizing: border-box; }
+
+/* line 38, /Users/mberridge/Sites/tdcss.js/src/tdcss.scss */
 .tdcss-diff-warning,
 .tdcss-fragment .tdcss-diff-stats {
   position: absolute;
@@ -415,26 +438,26 @@ body {
   color: white;
   background-color: red; }
 
-/* line 77, /Users/mberridge/Sites/tdcss.js/src/tdcss.scss */
+/* line 49, /Users/mberridge/Sites/tdcss.js/src/tdcss.scss */
 .tdcss-diff-warning {
   position: fixed;
   z-index: 10000;
   font-size: 12px; }
 
-/* line 83, /Users/mberridge/Sites/tdcss.js/src/tdcss.scss */
+/* line 55, /Users/mberridge/Sites/tdcss.js/src/tdcss.scss */
 .tdcss-diff-warning > a {
   padding-left: 0.25em;
   color: white; }
 
-/* line 88, /Users/mberridge/Sites/tdcss.js/src/tdcss.scss */
+/* line 60, /Users/mberridge/Sites/tdcss.js/src/tdcss.scss */
 .tdcss-diff-warning > a:hover {
   text-decoration: none; }
 
-/* line 92, /Users/mberridge/Sites/tdcss.js/src/tdcss.scss */
+/* line 64, /Users/mberridge/Sites/tdcss.js/src/tdcss.scss */
 .tdcss-fragment.tdcss-has-diff {
   outline: 1px dotted red; }
 
-/* line 96, /Users/mberridge/Sites/tdcss.js/src/tdcss.scss */
+/* line 68, /Users/mberridge/Sites/tdcss.js/src/tdcss.scss */
 .tdcss-diff-image {
   position: absolute;
   top: 0;
@@ -443,19 +466,7 @@ body {
   pointer-events: none;
   opacity: 0.5; }
 
-/* line 105, /Users/mberridge/Sites/tdcss.js/src/tdcss.scss */
-.tdcss-dom-example {
-  float: left;
-  position: relative;
-  width: 60%;
-  padding: 1em; }
-
-/* line 114, /Users/mberridge/Sites/tdcss.js/src/tdcss.scss */
-.tdcss-title {
-  font-size: 2em;
-  color: #7A888D; }
-
-/* line 119, /Users/mberridge/Sites/tdcss.js/src/tdcss.scss */
+/* line 77, /Users/mberridge/Sites/tdcss.js/src/tdcss.scss */
 .tdcss-no-fragments {
   font-weight: 200;
   color: gray;
