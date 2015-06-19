@@ -3,15 +3,13 @@
     <button type="button" class="tdcss-fragment__toggle" onclick=" this.parentNode.parentNode.classList.contains('is-fragment-details-expanded')?this.parentNode.parentNode.classList.remove('is-fragment-details-expanded'):this.parentNode.parentNode.classList.add('is-fragment-details-expanded'); return false;" >
       <h3 class="tdcss-fragment__title">{{title}}</h3>
     </button>
-    
+
     <div class="tdcss-fragment__details">
       {{#if renderSnippet}}
       <div class='tdcss-code-example tdcss-slab tdcss-slab--secondary'>
-        <pre>
-          <code class="language-markup">
-            {{html}}
-          </code>
-        </pre>
+<pre>
+    <code class="language-markup">{{html}}</code>
+</pre>
       </div>
       {{/if}}
 

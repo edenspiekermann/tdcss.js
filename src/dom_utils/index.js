@@ -53,7 +53,7 @@ function createFragmentFromComment(commentNode) {
         identifier = FragmentTypes[type].identifier;
         fragmentTitle = getFragmentContent(commentNode, identifier);
         description = $.trim(getCommentMeta(commentNode)[1]);
-        fragmentHTML = getFragmentHTML(commentNode);
+        fragmentHTML = $.trim(getFragmentHTML(commentNode));
 
         return new CodeSnippet({
             type: type,
@@ -68,7 +68,7 @@ function createFragmentFromComment(commentNode) {
         identifier = FragmentTypes[type].identifier;
         fragmentTitle = getFragmentContent(commentNode, identifier);
         rawScript = getFragmentScriptHTML(commentNode);
-        fragmentHTML = getFragmentHTML(commentNode);
+        fragmentHTML = $.trim(getFragmentHTML(commentNode));
         description = $.trim(getCommentMeta(commentNode)[1]);
 
         return new JSCodeSnippet({
@@ -87,7 +87,7 @@ function createFragmentFromComment(commentNode) {
         identifier = FragmentTypes[type].identifier;
         fragmentTitle = getFragmentContent(commentNode, identifier);
         rawScript = getFragmentScriptHTML(commentNode);
-        fragmentHTML = getFragmentHTML(commentNode);
+        fragmentHTML = $.trim(getFragmentHTML(commentNode));
         description = $.trim(getCommentMeta(commentNode)[1]);
 
         return new JSCodeSnippet({
@@ -104,7 +104,7 @@ function createFragmentFromComment(commentNode) {
         identifier = FragmentTypes[type].identifier;
         fragmentTitle = getFragmentContent(commentNode, identifier);
         description = $.trim(getCommentMeta(commentNode)[1]);
-        fragmentHTML = getFragmentHTML(commentNode);
+        fragmentHTML = $.trim(getFragmentHTML(commentNode));
 
         return new CodeSnippet({
             type: type,
@@ -140,11 +140,13 @@ function getCommentMeta(element) {
 }
 
 function getFragmentScriptHTML(element) {
-    return $(element).nextAll('script[type="text/javascript"]').html();
+    var markup = $(element).nextAll('script[type="text/javascript"]').html();
+    return jQuery.trim(markup);
 }
 
 function getFragmentCoffeeScriptHTML(element) {
-    return $(element).nextAll('script[type="text/coffeescript"]').html().trim();
+    var markup = $(element).nextAll('script[type="text/coffeescript"]').html();
+    return jQuery.trim(markup);
 }
 
 function getFragmentHTML(element) {
