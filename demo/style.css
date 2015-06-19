@@ -1,3 +1,6 @@
+@import url(http://fonts.googleapis.com/css?family=Lobster);
+
+
 body {
   font-family: helvetica, arial, sans-serif; }
 
@@ -32,3 +35,561 @@ body {
   border: 1px solid #ff9999;
   border-radius: 3px;
   box-shadow: 0 3px 10px -5px black, inset 0 -2em 2em rgba(255, 0, 0, 0.1); }
+
+
+.notification, .confirmation, .disclaimer, .disclaimer-chromeframe, .disclaimer-no-js, .warning {
+  padding: 15px 0;
+  text-align: center;
+}
+
+.confirmation {
+  background-color: LightGreen;
+  color: #444;
+}
+
+.disclaimer, .disclaimer-chromeframe, .disclaimer-no-js {
+  background-color: salmon;
+  color: #444;
+}
+
+.warning {
+  background-color: OrangeRed;
+  color: #fefefe;
+}
+
+
+
+
+
+
+body {
+  -webkit-hyphens: auto;
+  -moz-hyphens: auto;
+  -ms-hyphens: auto;
+  -o-hyphens: auto;
+  hyphens: auto;
+  color: #444;
+}
+
+h1, h2, h3, h4, h5 {
+  text-rendering: optimizeLegibility;
+  line-height: 1;
+  margin-top: 0;
+}
+
+.tera {
+  font-size: 119.654px;
+  font-size: 6.29493rem;
+  margin-bottom: 0.26768rem;
+}
+
+.giga {
+  font-size: 89.763px;
+  font-size: 4.72238rem;
+  margin-bottom: 0.35681rem;
+}
+
+.mega, .heading--embellished {
+  font-size: 85.248px;
+  font-size: 4.48485rem;
+  margin-bottom: 0.37571rem;
+}
+
+.alpha, h1 {
+  font-size: 45.003px;
+  font-size: 2.36758rem;
+  margin-bottom: 0.7117rem;
+}
+
+.beta, h2, blockquote {
+  font-size: 25.327px;
+  font-size: 1.33244rem;
+  margin-bottom: 1.2646rem;
+}
+
+.gamma, h3 {
+  font-size: 20.255px;
+  font-size: 1.0656rem;
+  margin-bottom: 1.58126rem;
+}
+
+.delta, h4, .kitten-card--small, .kitten-card--large {
+  font-size: 19px;
+  font-size: 0.99958rem;
+  margin-bottom: 1.68571rem;
+}
+
+.epsilon, h5, .date, .button--small, .kitten-card-list .kitten-card__copy {
+  font-size: 14.254px;
+  font-size: 0.74989rem;
+  margin-bottom: 2.24698rem;
+}
+
+.zeta {
+  font-size: 12px;
+  font-size: 0.63131rem;
+  margin-bottom: 2.66904rem;
+}
+
+p {
+  margin: 0 0 1.5em;
+}
+
+abbr,
+acronym,
+blockquote,
+code,
+dir,
+kbd,
+listing,
+plaintext,
+q,
+samp,
+tt,
+var,
+xmp {
+  -webkit-hyphens: none;
+  -moz-hyphens: none;
+  -ms-hyphens: none;
+  -o-hyphens: none;
+  hyphens: none;
+}
+
+pre code {
+  white-space: -moz-pre-wrap;
+  white-space: pre-wrap;
+}
+
+pre {
+  white-space: pre;
+}
+
+code {
+  white-space: pre;
+  font-family: monospace;
+}
+
+/**
+ * Abbreviations Markup
+ *
+  <abbr title="hyper text markup language">HMTL</abbr>
+ *
+ * Extend this object into your markup.
+ *
+ */
+abbr {
+  font-variant: small-caps;
+  font-weight: 600;
+  text-transform: lowercase;
+  color: gray;
+}
+abbr:hover {
+  cursor: help;
+}
+
+/**
+ * Lining Definition Style Markup
+ *
+  <dl class="lining">
+    <dt><b></b></dt>
+    <dd></dd>
+  </dl>
+ *
+ * Extend this object into your markup.
+ *
+ */
+.lining dt,
+.lining dd {
+  display: inline;
+  margin: 0;
+}
+.lining dt + dt:before,
+.lining dd + dt:before {
+  content: "\A";
+  white-space: pre;
+}
+.lining dd + dd:before {
+  content: ", ";
+}
+.lining dd:before {
+  content: ": ";
+  margin-left: -0.2rem;
+}
+
+/**
+ * Dictionary Definition Style Markup
+ *
+  <dl class="dictionary-style">
+    <dt><b></b></dt>
+      <dd></dd>
+  </dl>
+ *
+ * Extend this object into your markup.
+ *
+ */
+.dictionary-style dt {
+  display: inline;
+  counter-reset: definitions;
+}
+.dictionary-style dt + dt:before {
+  content: ", ";
+  margin-left: -0.2rem;
+}
+.dictionary-style dd {
+  display: block;
+  counter-increment: definitions;
+}
+.dictionary-style dd:before {
+  content: counter(definitions,decimal) ". ";
+}
+
+/**
+ * Stats Tab Markup
+ *
+  <ul class="stats-tabs">
+    <li><a href="#">[value]<b>[name]</b></a></li>
+  </ul>
+ *
+ * Extend this object into your markup.
+ *
+ */
+.stats-tabs {
+  padding: 0;
+}
+.stats-tabs li {
+  display: inline-block;
+  margin: 0 0.625rem 0 0;
+  padding: 0 0.625rem 0 0;
+  border-right: 0.125rem solid #ccc;
+}
+.stats-tabs li:last-child {
+  margin: 0;
+  padding: 0;
+  border: none;
+}
+.stats-tabs li a {
+  display: inline-block;
+  font-size: 1.5rem;
+  font-weight: bold;
+}
+.stats-tabs li a b {
+  display: block;
+  margin: 0.125rem 0 0 0;
+  font-size: 0.875rem;
+  font-weight: normal;
+}
+
+
+.pull-quote {
+  position: relative;
+  padding: 1em;
+}
+.pull-quote:before, .pull-quote:after {
+  height: 1em;
+  opacity: 0.15;
+  position: absolute;
+  font-size: 4em;
+}
+.pull-quote:before {
+  content: '“';
+  top: 0;
+  left: 0;
+}
+.pull-quote:after {
+  content: '”';
+  bottom: 0;
+  right: 0;
+}
+
+
+h1 {
+  margin-bottom: 32px;
+}
+
+h2 {
+  margin-top: 64px;
+  margin-bottom: 16px;
+  letter-spacing: 1px;
+  font-family: Adamina, serif;
+  text-transform: uppercase;
+  font-style: normal;
+  font-weight: 400;
+}
+
+p {
+  text-indent: 0em;
+  color: #545454;
+  font-style: normal;
+  font-weight: 400;
+  font-family: Adamina, serif;
+}
+
+.intro-paragraph, .text-feature__intro {
+  text-indent: 0px;
+  margin-bottom: 32px;
+  line-height: 32px;
+  font-size: 25px;
+  letter-spacing: 0px;
+  font-family: Adamina, serif;
+  font-style: normal;
+  font-weight: 400;
+}
+
+.date {
+  font-style: normal;
+  font-weight: 400;
+  font-family: Adamina, serif;
+  color: #878787;
+  margin-bottom: 32px;
+}
+
+.heading--embellished {
+  font-family: 'Lobster', cursive;
+  font-style: normal;
+  font-weight: 400;
+  color: salmon;
+  margin-bottom: 32px;
+  font-style: italic;
+}
+
+blockquote {
+  text-align: left;
+  font-family: sans-serif;
+  font-style: normal;
+  font-weight: 400;
+  color: #878787;
+  margin: 32px;
+}
+blockquote cite {
+  display: block;
+  padding-top: 0.3em;
+  font-size: .7em;
+}
+
+.blockquote--embellished {
+  font-family: 'Lobster', cursive;
+  font-style: italic;
+}
+
+.blockquote--embellished cite {
+  font-family: sans-serif;
+}
+
+.button, .button--strong, .button--focus, .button--small, .button--huge {
+  -moz-box-sizing: border-box;
+  -webkit-box-sizing: border-box;
+  box-sizing: border-box;
+  -moz-user-select: -moz-none;
+  -ms-user-select: none;
+  -webkit-user-select: none;
+  user-select: none;
+  -webkit-touch-callout: none;
+  background-clip: padding-box;
+  border: 0;
+  border-radius: 0.2em;
+  cursor: pointer;
+  display: inline-block;
+  margin: 0;
+  padding: 0.5em 1em;
+  position: relative;
+  text-align: center;
+  text-decoration: none !important;
+  text-transform: uppercase;
+  background-color: #efefef;
+  box-shadow: 0 0 5px rgba(0, 0, 0, 0.4);
+  font-family: Dosis, sans-serif;
+}
+.button:hover, .button--strong:hover, .button--focus:hover, .button--small:hover, .button--huge:hover {
+  background-color: #e2e2e2;
+}
+
+.button--strong {
+  background-color: salmon;
+  color: #444;
+}
+.button--strong:hover {
+  background-color: #f96a59;
+}
+
+.button--focus {
+  background-color: #bada55;
+  color: #444;
+}
+.button--focus:hover {
+  background-color: #b2d540;
+}
+
+.button--small {
+  padding: .2em .5em;
+  box-shadow: 0 0 2px rgba(0, 0, 0, 0.4);
+}
+
+.button--huge {
+  padding: 1em 2em;
+}
+
+.call-to-action .button, .call-to-action .button--strong, .call-to-action .button--focus, .call-to-action .button--small, .call-to-action .button--huge {
+  margin-bottom: 32px;
+}
+
+.kitten-card--small, .kitten-card--large {
+  max-width: 80em;
+  font-family: Dosis, sans-serif;
+  text-decoration: none;
+  color: #444;
+}
+
+.kitten-card__name {
+  text-transform: uppercase;
+  font-weight: bold;
+}
+
+.kitten-card__type {
+  color: #878787;
+}
+
+.kitten-card__copy {
+  display: block;
+}
+
+.kitten-card__image {
+  position: relative;
+}
+.kitten-card__image:after {
+  content: "";
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  box-shadow: inset 0 0 10px rgba(0, 0, 0, 0.2);
+}
+.kitten-card__image img {
+  width: 100%;
+}
+
+.kitten-card--small {
+  display: block;
+}
+.kitten-card--small .kitten-card__image {
+  display: inline-block;
+  vertical-align: middle;
+  *vertical-align: auto;
+  *zoom: 1;
+  *display: inline;
+  width: 20%;
+  margin-right: 16px;
+}
+
+.kitten-card--large {
+  display: inline-block;
+  vertical-align: middle;
+  *vertical-align: auto;
+  *zoom: 1;
+  *display: inline;
+}
+.kitten-card--large .kitten-card__image {
+  width: 100%;
+}
+.kitten-card--large .button, .kitten-card--large .button--strong, .kitten-card--large .button--focus, .kitten-card--large .button--small, .kitten-card--large .button--huge {
+  margin: 16px 0;
+}
+
+.kitten-card-list {
+  margin-top: 32px;
+  margin-bottom: 64px;
+}
+.kitten-card-list .kitten-card--large {
+  display: inline-block;
+  vertical-align: middle;
+  *vertical-align: auto;
+  *zoom: 1;
+  *display: inline;
+  vertical-align: top;
+  text-align: center;
+  margin-bottom: 16px;
+}
+@media only screen and (max-width: 45em) {
+  .kitten-card-list .kitten-card--large {
+    width: 100%;
+  }
+}
+@media only screen and (min-width: 45.01em) {
+  .kitten-card-list .kitten-card--large {
+    width: 48%;
+  }
+}
+@media only screen and (min-width: 45.01em) {
+  .kitten-card-list .kitten-card--large {
+    width: 48%;
+  }
+}
+@media only screen and (min-width: 75.01em) {
+  .kitten-card-list .kitten-card--large {
+    width: 30%;
+  }
+}
+.kitten-card-list .kitten-card__copy {
+  margin: 0 16px;
+}
+
+@media only screen and (min-width: 45.01em) {
+  .text-feature {
+    margin: 0 0 0 80px;
+  }
+}
+@media only screen and (min-width: 45.01em) {
+  .text-feature {
+    margin: 0 0 0 80px;
+  }
+}
+
+.text-feature__banner {
+  margin: 0 0 48px;
+}
+
+@media only screen and (max-width: 45em) {
+  .page-main,
+  .page-complementary {
+    margin: 16px;
+  }
+}
+@media only screen and (min-width: 45.01em) {
+  .page-main,
+  .page-complementary {
+    margin: 32px;
+  }
+}
+@media only screen and (min-width: 45.01em) {
+  .page-main,
+  .page-complementary {
+    margin: 32px;
+  }
+}
+
+.page-main {
+  max-width: 45em;
+}
+@media only screen and (min-width: 75.01em) {
+  .page-main {
+    display: inline-block;
+    vertical-align: middle;
+    *vertical-align: auto;
+    *zoom: 1;
+    *display: inline;
+    width: 60%;
+    vertical-align: top;
+  }
+}
+
+@media only screen and (min-width: 75.01em) {
+  .page-complementary {
+    display: inline-block;
+    vertical-align: middle;
+    *vertical-align: auto;
+    *zoom: 1;
+    *display: inline;
+    width: 25%;
+    vertical-align: top;
+  }
+}
