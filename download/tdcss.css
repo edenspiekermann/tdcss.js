@@ -10,7 +10,7 @@
  * Based on dabblet (http://dabblet.com)
  * @author Lea Verou
  */
-/* line 8, /Users/rbausek/CodeTests/tdcss.js/src/vendor/prism/prism.css */
+/* line 8, /Users/lmadsen/Sites/tdcss/src/vendor/prism/prism.css */
 code[class*="language-"],
 pre[class*="language-"] {
   color: black;
@@ -29,52 +29,52 @@ pre[class*="language-"] {
   hyphens: none; }
 
 /* Code blocks */
-/* line 28, /Users/rbausek/CodeTests/tdcss.js/src/vendor/prism/prism.css */
+/* line 28, /Users/lmadsen/Sites/tdcss/src/vendor/prism/prism.css */
 pre[class*="language-"] {
   padding: 1em;
   margin: .5em 0;
   overflow: auto; }
 
-/* line 35, /Users/rbausek/CodeTests/tdcss.js/src/vendor/prism/prism.css */
+/* line 35, /Users/lmadsen/Sites/tdcss/src/vendor/prism/prism.css */
 :not(pre) > code[class*="language-"],
 pre[class*="language-"] {
   background: #f5f2f0; }
 
 /* Inline code */
-/* line 40, /Users/rbausek/CodeTests/tdcss.js/src/vendor/prism/prism.css */
+/* line 40, /Users/lmadsen/Sites/tdcss/src/vendor/prism/prism.css */
 :not(pre) > code[class*="language-"] {
   padding: .1em;
   border-radius: .3em; }
 
-/* line 48, /Users/rbausek/CodeTests/tdcss.js/src/vendor/prism/prism.css */
+/* line 48, /Users/lmadsen/Sites/tdcss/src/vendor/prism/prism.css */
 .token.comment,
 .token.prolog,
 .token.doctype,
 .token.cdata {
   color: slategray; }
 
-/* line 52, /Users/rbausek/CodeTests/tdcss.js/src/vendor/prism/prism.css */
+/* line 52, /Users/lmadsen/Sites/tdcss/src/vendor/prism/prism.css */
 .token.punctuation {
   color: #999; }
 
-/* line 56, /Users/rbausek/CodeTests/tdcss.js/src/vendor/prism/prism.css */
+/* line 56, /Users/lmadsen/Sites/tdcss/src/vendor/prism/prism.css */
 .namespace {
   opacity: .7; }
 
-/* line 63, /Users/rbausek/CodeTests/tdcss.js/src/vendor/prism/prism.css */
+/* line 63, /Users/lmadsen/Sites/tdcss/src/vendor/prism/prism.css */
 .token.property,
 .token.tag,
 .token.boolean,
 .token.number {
   color: #905; }
 
-/* line 69, /Users/rbausek/CodeTests/tdcss.js/src/vendor/prism/prism.css */
+/* line 69, /Users/lmadsen/Sites/tdcss/src/vendor/prism/prism.css */
 .token.selector,
 .token.attr-name,
 .token.string {
   color: #690; }
 
-/* line 77, /Users/rbausek/CodeTests/tdcss.js/src/vendor/prism/prism.css */
+/* line 77, /Users/lmadsen/Sites/tdcss/src/vendor/prism/prism.css */
 .token.operator,
 .token.entity,
 .token.url,
@@ -83,39 +83,39 @@ pre[class*="language-"] {
   color: #a67f59;
   background: rgba(255, 255, 255, 0.5); }
 
-/* line 84, /Users/rbausek/CodeTests/tdcss.js/src/vendor/prism/prism.css */
+/* line 84, /Users/lmadsen/Sites/tdcss/src/vendor/prism/prism.css */
 .token.atrule,
 .token.attr-value,
 .token.keyword {
   color: #07a; }
 
-/* line 90, /Users/rbausek/CodeTests/tdcss.js/src/vendor/prism/prism.css */
+/* line 90, /Users/lmadsen/Sites/tdcss/src/vendor/prism/prism.css */
 .token.regex,
 .token.important {
   color: #e90; }
 
-/* line 94, /Users/rbausek/CodeTests/tdcss.js/src/vendor/prism/prism.css */
+/* line 94, /Users/lmadsen/Sites/tdcss/src/vendor/prism/prism.css */
 .token.important {
   font-weight: bold; }
 
-/* line 98, /Users/rbausek/CodeTests/tdcss.js/src/vendor/prism/prism.css */
+/* line 98, /Users/lmadsen/Sites/tdcss/src/vendor/prism/prism.css */
 .token.entity {
   cursor: help; }
 
-/* line 1, /Users/rbausek/CodeTests/tdcss.js/src/partials/_tdcss-box.scss */
-.tdcss-box {
-  border: 1px solid transparent;
-  overflow: hidden; }
-
-/* line 1, /Users/rbausek/CodeTests/tdcss.js/src/partials/_tdcss-code-example.scss */
+/* line 1, /Users/lmadsen/Sites/tdcss/src/partials/_tdcss-code-example.scss */
 .tdcss-code-example {
-  background: blue;
   padding: 1em;
   float: right;
-  width: 50%;
-  min-height: 4em; }
+  width: 50%; }
+  /* line 8, /Users/lmadsen/Sites/tdcss/src/partials/_tdcss-code-example.scss */
+  .tdcss-code-example pre {
+    min-height: 6em; }
+  /* line 13, /Users/lmadsen/Sites/tdcss/src/partials/_tdcss-code-example.scss */
+  .tdcss-code-example :not(pre) > code[class*="language-"],
+  .tdcss-code-example pre[class*="language-"] {
+    background-color: inherit; }
 
-/* line 1, /Users/rbausek/CodeTests/tdcss.js/src/partials/_tdcss-fragment.scss */
+/* line 1, /Users/lmadsen/Sites/tdcss/src/partials/_tdcss-fragment.scss */
 .tdcss-fragment {
   position: relative;
   padding: 0;
@@ -123,80 +123,104 @@ pre[class*="language-"] {
   overflow: hidden;
   margin: 1em 0; }
 
-/* line 10, /Users/rbausek/CodeTests/tdcss.js/src/partials/_tdcss-fragment.scss */
+/* line 10, /Users/lmadsen/Sites/tdcss/src/partials/_tdcss-fragment.scss */
 .tdcss-fragment__head {
   float: left;
   width: 100%; }
 
-/* line 15, /Users/rbausek/CodeTests/tdcss.js/src/partials/_tdcss-fragment.scss */
+/* line 15, /Users/lmadsen/Sites/tdcss/src/partials/_tdcss-fragment.scss */
 .tdcss-fragment__title {
   margin: 0;
-  padding: 0 0 0.5em; }
+  padding: .5em; }
 
-/* line 20, /Users/rbausek/CodeTests/tdcss.js/src/partials/_tdcss-fragment.scss */
+/* line 20, /Users/lmadsen/Sites/tdcss/src/partials/_tdcss-fragment.scss */
 .tdcss-fragment__details {
-  background: yellow;
   float: left;
   width: 100%;
   margin: 0;
   padding: .5em; }
 
-/* line 1, /Users/rbausek/CodeTests/tdcss.js/src/partials/_tdcss-group.scss */
+/* line 27, /Users/lmadsen/Sites/tdcss/src/partials/_tdcss-fragment.scss */
+.tdcss-fragment__preview {
+  float: left;
+  width: 100%;
+  margin: 0;
+  padding: .5em; }
+
+/* line 1, /Users/lmadsen/Sites/tdcss/src/partials/_tdcss-group.scss */
 .tdcss-group {
   width: 100%;
   padding: 1px 0 0 0;
   vertical-align: bottom;
   cursor: pointer;
   /* this is a crappy solution to evade the fixed top bar */
-  padding-top: 3.8em; }
+  padding-top: 3.8em;
+  position: relative; }
 
-/* line 12, /Users/rbausek/CodeTests/tdcss.js/src/partials/_tdcss-group.scss */
+/* line 15, /Users/lmadsen/Sites/tdcss/src/partials/_tdcss-group.scss */
 .tdcss-group__head {
   display: block;
-  padding: 10px;
-  margin: 0; }
+  padding: 2em 0;
+  margin: 0;
+  font-size: 2em; }
 
-/* line 19, /Users/rbausek/CodeTests/tdcss.js/src/partials/_tdcss-group.scss */
+/* line 24, /Users/lmadsen/Sites/tdcss/src/partials/_tdcss-group.scss */
 .tdcss-group__title,
 .tdcss-group__description {
   margin-bottom: 0; }
 
-/* line 23, /Users/rbausek/CodeTests/tdcss.js/src/partials/_tdcss-group.scss */
+/* line 28, /Users/lmadsen/Sites/tdcss/src/partials/_tdcss-group.scss */
 .tdcss-group__description strong {
   font-weight: bold; }
 
-/* line 27, /Users/rbausek/CodeTests/tdcss.js/src/partials/_tdcss-group.scss */
+/* line 32, /Users/lmadsen/Sites/tdcss/src/partials/_tdcss-group.scss */
 .tdcss-group__description em {
   font-style: italic; }
 
-/* line 1, /Users/rbausek/CodeTests/tdcss.js/src/partials/_tdcss-header.scss */
+/* line 36, /Users/lmadsen/Sites/tdcss/src/partials/_tdcss-group.scss */
+.tdcss-group__to-top {
+  position: absolute;
+  top: 100%;
+  background-color: red;
+  right: 0; }
+
+/* line 44, /Users/lmadsen/Sites/tdcss/src/partials/_tdcss-group.scss */
+.tdcss-group__to-top-link {
+  display: block;
+  padding: 0.1em 0.2em; }
+
+/* line 1, /Users/lmadsen/Sites/tdcss/src/partials/_tdcss-header.scss */
 .tdcss-header {
   background-color: #f90; }
 
-/* line 1, /Users/rbausek/CodeTests/tdcss.js/src/partials/_tdcss-masthead.scss */
+/* line 1, /Users/lmadsen/Sites/tdcss/src/partials/_tdcss-masthead.scss */
 .tdcss-masthead {
   position: fixed;
   top: 0;
   z-index: 9999;
   width: 100%; }
 
-/* line 8, /Users/rbausek/CodeTests/tdcss.js/src/partials/_tdcss-masthead.scss */
+/* line 8, /Users/lmadsen/Sites/tdcss/src/partials/_tdcss-masthead.scss */
 .tdcss-masthead__title {
   font-weight: normal;
   font-size: 1.5em;
   line-height: 1.5;
   margin-bottom: 0; }
 
-/* line 1, /Users/rbausek/CodeTests/tdcss.js/src/partials/_tdcss-menu.scss */
+/* line 1, /Users/lmadsen/Sites/tdcss/src/partials/_tdcss-menu.scss */
 .tdcss-menu {
   list-style: none;
   margin: 0;
   padding: 0; }
 
-/* line 7, /Users/rbausek/CodeTests/tdcss.js/src/partials/_tdcss-menu.scss */
+/* line 7, /Users/lmadsen/Sites/tdcss/src/partials/_tdcss-menu.scss */
 .tdcss-menu__item {
   display: block;
   padding: .5em; }
+  /* line 11, /Users/lmadsen/Sites/tdcss/src/partials/_tdcss-menu.scss */
+  .tdcss-menu__item a {
+    color: inherit;
+    text-decoration: none; }
 
 /**
  * Offcanvas navigation
@@ -205,18 +229,19 @@ pre[class*="language-"] {
  * 3. Off-canvas
  * 4. Responsible for opening/closing animation
  */
-/* line 12, /Users/rbausek/CodeTests/tdcss.js/src/partials/_tdcss-nav.scss */
+/* line 12, /Users/lmadsen/Sites/tdcss/src/partials/_tdcss-nav.scss */
 .tdcss-nav {
   position: absolute;
   top: 100%;
   left: 0;
   width: 180px;
   list-style: none;
-  margin: .5em;
-  background: deepskyblue;
-  padding: 2em 0.5em; }
+  margin: 0 0.5em;
+  background: white;
+  color: #00b4f1;
+  padding: .5em; }
   @media (max-width: 700px) {
-    /* line 12, /Users/rbausek/CodeTests/tdcss.js/src/partials/_tdcss-nav.scss */
+    /* line 12, /Users/lmadsen/Sites/tdcss/src/partials/_tdcss-nav.scss */
     .tdcss-nav {
       -webkit-transform: translateX(-100%);
           -ms-transform: translateX(-100%);
@@ -231,11 +256,11 @@ pre[class*="language-"] {
  * 1. Absolutely positioning
  * 2. ... on the right side of the nav (make sure overflow is visible)
  */
-/* line 33, /Users/rbausek/CodeTests/tdcss.js/src/partials/_tdcss-nav.scss */
+/* line 34, /Users/lmadsen/Sites/tdcss/src/partials/_tdcss-nav.scss */
 .tdcss-nav__toggle {
   display: none; }
   @media (max-width: 700px) {
-    /* line 33, /Users/rbausek/CodeTests/tdcss.js/src/partials/_tdcss-nav.scss */
+    /* line 34, /Users/lmadsen/Sites/tdcss/src/partials/_tdcss-nav.scss */
     .tdcss-nav__toggle {
       display: block;
       position: absolute;
@@ -254,7 +279,7 @@ pre[class*="language-"] {
  * Checkbox responsible for the toggle hack
  * Hidden, no matter what
  */
-/* line 55, /Users/rbausek/CodeTests/tdcss.js/src/partials/_tdcss-nav.scss */
+/* line 56, /Users/lmadsen/Sites/tdcss/src/partials/_tdcss-nav.scss */
 #tdcssNavToggle {
   position: absolute;
   clip: rect(0 0 0 0);
@@ -263,7 +288,7 @@ pre[class*="language-"] {
 /**
  * When checkbox is checked, open the nav
  */
-/* line 64, /Users/rbausek/CodeTests/tdcss.js/src/partials/_tdcss-nav.scss */
+/* line 65, /Users/lmadsen/Sites/tdcss/src/partials/_tdcss-nav.scss */
 #tdcssNavToggle:checked ~ .tdcss-nav {
   -webkit-transform: translateX(0);
       -ms-transform: translateX(0);
@@ -273,11 +298,11 @@ pre[class*="language-"] {
  * Rotate the label when nav is opened
  * Purely aesthetic
  */
-/* line 73, /Users/rbausek/CodeTests/tdcss.js/src/partials/_tdcss-nav.scss */
+/* line 74, /Users/lmadsen/Sites/tdcss/src/partials/_tdcss-nav.scss */
 #tdcssNavToggle:checked ~ .tdcss-nav > .tdcss-nav__toggle .tdcss-nav__toggle-label {
   opacity: 0; }
 
-/* line 76, /Users/rbausek/CodeTests/tdcss.js/src/partials/_tdcss-nav.scss */
+/* line 77, /Users/lmadsen/Sites/tdcss/src/partials/_tdcss-nav.scss */
 #tdcssNavToggle:checked ~ .tdcss-nav > .tdcss-nav__toggle:after {
   content: "x";
   font-size: 20px;
@@ -293,7 +318,7 @@ pre[class*="language-"] {
  * See: http://timpietrusky.com/advanced-checkbox-hack
  * Beware, can be costly: http://codepen.io/HugoGiraudel/details/jPOREG#comment-id-89799
  */
-/* line 91, /Users/rbausek/CodeTests/tdcss.js/src/partials/_tdcss-nav.scss */
+/* line 92, /Users/lmadsen/Sites/tdcss/src/partials/_tdcss-nav.scss */
 body {
   -webkit-animation: bugfix infinite 1s; }
 
@@ -305,10 +330,10 @@ body {
  * Take care of small screens
  */
 @media (max-width: 350px) {
-  /* line 103, /Users/rbausek/CodeTests/tdcss.js/src/partials/_tdcss-nav.scss */
+  /* line 104, /Users/lmadsen/Sites/tdcss/src/partials/_tdcss-nav.scss */
   .tdcss-nav {
     width: 100%; }
-  /* line 107, /Users/rbausek/CodeTests/tdcss.js/src/partials/_tdcss-nav.scss */
+  /* line 108, /Users/lmadsen/Sites/tdcss/src/partials/_tdcss-nav.scss */
   [id='tdcssNavToggle']:checked ~ .tdcss-nav > .tdcss-nav__toggle {
     left: auto;
     right: 0;
@@ -317,69 +342,52 @@ body {
 /**
  * Provide a fallback for browsers that do not support CSS transforms
  */
-/* line 117, /Users/rbausek/CodeTests/tdcss.js/src/partials/_tdcss-nav.scss */
+/* line 118, /Users/lmadsen/Sites/tdcss/src/partials/_tdcss-nav.scss */
 .no-csstransforms .tdcss-nav {
   left: -350px; }
 
-/* line 121, /Users/rbausek/CodeTests/tdcss.js/src/partials/_tdcss-nav.scss */
+/* line 122, /Users/lmadsen/Sites/tdcss/src/partials/_tdcss-nav.scss */
 .no-csstransforms [id='tdcssNavToggle']:checked ~ .tdcss-nav {
   left: 0; }
 
 @media (min-width: 701px) {
-  /* line 131, /Users/rbausek/CodeTests/tdcss.js/src/partials/_tdcss-nav.scss */
+  /* line 132, /Users/lmadsen/Sites/tdcss/src/partials/_tdcss-nav.scss */
   .tdcss-nav__neighbour {
     margin-left: 180px; } }
 
-/* line 1, /Users/rbausek/CodeTests/tdcss.js/src/partials/_tdcss-slab.scss */
-.tdcss-slab {
-  padding-left: 20px;
-  padding-right: 20px; }
-
-/* line 6, /Users/rbausek/CodeTests/tdcss.js/src/partials/_tdcss-slab.scss */
-.tdcss-slab--group {
-  padding-top: 15px;
-  padding-bottom: 15px; }
-
-/* line 13, /Users/rbausek/CodeTests/tdcss.js/src/partials/_tdcss-slab.scss */
-.tdcss-slab--masthead,
-.tdcss-slab--description,
-.tdcss-slab--fragment {
-  padding-top: 10px;
-  padding-bottom: 10px; }
-
-/* line 1, /Users/rbausek/CodeTests/tdcss.js/src/partials/_tdcss-subgroup.scss */
+/* line 1, /Users/lmadsen/Sites/tdcss/src/partials/_tdcss-subgroup.scss */
 .tdcss-subgroup {
   /* this is a crappy solution to evade the fixed top bar */
   padding-top: 3.8em; }
 
-/* line 1, /Users/rbausek/CodeTests/tdcss.js/src/partials/_tdcss-submenu.scss */
+/* line 1, /Users/lmadsen/Sites/tdcss/src/partials/_tdcss-submenu.scss */
 .tdcss-submenu {
   list-style: none;
   margin: 0 0 0 1em;
   padding: 1em 0 0 0.5em; }
 
-/* line 7, /Users/rbausek/CodeTests/tdcss.js/src/partials/_tdcss-submenu.scss */
+/* line 7, /Users/lmadsen/Sites/tdcss/src/partials/_tdcss-submenu.scss */
 .tdcss-submenu__item {
   display: block;
   padding: .5em; }
 
-/* line 24, /Users/rbausek/CodeTests/tdcss.js/src/tdcss.scss */
+/* line 22, /Users/lmadsen/Sites/tdcss/src/tdcss.scss */
 body {
   margin: 0; }
 
-/* line 28, /Users/rbausek/CodeTests/tdcss.js/src/tdcss.scss */
+/* line 26, /Users/lmadsen/Sites/tdcss/src/tdcss.scss */
 [class*='tdcss-'] {
   box-sizing: border-box; }
 
-/* line 33, /Users/rbausek/CodeTests/tdcss.js/src/tdcss.scss */
+/* line 31, /Users/lmadsen/Sites/tdcss/src/tdcss.scss */
 .tdcss-elements {
   margin: 1em;
   box-sizing: border-box; }
-  /* line 37, /Users/rbausek/CodeTests/tdcss.js/src/tdcss.scss */
+  /* line 35, /Users/lmadsen/Sites/tdcss/src/tdcss.scss */
   .tdcss-elements h1, .tdcss-elements h2, .tdcss-elements h3, .tdcss-elements p, .tdcss-elements ul {
     margin-top: 0; }
 
-/* line 45, /Users/rbausek/CodeTests/tdcss.js/src/tdcss.scss */
+/* line 42, /Users/lmadsen/Sites/tdcss/src/tdcss.scss */
 .tdcss-top {
   position: relative;
   padding: 0;
@@ -387,17 +395,17 @@ body {
   width: 100%;
   height: 2em; }
 
-/* line 53, /Users/rbausek/CodeTests/tdcss.js/src/tdcss.scss */
+/* line 50, /Users/lmadsen/Sites/tdcss/src/tdcss.scss */
 .tddcss-top__link {
   float: right;
   margin-right: 1.25em;
   color: #558696; }
 
-/* line 59, /Users/rbausek/CodeTests/tdcss.js/src/tdcss.scss */
+/* line 56, /Users/lmadsen/Sites/tdcss/src/tdcss.scss */
 .tddcss-top__link:hover {
   color: #96cddf; }
 
-/* line 66, /Users/rbausek/CodeTests/tdcss.js/src/tdcss.scss */
+/* line 63, /Users/lmadsen/Sites/tdcss/src/tdcss.scss */
 .tdcss-diff-warning,
 .tdcss-fragment .tdcss-diff-stats {
   position: absolute;
@@ -409,26 +417,26 @@ body {
   color: white;
   background-color: red; }
 
-/* line 77, /Users/rbausek/CodeTests/tdcss.js/src/tdcss.scss */
+/* line 74, /Users/lmadsen/Sites/tdcss/src/tdcss.scss */
 .tdcss-diff-warning {
   position: fixed;
   z-index: 10000;
   font-size: 12px; }
 
-/* line 83, /Users/rbausek/CodeTests/tdcss.js/src/tdcss.scss */
+/* line 80, /Users/lmadsen/Sites/tdcss/src/tdcss.scss */
 .tdcss-diff-warning > a {
   padding-left: 0.25em;
   color: white; }
 
-/* line 88, /Users/rbausek/CodeTests/tdcss.js/src/tdcss.scss */
+/* line 85, /Users/lmadsen/Sites/tdcss/src/tdcss.scss */
 .tdcss-diff-warning > a:hover {
   text-decoration: none; }
 
-/* line 92, /Users/rbausek/CodeTests/tdcss.js/src/tdcss.scss */
+/* line 89, /Users/lmadsen/Sites/tdcss/src/tdcss.scss */
 .tdcss-fragment.tdcss-has-diff {
   outline: 1px dotted red; }
 
-/* line 96, /Users/rbausek/CodeTests/tdcss.js/src/tdcss.scss */
+/* line 93, /Users/lmadsen/Sites/tdcss/src/tdcss.scss */
 .tdcss-diff-image {
   position: absolute;
   top: 0;
@@ -437,19 +445,19 @@ body {
   pointer-events: none;
   opacity: 0.5; }
 
-/* line 105, /Users/rbausek/CodeTests/tdcss.js/src/tdcss.scss */
+/* line 102, /Users/lmadsen/Sites/tdcss/src/tdcss.scss */
 .tdcss-dom-example {
   float: left;
   position: relative;
   width: 60%;
   padding: 1em; }
 
-/* line 118, /Users/rbausek/CodeTests/tdcss.js/src/tdcss.scss */
+/* line 111, /Users/lmadsen/Sites/tdcss/src/tdcss.scss */
 .tdcss-title {
   font-size: 2em;
   color: #7A888D; }
 
-/* line 123, /Users/rbausek/CodeTests/tdcss.js/src/tdcss.scss */
+/* line 116, /Users/lmadsen/Sites/tdcss/src/tdcss.scss */
 .tdcss-no-fragments {
   font-weight: 200;
   color: gray;

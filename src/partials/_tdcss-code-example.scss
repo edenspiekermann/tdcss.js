@@ -1,9 +1,16 @@
 .tdcss-code-example {
-  background: blue;
   padding: 1em;
 
   float: right;
   width: 50%;
 
-  min-height: 4em;
+
+  pre {
+    min-height: 6em;
+  }
+
+  :not(pre) > code[class*="language-"],
+  pre[class*="language-"] {
+    background-color: inherit;
+  }
 }

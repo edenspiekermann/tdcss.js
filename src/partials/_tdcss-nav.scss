@@ -15,9 +15,10 @@ $on-canvas-min: $off-canvas-max + 1;
   left: 0;
   width: 180px;
   list-style: none;
-  margin: .5em;
-  background: deepskyblue;
-  padding: 2em .5em;
+  margin: 0 .5em;
+  background: white;
+  color: #00b4f1;
+  padding: .5em;
 
   @media (max-width: $off-canvas-max) {
     transform: translateX(-100%); /* 3 */

@@ -1,10 +1,9 @@
-<div class="tdcss-fragment tdcss-box tdcss-box--fragment" id="fragment-1">
-  <div class="tdcss-fragment__head tdcss-slab tdcss-slab--fragment tdcss-slab--secondary tdcss-font">
+<div class="tdcss-fragment tdcss-box tdcss-box--fragment tdcss-slab--primary" id="fragment-1">
+  <div class="tdcss-fragment__head tdcss-font">
     <h3 class="tdcss-fragment__title">{{title}}</h3>
     <div class="tdcss-fragment__details">
-      these are details
       {{#if renderSnippet}}
-      <div class='tdcss-code-example'>
+      <div class='tdcss-code-example tdcss-slab tdcss-slab--secondary'>
         <pre>
           <code class="language-markup">
             {{html}}
@@ -12,9 +11,14 @@
         </pre>
       </div>
       {{/if}}
+
+      these are details
+
     </div>
   </div>
-  <div class="tdcss-dom-example">
-    {{{html}}}
+  <div class="tdcss-fragment__preview tdcss-slab tdcss-slab--secondary">
+    <div class="tdcss-dom-example">
+      {{{html}}}
+    </div>
   </div>
 </div>

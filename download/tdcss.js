@@ -1,4 +1,4 @@
-/* tdcss.js - v0.7.0 - 2015-06-19
+/* tdcss.js - v0.7.0 - 2015-06-18
 * http://jakobloekke.github.io/tdcss.js/
 * Copyright (c) 2015 Jakob Løkke Madsen;
 * License: MIT */
@@ -20293,179 +20293,7 @@ module.exports = {
     Fragments: Fragments
 }
 
-},{"../models/":45,"../models/const.js":44,"backbone":1}],42:[function(require,module,exports){
-'use strict';
-
-module.exports = {
-    fragmentInfoSplitter: ";"
-}
-
-},{}],43:[function(require,module,exports){
-var $ = require('jquery');
-var jQuery = $;
-var _ = require('underscore');
-
-var FragmentTypes = require('../models/const.js');
-var config = require('../config');
-var fragmentInfoSplitter = config.fragmentInfoSplitter;
-
-// models
-var Models = require('../models');
-var Section = Models.Section;
-var Description = Models.Description;
-var CodeSnippet = Models.CodeSnippet;
-var JSCodeSnippet = Models.JSCodeSnippet;
-// collections
-var Fragments = require('../collections').Fragments;
-var Sections = require('../collections').Sections;
-
-
-function createFragmentFromComment(commentNode) {
-    var type = getFragmentType(commentNode);
-    var customHeight;
-    var fragmentTitle;
-    var fragmentDescription;
-    var fragment;
-    var fragmentHTML;
-    var rawScript;
-    var identifier;
-
-    if (type === FragmentTypes.SECTION.name) {
-        identifier = FragmentTypes[type].identifier;
-        fragmentTitle = getFragmentContent(commentNode, identifier);
-        return new Section({
-            type: type,
-            name: fragmentTitle
-        });
-    }
-
-    if (type === FragmentTypes.DESCRIPTION.name) {
-        identifier = FragmentTypes[type].identifier;
-        fragmentDescription = getFragmentContent(commentNode, identifier);
-
-        return new Description({
-            type: type,
-            description: fragmentDescription
-        });
-    }
-
-    if (type === FragmentTypes.SNIPPET.name) {
-        identifier = FragmentTypes[type].identifier;
-        fragmentTitle = getFragmentContent(commentNode, identifier);
-        customHeight = $.trim(getCommentMeta(commentNode)[1]);
-        fragmentHTML = getFragmentHTML(commentNode);
-
-        return new CodeSnippet({
-            type: type,
-            title: fragmentTitle,
-            html: fragmentHTML,
-            customHeight: customHeight
-        });
-
-    }
-
-    if (type === FragmentTypes.JS_SNIPPET.name) {
-        identifier = FragmentTypes[type].identifier;
-        fragmentTitle = getFragmentContent(commentNode, identifier);
-        rawScript = getFragmentScriptHTML(commentNode);
-        fragmentHTML = getFragmentHTML(commentNode);
-
-        return new JSCodeSnippet({
-            type: type,
-            title: fragmentTitle,
-            html: fragmentHTML,
-            rawScript: rawScript
-        });
-    }
-
-    if (type === FragmentTypes.COFFEE_SNIPPET.name) {
-        if (!window.CoffeeScript) {
-            throw new Error("Include CoffeeScript Compiler to evaluate CoffeeScript with tdcss.");
-        }
-        identifier = FragmentTypes[type].identifier;
-        fragmentTitle = getFragmentContent(commentNode, identifier);
-        rawScript = getFragmentScriptHTML(commentNode);
-        fragmentHTML = getFragmentHTML(commentNode);
-
-        return new JSCodeSnippet({
-            type: type,
-            title: fragmentTitle,
-            html: fragmentHTML,
-            rawScript: rawScript
-        });
-
-    }
-
-    if (type === FragmentTypes.NO_SNIPPET.name) {
-        identifier = FragmentTypes[type].identifier;
-        fragmentTitle = getFragmentContent(commentNode, identifier);
-        customHeight = $.trim(getCommentMeta(commentNode)[1]);
-        fragmentHTML = getFragmentHTML(commentNode);
-
-        return new CodeSnippet({
-            type: type,
-            title: fragmentTitle,
-            html: fragmentHTML,
-            customHeight: customHeight
-        });
-    }
-
-    // return undefined if no match is found
-    return undefined;
-}
-
-function getFragmentType(element) {
-    var foundType = "";
-    for (var fragmentType in FragmentTypes) {
-        if (FragmentTypes.hasOwnProperty(fragmentType)) {
-            var identifier = FragmentTypes[fragmentType].identifier;
-            if (element.nodeValue.match(new RegExp(identifier))) {
-                foundType = fragmentType;
-            }
-        }
-    }
-    return foundType;
-}
-
-function getFragmentContent(element, identifier) {
-    return $.trim(getCommentMeta(element)[0].split(identifier)[1]);
-}
-
-function getCommentMeta(element) {
-    return element.nodeValue.split(fragmentInfoSplitter);
-}
-
-function getFragmentScriptHTML(element) {
-    return $(element).nextAll('script[type="text/javascript"]').html();
-}
-
-function getFragmentCoffeeScriptHTML(element) {
-    return $(element).nextAll('script[type="text/coffeescript"]').html().trim();
-}
-
-function getFragmentHTML(element) {
-    // The actual HTML fragment is the comment's nextSibling (a carriage return)'s nextSibling:
-    var fragment = element.nextSibling.nextSibling;
-
-    // Check if nextSibling is a comment or a real html fragment to be rendered
-    if (fragment.nodeType !== 8) {
-        return fragment.outerHTML;
-    } else {
-        return null;
-    }
-}
-
-module.exports = {
-    createFragmentFromComment: createFragmentFromComment,
-    getFragmentType: getFragmentType,
-    getFragmentContent: getFragmentContent,
-    getCommentMeta: getCommentMeta,
-    getFragmentScriptHTML: getFragmentScriptHTML,
-    getFragmentCoffeeScriptHTML: getFragmentCoffeeScriptHTML,
-    getFragmentHTML: getFragmentHTML
-}
-
-},{"../collections":41,"../config":42,"../models":45,"../models/const.js":44,"jquery":38,"underscore":40}],44:[function(require,module,exports){
+},{"../models/":43,"../models/const.js":42,"backbone":1}],42:[function(require,module,exports){
 var types = {
     SECTION: {
         name: 'SECTION',
@@ -20495,9 +20323,8 @@ var types = {
 
 module.exports = types;
 
-},{}],45:[function(require,module,exports){
+},{}],43:[function(require,module,exports){
 var Backbone = require('backbone');
-var _ = require('underscore');
 
 
 var Fragment = Backbone.Model.extend({
@@ -20515,19 +20342,11 @@ var Fragment = Backbone.Model.extend({
         var output = this.get('name').replace(/\s+/g, '-').toLowerCase();
         return encodeURIComponent(output);
     }
-
 });
 
 
 var Section = Fragment.extend({
-    toJSON: function () {
-        var data = _.clone(this.attributes);
-        data = _.extend({
-            href: this.toUniqueID()
-        }, data);
 
-        return data;
-    }
 });
 
 
@@ -20560,7 +20379,7 @@ module.exports = {
     JSCodeSnippet: JSCodeSnippet
 }
 
-},{"backbone":1,"underscore":40}],46:[function(require,module,exports){
+},{"backbone":1}],44:[function(require,module,exports){
 /**
  * tdcss.js: Super-simple styleguide tool
  * MIT License http://www.opensource.org/licenses/mit-license.php/
@@ -20588,8 +20407,6 @@ var TDCSSElementsView = require('./views/tdcss-elements.js');
 var SectionView = require('./views/section.js');
 var FragmentView = require('./views/fragment.js');
 var NavigationView = require('./views/tdcss-nav.js');
-
-var createFragmentFromComment = require('./dom_utils').createFragmentFromComment;
 
 (function () {
     "use strict";
@@ -20635,6 +20452,7 @@ var createFragmentFromComment = require('./dom_utils').createFragmentFromComment
             reset();
             setup();
             parse();
+            renderNavigation();
             render();
             bindSectionCollapseHandlers();
             restoreCollapsedSectionsFromUrl();
@@ -20691,149 +20509,142 @@ var createFragmentFromComment = require('./dom_utils').createFragmentFromComment
 
 
 
-        // function createFragmentFromComment(commentNode) {
-        //     var type = getFragmentType(commentNode);
-        //     var customHeight;
-        //     var fragmentTitle;
-        //     var fragmentDescription;
-        //     var fragment;
-        //     var fragmentHTML;
-        //     var rawScript;
-        //     var identifier;
+        function createFragmentFromComment(commentNode) {
+            var type = getFragmentType(commentNode);
+            var customHeight;
+            var fragmentTitle;
+            var fragmentDescription;
+            var fragment;
+            var fragmentHTML;
+            var rawScript;
+            var identifier;
 
-        //     if (type === FragmentTypes.SECTION.name) {
-        //         identifier = FragmentTypes[type].identifier;
-        //         fragmentTitle = getFragmentContent(commentNode, identifier);
-        //         return new Section({
-        //             type: type,
-        //             name: fragmentTitle
-        //         });
-        //     }
+            if (type === FragmentTypes.SECTION.name) {
+                identifier = FragmentTypes[type].identifier;
+                fragmentTitle = getFragmentContent(commentNode, identifier);
+                return new Section({
+                    type: type,
+                    name: fragmentTitle
+                });
+            }
 
-        //     if (type === FragmentTypes.DESCRIPTION.name) {
-        //         identifier = FragmentTypes[type].identifier;
-        //         fragmentDescription = getFragmentContent(commentNode, identifier);
+            if (type === FragmentTypes.DESCRIPTION.name) {
+                identifier = FragmentTypes[type].identifier;
+                fragmentDescription = getFragmentContent(commentNode, identifier);
 
-        //         return new Description({
-        //             type: type,
-        //             description: fragmentDescription
-        //         });
-        //     }
+                return new Description({
+                    type: type,
+                    description: fragmentDescription
+                });
+            }
 
-        //     if (type === FragmentTypes.SNIPPET.name) {
-        //         identifier = FragmentTypes[type].identifier;
-        //         fragmentTitle = getFragmentContent(commentNode, identifier);
-        //         customHeight = $.trim(getCommentMeta(commentNode)[1]);
-        //         fragmentHTML = getFragmentHTML(commentNode);
+            if (type === FragmentTypes.SNIPPET.name) {
+                identifier = FragmentTypes[type].identifier;
+                fragmentTitle = getFragmentContent(commentNode, identifier);
+                customHeight = $.trim(getCommentMeta(commentNode)[1]);
+                fragmentHTML = getFragmentHTML(commentNode);
 
-        //         return new CodeSnippet({
-        //             type: type,
-        //             title: fragmentTitle,
-        //             html: fragmentHTML,
-        //             customHeight: customHeight
-        //         });
+                return new CodeSnippet({
+                    type: type,
+                    title: fragmentTitle,
+                    html: fragmentHTML,
+                    customHeight: customHeight
+                });
 
-        //     }
+            }
 
-        //     if (type === FragmentTypes.JS_SNIPPET.name) {
-        //         identifier = FragmentTypes[type].identifier;
-        //         fragmentTitle = getFragmentContent(commentNode, identifier);
-        //         rawScript = getFragmentScriptHTML(commentNode);
-        //         fragmentHTML = getFragmentHTML(commentNode);
+            if (type === FragmentTypes.JS_SNIPPET.name) {
+                identifier = FragmentTypes[type].identifier;
+                fragmentTitle = getFragmentContent(commentNode, identifier);
+                rawScript = getFragmentScriptHTML(commentNode);
+                fragmentHTML = getFragmentHTML(commentNode);
 
-        //         return new JSCodeSnippet({
-        //             type: type,
-        //             title: fragmentTitle,
-        //             html: fragmentHTML,
-        //             rawScript: rawScript
-        //         });
-        //     }
+                return new JSCodeSnippet({
+                    type: type,
+                    title: fragmentTitle,
+                    html: fragmentHTML,
+                    rawScript: rawScript
+                });
+            }
 
-        //     if (type === FragmentTypes.COFFEE_SNIPPET.name) {
-        //         if (!window.CoffeeScript) {
-        //             throw new Error("Include CoffeeScript Compiler to evaluate CoffeeScript with tdcss.");
-        //         }
-        //         identifier = FragmentTypes[type].identifier;
-        //         fragmentTitle = getFragmentContent(commentNode, identifier);
-        //         rawScript = getFragmentScriptHTML(commentNode);
-        //         fragmentHTML = getFragmentHTML(commentNode);
+            if (type === FragmentTypes.COFFEE_SNIPPET.name) {
+                if (!window.CoffeeScript) {
+                    throw new Error("Include CoffeeScript Compiler to evaluate CoffeeScript with tdcss.");
+                }
+                identifier = FragmentTypes[type].identifier;
+                fragmentTitle = getFragmentContent(commentNode, identifier);
+                rawScript = getFragmentScriptHTML(commentNode);
+                fragmentHTML = getFragmentHTML(commentNode);
 
-        //         return new JSCodeSnippet({
-        //             type: type,
-        //             title: fragmentTitle,
-        //             html: fragmentHTML,
-        //             rawScript: rawScript
-        //         });
+                return new JSCodeSnippet({
+                    type: type,
+                    title: fragmentTitle,
+                    html: fragmentHTML,
+                    rawScript: rawScript
+                });
 
-        //     }
+            }
 
-        //     if (type === FragmentTypes.NO_SNIPPET.name) {
-        //         identifier = FragmentTypes[type].identifier;
-        //         fragmentTitle = getFragmentContent(commentNode, identifier);
-        //         customHeight = $.trim(getCommentMeta(commentNode)[1]);
-        //         fragmentHTML = getFragmentHTML(commentNode);
+            if (type === FragmentTypes.NO_SNIPPET.name) {
+                identifier = FragmentTypes[type].identifier;
+                fragmentTitle = getFragmentContent(commentNode, identifier);
+                customHeight = $.trim(getCommentMeta(commentNode)[1]);
+                fragmentHTML = getFragmentHTML(commentNode);
 
-        //         return new CodeSnippet({
-        //             type: type,
-        //             title: fragmentTitle,
-        //             html: fragmentHTML,
-        //             customHeight: customHeight
-        //         });
-        //     }
+                return new CodeSnippet({
+                    type: type,
+                    title: fragmentTitle,
+                    html: fragmentHTML,
+                    customHeight: customHeight
+                });
+            }
 
-        //     // return undefined if no match is found
-        //     return undefined;
-        // }
-
-        // function getFragmentType(element) {
-        //     var foundType = "";
-        //     for (var fragmentType in FragmentTypes) {
-        //         if (FragmentTypes.hasOwnProperty(fragmentType)) {
-        //             var identifier = FragmentTypes[fragmentType].identifier;
-        //             if (element.nodeValue.match(new RegExp(identifier))) {
-        //                 foundType = fragmentType;
-        //             }
-        //         }
-        //     }
-        //     return foundType;
-        // }
-
-        // function getFragmentContent(element, identifier) {
-        //     return $.trim(getCommentMeta(element)[0].split(identifier)[1]);
-        // }
-
-        // function getCommentMeta(element) {
-        //     return element.nodeValue.split(settings.fragment_info_splitter);
-        // }
-
-        // function getFragmentScriptHTML(element) {
-        //     return $(element).nextAll('script[type="text/javascript"]').html();
-        // }
-
-        // function getFragmentCoffeeScriptHTML(element) {
-        //     return $(element).nextAll('script[type="text/coffeescript"]').html().trim();
-        // }
-
-        // function getFragmentHTML(element) {
-        //     // The actual HTML fragment is the comment's nextSibling (a carriage return)'s nextSibling:
-        //     var fragment = element.nextSibling.nextSibling;
-
-        //     // Check if nextSibling is a comment or a real html fragment to be rendered
-        //     if (fragment.nodeType !== 8) {
-        //         return fragment.outerHTML;
-        //     } else {
-        //         return null;
-        //     }
-        // }
-
-        // TODO: all of this is super hacky, should be moved into own view
-
-        function render() {
-            renderNavigation();
-            renderBody();
+            // return undefined if no match is found
+            return undefined;
         }
 
-        function renderBody() {
+        function getFragmentType(element) {
+            var foundType = "";
+            for (var fragmentType in FragmentTypes) {
+                if (FragmentTypes.hasOwnProperty(fragmentType)) {
+                    var identifier = FragmentTypes[fragmentType].identifier;
+                    if (element.nodeValue.match(new RegExp(identifier))) {
+                        foundType = fragmentType;
+                    }
+                }
+            }
+            return foundType;
+        }
+
+        function getFragmentContent(element, identifier) {
+            return $.trim(getCommentMeta(element)[0].split(identifier)[1]);
+        }
+
+        function getCommentMeta(element) {
+            return element.nodeValue.split(settings.fragment_info_splitter);
+        }
+
+        function getFragmentScriptHTML(element) {
+            return $(element).nextAll('script[type="text/javascript"]').html();
+        }
+
+        function getFragmentCoffeeScriptHTML(element) {
+            return $(element).nextAll('script[type="text/coffeescript"]').html().trim();
+        }
+
+        function getFragmentHTML(element) {
+            // The actual HTML fragment is the comment's nextSibling (a carriage return)'s nextSibling:
+            var fragment = element.nextSibling.nextSibling;
+
+            // Check if nextSibling is a comment or a real html fragment to be rendered
+            if (fragment.nodeType !== 8) {
+                return fragment.outerHTML;
+            } else {
+                return null;
+            }
+        }
+
+        function render() {
             var sectionCount = 0, insertBackToTop;
 
 
@@ -21228,28 +21039,28 @@ var createFragmentFromComment = require('./dom_utils').createFragmentFromComment
 
 window.$ = $;
 
-},{"./collections":41,"./dom_utils":43,"./models":45,"./models/const.js":44,"./views/fragment.js":48,"./views/section.js":50,"./views/tdcss-elements.js":51,"./views/tdcss-nav.js":53,"jquery":38,"prismjs":39,"underscore":40}],47:[function(require,module,exports){
+},{"./collections":41,"./models":43,"./models/const.js":42,"./views/fragment.js":46,"./views/section.js":48,"./views/tdcss-elements.js":49,"./views/tdcss-nav.js":51,"jquery":38,"prismjs":39,"underscore":40}],45:[function(require,module,exports){
 // hbsfy compiled Handlebars template
 var HandlebarsCompiler = require('hbsfy/runtime');
 module.exports = HandlebarsCompiler.template({"1":function(depth0,helpers,partials,data) {
     var helper;
 
-  return "      <div class='tdcss-code-example'>\n        <pre>\n          <code class=\"language-markup\">\n            "
+  return "      <div class='tdcss-code-example tdcss-slab tdcss-slab--secondary'>\n        <pre>\n          <code class=\"language-markup\">\n            "
     + this.escapeExpression(((helper = (helper = helpers.html || (depth0 != null ? depth0.html : depth0)) != null ? helper : helpers.helperMissing),(typeof helper === "function" ? helper.call(depth0,{"name":"html","hash":{},"data":data}) : helper)))
     + "\n          </code>\n        </pre>\n      </div>\n";
 },"compiler":[6,">= 2.0.0-beta.1"],"main":function(depth0,helpers,partials,data) {
     var stack1, helper, alias1=helpers.helperMissing, alias2="function";
 
-  return "<div class=\"tdcss-fragment tdcss-box tdcss-box--fragment\" id=\"fragment-1\">\n  <div class=\"tdcss-fragment__head tdcss-slab tdcss-slab--fragment tdcss-slab--secondary tdcss-font\">\n    <h3 class=\"tdcss-fragment__title\">"
+  return "<div class=\"tdcss-fragment tdcss-box tdcss-box--fragment tdcss-slab--primary\" id=\"fragment-1\">\n  <div class=\"tdcss-fragment__head tdcss-font\">\n    <h3 class=\"tdcss-fragment__title\">"
     + this.escapeExpression(((helper = (helper = helpers.title || (depth0 != null ? depth0.title : depth0)) != null ? helper : alias1),(typeof helper === alias2 ? helper.call(depth0,{"name":"title","hash":{},"data":data}) : helper)))
-    + "</h3>\n    <div class=\"tdcss-fragment__details\">\n      these are details\n"
+    + "</h3>\n    <div class=\"tdcss-fragment__details\">\n"
     + ((stack1 = helpers['if'].call(depth0,(depth0 != null ? depth0.renderSnippet : depth0),{"name":"if","hash":{},"fn":this.program(1, data, 0),"inverse":this.noop,"data":data})) != null ? stack1 : "")
-    + "    </div>\n  </div>\n  <div class=\"tdcss-dom-example\">\n    "
+    + "\n      these are details\n\n    </div>\n  </div>\n  <div class=\"tdcss-fragment__preview tdcss-slab tdcss-slab--secondary\">\n    <div class=\"tdcss-dom-example\">\n      "
     + ((stack1 = ((helper = (helper = helpers.html || (depth0 != null ? depth0.html : depth0)) != null ? helper : alias1),(typeof helper === alias2 ? helper.call(depth0,{"name":"html","hash":{},"data":data}) : helper))) != null ? stack1 : "")
-    + "\n  </div>\n</div>\n";
+    + "\n    </div>\n  </div>\n</div>\n";
 },"useData":true});
 
-},{"hbsfy/runtime":37}],48:[function(require,module,exports){
+},{"hbsfy/runtime":37}],46:[function(require,module,exports){
 var _ = require('underscore');
 var TDCSSView = require('./tdcss-view');
 var FacetTypes = require ('../models/const.js');
@@ -21303,22 +21114,20 @@ module.exports = TDCSSView.extend({
     },
 });
 
-},{"../models/const.js":44,"./fragment.hbs":47,"./tdcss-view":54,"jquery":38,"underscore":40}],49:[function(require,module,exports){
+},{"../models/const.js":42,"./fragment.hbs":45,"./tdcss-view":52,"jquery":38,"underscore":40}],47:[function(require,module,exports){
 // hbsfy compiled Handlebars template
 var HandlebarsCompiler = require('hbsfy/runtime');
 module.exports = HandlebarsCompiler.template({"compiler":[6,">= 2.0.0-beta.1"],"main":function(depth0,helpers,partials,data) {
     var helper, alias1=helpers.helperMissing, alias2="function", alias3=this.escapeExpression;
 
-  return "<section class=\"tdcss-group\" id=\""
-    + alias3(((helper = (helper = helpers.href || (depth0 != null ? depth0.href : depth0)) != null ? helper : alias1),(typeof helper === alias2 ? helper.call(depth0,{"name":"href","hash":{},"data":data}) : helper)))
-    + "\">\n  <header class=\"tdcss-group__head tdcss-slab tdcss-slab--group tdcss-slab--primary tdcss-font\">\n    <h1 class=\"tdcss-group__title\">"
+  return "<section class=\"tdcss-group\" id=\"\">\n  <header class=\"tdcss-group__head tdcss-font\">\n    <h1 class=\"tdcss-group__title\">"
     + alias3(((helper = (helper = helpers.name || (depth0 != null ? depth0.name : depth0)) != null ? helper : alias1),(typeof helper === alias2 ? helper.call(depth0,{"name":"name","hash":{},"data":data}) : helper)))
     + "</h1>\n    <div class=\"tdcss-group__description tdcss-slab tdcss-slab--description tdcss-slab--dimmed tdcss-font\">\n      "
     + alias3(((helper = (helper = helpers.text || (depth0 != null ? depth0.text : depth0)) != null ? helper : alias1),(typeof helper === alias2 ? helper.call(depth0,{"name":"text","hash":{},"data":data}) : helper)))
-    + "\n    </div>\n  </header>\n\n  content\n\n  <div class=\"tdcss-top\">\n    <a class=\"tddcss-top-link\" href=\"#\">Back to Top</a>\n  </div>\n</section>\n";
+    + "\n    </div>\n  </header>\n\n  content\n\n  <div class=\"tdcss-group__to-top\">\n    <a class=\"tdcss-group__to-top-link\" href=\"#\">Back to Top</a>\n  </div>\n</section>\n";
 },"useData":true});
 
-},{"hbsfy/runtime":37}],50:[function(require,module,exports){
+},{"hbsfy/runtime":37}],48:[function(require,module,exports){
 var TDCSSView = require('./tdcss-view');
 
 module.exports = TDCSSView.extend({
@@ -21333,37 +21142,27 @@ module.exports = TDCSSView.extend({
     },
 
     attributes: function() {
-        return this.model.toJSON();
+        return {
+          //id: this.model.toUniqueID()
+        };
     }
 });
 
-},{"./section.hbs":49,"./tdcss-view":54}],51:[function(require,module,exports){
+},{"./section.hbs":47,"./tdcss-view":52}],49:[function(require,module,exports){
 var Backbone = require('backbone');
 
 module.exports = Backbone.View.extend({
     className: 'tdcss-elements'
 });
 
-},{"backbone":1}],52:[function(require,module,exports){
+},{"backbone":1}],50:[function(require,module,exports){
 // hbsfy compiled Handlebars template
 var HandlebarsCompiler = require('hbsfy/runtime');
-module.exports = HandlebarsCompiler.template({"1":function(depth0,helpers,partials,data) {
-    var alias1=this.lambda, alias2=this.escapeExpression;
-
-  return "        <li class=\"tdcss-menu__item\">\n            <a class=\"tdcss-menu__link\" href=\"#"
-    + alias2(alias1((depth0 != null ? depth0.href : depth0), depth0))
-    + "\">"
-    + alias2(alias1((depth0 != null ? depth0.name : depth0), depth0))
-    + "</a>\n        </li>\n";
-},"compiler":[6,">= 2.0.0-beta.1"],"main":function(depth0,helpers,partials,data) {
-    var stack1;
-
-  return "<input type=\"checkbox\" id=\"tdcssNavToggle\" aria-hidden=\"true\">\n<div class=\"tdcss-nav\">\n    <label for=\"tdcssNavToggle\" class=\"tdcss-nav__toggle\">\n        <span class=\"tdcss-nav__toggle-label\">groups</span>\n    </label>\n    <ul class=\"tdcss-menu\">\n"
-    + ((stack1 = helpers.each.call(depth0,(depth0 != null ? depth0.menuItems : depth0),{"name":"each","hash":{},"fn":this.program(1, data, 0),"inverse":this.noop,"data":data})) != null ? stack1 : "")
-    + "\n    </ul>\n</div>\n";
+module.exports = HandlebarsCompiler.template({"compiler":[6,">= 2.0.0-beta.1"],"main":function(depth0,helpers,partials,data) {
+    return "<input type=\"checkbox\" id=\"tdcssNavToggle\" aria-hidden=\"true\">\n<div class=\"tdcss-nav\">\n    <label for=\"tdcssNavToggle\" class=\"tdcss-nav__toggle\">\n        <span class=\"tdcss-nav__toggle-label\">groups</span>\n    </label>\n    <ul class=\"tdcss-menu\">\n        <li class=\"tdcss-menu__item\">\n            <a class=\"tdcss-menu__link\" href=\"#wip-javascript-test\">Item title</a>\n        </li>\n        <li>...</li>\n    </ul>\n</div>\n";
 },"useData":true});
 
-},{"hbsfy/runtime":37}],53:[function(require,module,exports){
+},{"hbsfy/runtime":37}],51:[function(require,module,exports){
 var _ = require('underscore');
 var TDCSSView = require('./tdcss-view');
 var FacetTypes = require ('../models/const.js');
@@ -21375,12 +21174,7 @@ module.exports = TDCSSView.extend({
     template: require('./tdcss-nav.hbs'),
 
     render: function() {
-        var menuData = this.collection.map(function (item) {
-            return item.toJSON();
-        });
-        var data = {
-            menuItems: menuData
-        };
+        var data = {};
 
         this.$el.append(this.template(data));
 
@@ -21389,13 +21183,13 @@ module.exports = TDCSSView.extend({
 
 });
 
-},{"../models/const.js":44,"./tdcss-nav.hbs":52,"./tdcss-view":54,"jquery":38,"underscore":40}],54:[function(require,module,exports){
+},{"../models/const.js":42,"./tdcss-nav.hbs":50,"./tdcss-view":52,"jquery":38,"underscore":40}],52:[function(require,module,exports){
 var Backbone = require('backbone');
 var Handlebars = require('handlebars');
 
 module.exports = Backbone.View.extend({
     render: function() {
-        var data = this.getTemplateData ? this.getTemplateData() : this.model.toJSON();
+        var data = this.getTemplateData ? this.getTemplateData() : this.model.attributes;
 
         this.$el.append(this.template(data));
         if (this.postRender) {
@@ -21405,4 +21199,4 @@ module.exports = Backbone.View.extend({
     }
 });
 
-},{"backbone":1,"handlebars":24}]},{},[46]);
+},{"backbone":1,"handlebars":24}]},{},[44]);

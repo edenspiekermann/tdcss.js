@@ -1,0 +1,20 @@
+.your-custom-header {
+  float: left;
+  width: 100%;
+
+  background-color: white;
+  color: #222;
+}
+
+.your-custom-header__title {
+  float: left;
+  margin: 0;
+}
+
+.your-custom-header__menu {
+  float: right;
+
+  a {
+    color: inherit;
+  }
+}

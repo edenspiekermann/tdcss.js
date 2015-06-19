@@ -1,0 +1,39 @@
+.tdcss-slab {
+  // padding-left: 20px;
+  // padding-right: 20px;
+}
+
+.tdcss-slab--group {
+  // padding-top: 15px;
+  // padding-bottom: 15px;
+}
+
+.tdcss-slab--description,
+.tdcss-slab--fragment {
+  // padding-top: 10px;
+  // padding-bottom: 10px;
+}
+
+
+
+
+
+.tdcss-slab--primary {
+  background-color: #f3f3f3;
+  color: #222;
+}
+
+.tdcss-slab--secondary {
+  background-color: white;
+  color: #222;
+}
+
+.tdcss-slab--inverted {
+  background-color: #222;
+  color: white;
+}
+
+.tdcss-slab--dimmed {
+  background-color: #f3f3f3;
+  color: #ccc;
+}
