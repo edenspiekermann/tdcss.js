@@ -98,7 +98,7 @@ var createFragmentFromComment = require('./dom_utils').createFragmentFromComment
         function setup() {
             $(module.container)
                 .addClass("tdcss-fragments")
-                .after('<div class="tdcss-elements"></div>');
+                .after('<div class="tdcss-elements tdcss-nav__neighbour"></div>');
         }
 
         function parse() {
