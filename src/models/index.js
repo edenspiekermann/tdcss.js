@@ -6,6 +6,7 @@ var Fragment = Backbone.Model.extend({
     defaults: {
         type: '',
         name: '',
+        description: '',
         wip: false
     },
 
