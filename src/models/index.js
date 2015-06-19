@@ -38,7 +38,6 @@ var Section = Fragment.extend({
             items = new Backbone.Collection(items);
 
             this.children = items;
-            debugger;
         }
 
     },
@@ -63,6 +62,7 @@ var Section = Fragment.extend({
 
     toJSON: function () {
         var data = _.clone(this.attributes);
+
         data = _.extend({
             href: this.toUniqueID()
         }, data);

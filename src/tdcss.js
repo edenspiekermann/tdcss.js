@@ -159,16 +159,16 @@ var createFragmentFromComment = require('./dom_utils').createFragmentFromComment
                     // jump_to_menu_options += '<option class="tdcss-jumpto-section" href="#' + encodeURIComponent(_spacesToLowerCasedHyphenated(fragment.section_name)) + '">' + fragment.section_name + '</option>';
                     // sectionCount++;
                 }
-                if (
-                    type === FragmentTypes.SNIPPET.name ||
-                    type === FragmentTypes.JS_SNIPPET.name ||
-                    type === FragmentTypes.COFFEE_SNIPPET.name) {
+                // if (
+                //     type === FragmentTypes.SNIPPET.name ||
+                //     type === FragmentTypes.JS_SNIPPET.name ||
+                //     type === FragmentTypes.COFFEE_SNIPPET.name) {
 
-                    view = new FragmentView({model: fragment});
-                    markup = $(view.render().el).html();
+                //     view = new FragmentView({model: fragment});
+                //     markup = $(view.render().el).html();
 
-                    $(module.container).next(".tdcss-elements").append(markup);
-                }
+                //     $(module.container).next(".tdcss-elements").append(markup);
+                // }
 
                 // if (fragment.type === "no_snippet") {
                 //     module.snippet_count++;
