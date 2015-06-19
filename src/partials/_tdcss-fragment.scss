@@ -12,9 +12,30 @@
   width: 100%;
 }
 
+
+.tdcss-fragment__toggle {
+  float: left;
+  border: 0;
+  background: transparent; 
+  margin: .5em;
+
+  &:before {
+    content:"\25b6";
+    display: inline-block;
+    font-size: .8em;
+    width: 10px;
+    vertical-align: text-top;
+  }
+  .is-fragment-details-expanded & {
+    &:before {
+      content:"\25bc";
+    }
+  }
+}
+
 .tdcss-fragment__title {
   margin: 0;
-  padding: .5em;
+  display: inline-block;
 }
 
 .tdcss-fragment__details {
@@ -22,6 +43,11 @@
   width: 100%;
   margin: 0;
   padding: .5em;
+
+  display: none;
+  .is-fragment-details-expanded & {
+    display: block;
+  }
 }
 
 .tdcss-fragment__preview {
