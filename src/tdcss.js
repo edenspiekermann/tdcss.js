@@ -98,7 +98,7 @@ var createFragmentFromComment = require('./dom_utils').createFragmentFromComment
         function setup() {
             $(module.container)
                 .addClass("tdcss-fragments")
-                .after('<div class="tdcss-elements"></div>');
+                .after('<div class="tdcss-elements tdcss-nav__neighbour"></div>');
         }
 
         function parse() {
@@ -120,6 +120,12 @@ var createFragmentFromComment = require('./dom_utils').createFragmentFromComment
                         module.fragments.add(fragment);
                     }
                 });
+
+                // populate the sections with their fragments
+                var sections = module.fragments.getSections();
+                _.each(sections, function (section) {
+                    section.getSectionFragments();
+                });
             }
 
 
@@ -137,8 +143,6 @@ var createFragmentFromComment = require('./dom_utils').createFragmentFromComment
         function renderBody() {
             var sectionCount = 0, insertBackToTop;
 
-
-
             module.fragments.each(function (fragment, index) {
                 var type = fragment.get('type');
                 var view;
@@ -155,16 +159,16 @@ var createFragmentFromComment = require('./dom_utils').createFragmentFromComment
                     // jump_to_menu_options += '<option class="tdcss-jumpto-section" href="#' + encodeURIComponent(_spacesToLowerCasedHyphenated(fragment.section_name)) + '">' + fragment.section_name + '</option>';
                     // sectionCount++;
                 }
-                if (
-                    type === FragmentTypes.SNIPPET.name ||
-                    type === FragmentTypes.JS_SNIPPET.name ||
-                    type === FragmentTypes.COFFEE_SNIPPET.name) {
+                // if (
+                //     type === FragmentTypes.SNIPPET.name ||
+                //     type === FragmentTypes.JS_SNIPPET.name ||
+                //     type === FragmentTypes.COFFEE_SNIPPET.name) {
 
-                    view = new FragmentView({model: fragment});
-                    markup = $(view.render().el).html();
+                //     view = new FragmentView({model: fragment});
+                //     markup = $(view.render().el).html();
 
-                    $(module.container).next(".tdcss-elements").append(markup);
-                }
+                //     $(module.container).next(".tdcss-elements").append(markup);
+                // }
 
                 // if (fragment.type === "no_snippet") {
                 //     module.snippet_count++;
