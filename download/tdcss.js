@@ -20293,7 +20293,179 @@ module.exports = {
     Fragments: Fragments
 }
 
-},{"../models/":43,"../models/const.js":42,"backbone":1}],42:[function(require,module,exports){
+},{"../models/":45,"../models/const.js":44,"backbone":1}],42:[function(require,module,exports){
+'use strict';
+
+module.exports = {
+    fragmentInfoSplitter: ";"
+}
+
+},{}],43:[function(require,module,exports){
+var $ = require('jquery');
+var jQuery = $;
+var _ = require('underscore');
+
+var FragmentTypes = require('../models/const.js');
+var config = require('../config');
+var fragmentInfoSplitter = config.fragmentInfoSplitter;
+
+// models
+var Models = require('../models');
+var Section = Models.Section;
+var Description = Models.Description;
+var CodeSnippet = Models.CodeSnippet;
+var JSCodeSnippet = Models.JSCodeSnippet;
+// collections
+var Fragments = require('../collections').Fragments;
+var Sections = require('../collections').Sections;
+
+
+function createFragmentFromComment(commentNode) {
+    var type = getFragmentType(commentNode);
+    var customHeight;
+    var fragmentTitle;
+    var fragmentDescription;
+    var fragment;
+    var fragmentHTML;
+    var rawScript;
+    var identifier;
+
+    if (type === FragmentTypes.SECTION.name) {
+        identifier = FragmentTypes[type].identifier;
+        fragmentTitle = getFragmentContent(commentNode, identifier);
+        return new Section({
+            type: type,
+            name: fragmentTitle
+        });
+    }
+
+    if (type === FragmentTypes.DESCRIPTION.name) {
+        identifier = FragmentTypes[type].identifier;
+        fragmentDescription = getFragmentContent(commentNode, identifier);
+
+        return new Description({
+            type: type,
+            description: fragmentDescription
+        });
+    }
+
+    if (type === FragmentTypes.SNIPPET.name) {
+        identifier = FragmentTypes[type].identifier;
+        fragmentTitle = getFragmentContent(commentNode, identifier);
+        customHeight = $.trim(getCommentMeta(commentNode)[1]);
+        fragmentHTML = getFragmentHTML(commentNode);
+
+        return new CodeSnippet({
+            type: type,
+            title: fragmentTitle,
+            html: fragmentHTML,
+            customHeight: customHeight
+        });
+
+    }
+
+    if (type === FragmentTypes.JS_SNIPPET.name) {
+        identifier = FragmentTypes[type].identifier;
+        fragmentTitle = getFragmentContent(commentNode, identifier);
+        rawScript = getFragmentScriptHTML(commentNode);
+        fragmentHTML = getFragmentHTML(commentNode);
+
+        return new JSCodeSnippet({
+            type: type,
+            title: fragmentTitle,
+            html: fragmentHTML,
+            rawScript: rawScript
+        });
+    }
+
+    if (type === FragmentTypes.COFFEE_SNIPPET.name) {
+        if (!window.CoffeeScript) {
+            throw new Error("Include CoffeeScript Compiler to evaluate CoffeeScript with tdcss.");
+        }
+        identifier = FragmentTypes[type].identifier;
+        fragmentTitle = getFragmentContent(commentNode, identifier);
+        rawScript = getFragmentScriptHTML(commentNode);
+        fragmentHTML = getFragmentHTML(commentNode);
+
+        return new JSCodeSnippet({
+            type: type,
+            title: fragmentTitle,
+            html: fragmentHTML,
+            rawScript: rawScript
+        });
+
+    }
+
+    if (type === FragmentTypes.NO_SNIPPET.name) {
+        identifier = FragmentTypes[type].identifier;
+        fragmentTitle = getFragmentContent(commentNode, identifier);
+        customHeight = $.trim(getCommentMeta(commentNode)[1]);
+        fragmentHTML = getFragmentHTML(commentNode);
+
+        return new CodeSnippet({
+            type: type,
+            title: fragmentTitle,
+            html: fragmentHTML,
+            customHeight: customHeight
+        });
+    }
+
+    // return undefined if no match is found
+    return undefined;
+}
+
+function getFragmentType(element) {
+    var foundType = "";
+    for (var fragmentType in FragmentTypes) {
+        if (FragmentTypes.hasOwnProperty(fragmentType)) {
+            var identifier = FragmentTypes[fragmentType].identifier;
+            if (element.nodeValue.match(new RegExp(identifier))) {
+                foundType = fragmentType;
+            }
+        }
+    }
+    return foundType;
+}
+
+function getFragmentContent(element, identifier) {
+    return $.trim(getCommentMeta(element)[0].split(identifier)[1]);
+}
+
+function getCommentMeta(element) {
+    return element.nodeValue.split(fragmentInfoSplitter);
+}
+
+function getFragmentScriptHTML(element) {
+    return $(element).nextAll('script[type="text/javascript"]').html();
+}
+
+function getFragmentCoffeeScriptHTML(element) {
+    return $(element).nextAll('script[type="text/coffeescript"]').html().trim();
+}
+
+function getFragmentHTML(element) {
+    // The actual HTML fragment is the comment's nextSibling (a carriage return)'s nextSibling:
+    var fragment = element.nextSibling.nextSibling;
+
+    // Check if nextSibling is a comment or a real html fragment to be rendered
+    if (fragment.nodeType !== 8) {
+        return fragment.outerHTML;
+    } else {
+        return null;
+    }
+}
+
+module.exports = {
+    createFragmentFromComment: createFragmentFromComment,
+    getFragmentType: getFragmentType,
+    getFragmentContent: getFragmentContent,
+    getCommentMeta: getCommentMeta,
+    getFragmentScriptHTML: getFragmentScriptHTML,
+    getFragmentCoffeeScriptHTML: getFragmentCoffeeScriptHTML,
+    getFragmentHTML: getFragmentHTML
+}
+
+},{"../collections":41,"../config":42,"../models":45,"../models/const.js":44,"jquery":38,"underscore":40}],44:[function(require,module,exports){
 var types = {
     SECTION: {
         name: 'SECTION',
@@ -20323,7 +20495,7 @@ var types = {
 
 module.exports = types;
 
-},{}],43:[function(require,module,exports){
+},{}],45:[function(require,module,exports){
 var Backbone = require('backbone');
 var _ = require('underscore');
 
@@ -20388,7 +20560,7 @@ module.exports = {
     JSCodeSnippet: JSCodeSnippet
 }
 
-},{"backbone":1,"underscore":40}],44:[function(require,module,exports){
+},{"backbone":1,"underscore":40}],46:[function(require,module,exports){
 /**
  * tdcss.js: Super-simple styleguide tool
  * MIT License http://www.opensource.org/licenses/mit-license.php/
@@ -20416,6 +20588,8 @@ var TDCSSElementsView = require('./views/tdcss-elements.js');
 var SectionView = require('./views/section.js');
 var FragmentView = require('./views/fragment.js');
 var NavigationView = require('./views/tdcss-nav.js');
+
+var createFragmentFromComment = require('./dom_utils').createFragmentFromComment;
 
 (function () {
     "use strict";
@@ -20461,7 +20635,6 @@ var NavigationView = require('./views/tdcss-nav.js');
             reset();
             setup();
             parse();
-            renderNavigation();
             render();
             bindSectionCollapseHandlers();
             restoreCollapsedSectionsFromUrl();
@@ -20518,142 +20691,149 @@ var NavigationView = require('./views/tdcss-nav.js');
 
 
 
-        function createFragmentFromComment(commentNode) {
-            var type = getFragmentType(commentNode);
-            var customHeight;
-            var fragmentTitle;
-            var fragmentDescription;
-            var fragment;
-            var fragmentHTML;
-            var rawScript;
-            var identifier;
+        // function createFragmentFromComment(commentNode) {
+        //     var type = getFragmentType(commentNode);
+        //     var customHeight;
+        //     var fragmentTitle;
+        //     var fragmentDescription;
+        //     var fragment;
+        //     var fragmentHTML;
+        //     var rawScript;
+        //     var identifier;
 
-            if (type === FragmentTypes.SECTION.name) {
-                identifier = FragmentTypes[type].identifier;
-                fragmentTitle = getFragmentContent(commentNode, identifier);
-                return new Section({
-                    type: type,
-                    name: fragmentTitle
-                });
-            }
+        //     if (type === FragmentTypes.SECTION.name) {
+        //         identifier = FragmentTypes[type].identifier;
+        //         fragmentTitle = getFragmentContent(commentNode, identifier);
+        //         return new Section({
+        //             type: type,
+        //             name: fragmentTitle
+        //         });
+        //     }
 
-            if (type === FragmentTypes.DESCRIPTION.name) {
-                identifier = FragmentTypes[type].identifier;
-                fragmentDescription = getFragmentContent(commentNode, identifier);
+        //     if (type === FragmentTypes.DESCRIPTION.name) {
+        //         identifier = FragmentTypes[type].identifier;
+        //         fragmentDescription = getFragmentContent(commentNode, identifier);
 
-                return new Description({
-                    type: type,
-                    description: fragmentDescription
-                });
-            }
+        //         return new Description({
+        //             type: type,
+        //             description: fragmentDescription
+        //         });
+        //     }
 
-            if (type === FragmentTypes.SNIPPET.name) {
-                identifier = FragmentTypes[type].identifier;
-                fragmentTitle = getFragmentContent(commentNode, identifier);
-                customHeight = $.trim(getCommentMeta(commentNode)[1]);
-                fragmentHTML = getFragmentHTML(commentNode);
+        //     if (type === FragmentTypes.SNIPPET.name) {
+        //         identifier = FragmentTypes[type].identifier;
+        //         fragmentTitle = getFragmentContent(commentNode, identifier);
+        //         customHeight = $.trim(getCommentMeta(commentNode)[1]);
+        //         fragmentHTML = getFragmentHTML(commentNode);
 
-                return new CodeSnippet({
-                    type: type,
-                    title: fragmentTitle,
-                    html: fragmentHTML,
-                    customHeight: customHeight
-                });
+        //         return new CodeSnippet({
+        //             type: type,
+        //             title: fragmentTitle,
+        //             html: fragmentHTML,
+        //             customHeight: customHeight
+        //         });
 
-            }
+        //     }
 
-            if (type === FragmentTypes.JS_SNIPPET.name) {
-                identifier = FragmentTypes[type].identifier;
-                fragmentTitle = getFragmentContent(commentNode, identifier);
-                rawScript = getFragmentScriptHTML(commentNode);
-                fragmentHTML = getFragmentHTML(commentNode);
+        //     if (type === FragmentTypes.JS_SNIPPET.name) {
+        //         identifier = FragmentTypes[type].identifier;
+        //         fragmentTitle = getFragmentContent(commentNode, identifier);
+        //         rawScript = getFragmentScriptHTML(commentNode);
+        //         fragmentHTML = getFragmentHTML(commentNode);
 
-                return new JSCodeSnippet({
-                    type: type,
-                    title: fragmentTitle,
-                    html: fragmentHTML,
-                    rawScript: rawScript
-                });
-            }
+        //         return new JSCodeSnippet({
+        //             type: type,
+        //             title: fragmentTitle,
+        //             html: fragmentHTML,
+        //             rawScript: rawScript
+        //         });
+        //     }
 
-            if (type === FragmentTypes.COFFEE_SNIPPET.name) {
-                if (!window.CoffeeScript) {
-                    throw new Error("Include CoffeeScript Compiler to evaluate CoffeeScript with tdcss.");
-                }
-                identifier = FragmentTypes[type].identifier;
-                fragmentTitle = getFragmentContent(commentNode, identifier);
-                rawScript = getFragmentScriptHTML(commentNode);
-                fragmentHTML = getFragmentHTML(commentNode);
+        //     if (type === FragmentTypes.COFFEE_SNIPPET.name) {
+        //         if (!window.CoffeeScript) {
+        //             throw new Error("Include CoffeeScript Compiler to evaluate CoffeeScript with tdcss.");
+        //         }
+        //         identifier = FragmentTypes[type].identifier;
+        //         fragmentTitle = getFragmentContent(commentNode, identifier);
+        //         rawScript = getFragmentScriptHTML(commentNode);
+        //         fragmentHTML = getFragmentHTML(commentNode);
 
-                return new JSCodeSnippet({
-                    type: type,
-                    title: fragmentTitle,
-                    html: fragmentHTML,
-                    rawScript: rawScript
-                });
+        //         return new JSCodeSnippet({
+        //             type: type,
+        //             title: fragmentTitle,
+        //             html: fragmentHTML,
+        //             rawScript: rawScript
+        //         });
 
-            }
+        //     }
 
-            if (type === FragmentTypes.NO_SNIPPET.name) {
-                identifier = FragmentTypes[type].identifier;
-                fragmentTitle = getFragmentContent(commentNode, identifier);
-                customHeight = $.trim(getCommentMeta(commentNode)[1]);
-                fragmentHTML = getFragmentHTML(commentNode);
+        //     if (type === FragmentTypes.NO_SNIPPET.name) {
+        //         identifier = FragmentTypes[type].identifier;
+        //         fragmentTitle = getFragmentContent(commentNode, identifier);
+        //         customHeight = $.trim(getCommentMeta(commentNode)[1]);
+        //         fragmentHTML = getFragmentHTML(commentNode);
 
-                return new CodeSnippet({
-                    type: type,
-                    title: fragmentTitle,
-                    html: fragmentHTML,
-                    customHeight: customHeight
-                });
-            }
+        //         return new CodeSnippet({
+        //             type: type,
+        //             title: fragmentTitle,
+        //             html: fragmentHTML,
+        //             customHeight: customHeight
+        //         });
+        //     }
 
-            // return undefined if no match is found
-            return undefined;
-        }
+        //     // return undefined if no match is found
+        //     return undefined;
+        // }
 
-        function getFragmentType(element) {
-            var foundType = "";
-            for (var fragmentType in FragmentTypes) {
-                if (FragmentTypes.hasOwnProperty(fragmentType)) {
-                    var identifier = FragmentTypes[fragmentType].identifier;
-                    if (element.nodeValue.match(new RegExp(identifier))) {
-                        foundType = fragmentType;
-                    }
-                }
-            }
-            return foundType;
-        }
+        // function getFragmentType(element) {
+        //     var foundType = "";
+        //     for (var fragmentType in FragmentTypes) {
+        //         if (FragmentTypes.hasOwnProperty(fragmentType)) {
+        //             var identifier = FragmentTypes[fragmentType].identifier;
+        //             if (element.nodeValue.match(new RegExp(identifier))) {
+        //                 foundType = fragmentType;
+        //             }
+        //         }
+        //     }
+        //     return foundType;
+        // }
 
-        function getFragmentContent(element, identifier) {
-            return $.trim(getCommentMeta(element)[0].split(identifier)[1]);
-        }
+        // function getFragmentContent(element, identifier) {
+        //     return $.trim(getCommentMeta(element)[0].split(identifier)[1]);
+        // }
 
-        function getCommentMeta(element) {
-            return element.nodeValue.split(settings.fragment_info_splitter);
-        }
+        // function getCommentMeta(element) {
+        //     return element.nodeValue.split(settings.fragment_info_splitter);
+        // }
 
-        function getFragmentScriptHTML(element) {
-            return $(element).nextAll('script[type="text/javascript"]').html();
-        }
+        // function getFragmentScriptHTML(element) {
+        //     return $(element).nextAll('script[type="text/javascript"]').html();
+        // }
 
-        function getFragmentCoffeeScriptHTML(element) {
-            return $(element).nextAll('script[type="text/coffeescript"]').html().trim();
-        }
+        // function getFragmentCoffeeScriptHTML(element) {
+        //     return $(element).nextAll('script[type="text/coffeescript"]').html().trim();
+        // }
 
-        function getFragmentHTML(element) {
-            // The actual HTML fragment is the comment's nextSibling (a carriage return)'s nextSibling:
-            var fragment = element.nextSibling.nextSibling;
+        // function getFragmentHTML(element) {
+        //     // The actual HTML fragment is the comment's nextSibling (a carriage return)'s nextSibling:
+        //     var fragment = element.nextSibling.nextSibling;
 
-            // Check if nextSibling is a comment or a real html fragment to be rendered
-            if (fragment.nodeType !== 8) {
-                return fragment.outerHTML;
-            } else {
-                return null;
-            }
-        }
+        //     // Check if nextSibling is a comment or a real html fragment to be rendered
+        //     if (fragment.nodeType !== 8) {
+        //         return fragment.outerHTML;
+        //     } else {
+        //         return null;
+        //     }
+        // }
+
+        // TODO: all of this is super hacky, should be moved into own view
 
         function render() {
+            renderNavigation();
+            renderBody();
+        }
+
+        function renderBody() {
             var sectionCount = 0, insertBackToTop;
 
 
@@ -21048,7 +21228,7 @@ var NavigationView = require('./views/tdcss-nav.js');
 
 window.$ = $;
 
-},{"./collections":41,"./models":43,"./models/const.js":42,"./views/fragment.js":46,"./views/section.js":48,"./views/tdcss-elements.js":49,"./views/tdcss-nav.js":51,"jquery":38,"prismjs":39,"underscore":40}],45:[function(require,module,exports){
+},{"./collections":41,"./dom_utils":43,"./models":45,"./models/const.js":44,"./views/fragment.js":48,"./views/section.js":50,"./views/tdcss-elements.js":51,"./views/tdcss-nav.js":53,"jquery":38,"prismjs":39,"underscore":40}],47:[function(require,module,exports){
 // hbsfy compiled Handlebars template
 var HandlebarsCompiler = require('hbsfy/runtime');
 module.exports = HandlebarsCompiler.template({"1":function(depth0,helpers,partials,data) {
@@ -21069,7 +21249,7 @@ module.exports = HandlebarsCompiler.template({"1":function(depth0,helpers,partia
     + "\n  </div>\n</div>\n";
 },"useData":true});
 
-},{"hbsfy/runtime":37}],46:[function(require,module,exports){
+},{"hbsfy/runtime":37}],48:[function(require,module,exports){
 var _ = require('underscore');
 var TDCSSView = require('./tdcss-view');
 var FacetTypes = require ('../models/const.js');
@@ -21123,7 +21303,7 @@ module.exports = TDCSSView.extend({
     },
 });
 
-},{"../models/const.js":42,"./fragment.hbs":45,"./tdcss-view":52,"jquery":38,"underscore":40}],47:[function(require,module,exports){
+},{"../models/const.js":44,"./fragment.hbs":47,"./tdcss-view":54,"jquery":38,"underscore":40}],49:[function(require,module,exports){
 // hbsfy compiled Handlebars template
 var HandlebarsCompiler = require('hbsfy/runtime');
 module.exports = HandlebarsCompiler.template({"compiler":[6,">= 2.0.0-beta.1"],"main":function(depth0,helpers,partials,data) {
@@ -21138,7 +21318,7 @@ module.exports = HandlebarsCompiler.template({"compiler":[6,">= 2.0.0-beta.1"],"
     + "\n    </div>\n  </header>\n\n  content\n\n  <div class=\"tdcss-top\">\n    <a class=\"tddcss-top-link\" href=\"#\">Back to Top</a>\n  </div>\n</section>\n";
 },"useData":true});
 
-},{"hbsfy/runtime":37}],48:[function(require,module,exports){
+},{"hbsfy/runtime":37}],50:[function(require,module,exports){
 var TDCSSView = require('./tdcss-view');
 
 module.exports = TDCSSView.extend({
@@ -21157,14 +21337,14 @@ module.exports = TDCSSView.extend({
     }
 });
 
-},{"./section.hbs":47,"./tdcss-view":52}],49:[function(require,module,exports){
+},{"./section.hbs":49,"./tdcss-view":54}],51:[function(require,module,exports){
 var Backbone = require('backbone');
 
 module.exports = Backbone.View.extend({
     className: 'tdcss-elements'
 });
 
-},{"backbone":1}],50:[function(require,module,exports){
+},{"backbone":1}],52:[function(require,module,exports){
 // hbsfy compiled Handlebars template
 var HandlebarsCompiler = require('hbsfy/runtime');
 module.exports = HandlebarsCompiler.template({"1":function(depth0,helpers,partials,data) {
@@ -21183,7 +21363,7 @@ module.exports = HandlebarsCompiler.template({"1":function(depth0,helpers,partia
     + "\n    </ul>\n</div>\n";
 },"useData":true});
 
-},{"hbsfy/runtime":37}],51:[function(require,module,exports){
+},{"hbsfy/runtime":37}],53:[function(require,module,exports){
 var _ = require('underscore');
 var TDCSSView = require('./tdcss-view');
 var FacetTypes = require ('../models/const.js');
@@ -21209,7 +21389,7 @@ module.exports = TDCSSView.extend({
 
 });
 
-},{"../models/const.js":42,"./tdcss-nav.hbs":50,"./tdcss-view":52,"jquery":38,"underscore":40}],52:[function(require,module,exports){
+},{"../models/const.js":44,"./tdcss-nav.hbs":52,"./tdcss-view":54,"jquery":38,"underscore":40}],54:[function(require,module,exports){
 var Backbone = require('backbone');
 var Handlebars = require('handlebars');
 
@@ -21225,4 +21405,4 @@ module.exports = Backbone.View.extend({
     }
 });
 
-},{"backbone":1,"handlebars":24}]},{},[44]);
+},{"backbone":1,"handlebars":24}]},{},[46]);
