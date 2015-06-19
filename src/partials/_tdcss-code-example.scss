@@ -1,12 +1,12 @@
 .tdcss-code-example {
-  padding: 1em;
-
   float: right;
   width: 50%;
 
-
   pre {
     min-height: 6em;
+    margin: 0;
+
+    height: auto !important;
   }
 
   :not(pre) > code[class*="language-"],

@@ -10,6 +10,7 @@
 
 // Import Component Styles
 @import 'partials/tdcss-code-example';
+@import 'partials/tdcss-dom-example';
 @import 'partials/tdcss-fragment';
 @import 'partials/tdcss-group';
 @import 'partials/tdcss-header';
@@ -99,12 +100,7 @@ body {
 	opacity: 0.5;
 }
 
-.tdcss-dom-example {
-	float: left;
-	position: relative;
-	width: 60%;
-	padding: 1em;
-}
+
 
 
 
