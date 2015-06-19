@@ -9,7 +9,7 @@ module.exports = function (grunt) {
     grunt.loadNpmTasks('grunt-browserify');
 
     // Default task.
-    grunt.registerTask('default', ['clean', 'jshint', 'browserify', 'karma', 'sass:watch', 'autoprefixer', 'watch']);
+    grunt.registerTask('default', ['clean', 'jshint', 'browserify', 'sass:watch', 'autoprefixer', 'watch']);
 
     // Build task.
     grunt.registerTask('build', ['clean', 'jshint', 'sass:dist', 'autoprefixer', 'karma']);
@@ -87,7 +87,7 @@ module.exports = function (grunt) {
                     src: ['**/*.css'],
                     dest: '<%= dirs.build %>',
                 }]
-            }            
+            }
         },
 
         browserify: {
