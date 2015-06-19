@@ -120,6 +120,12 @@ var createFragmentFromComment = require('./dom_utils').createFragmentFromComment
                         module.fragments.add(fragment);
                     }
                 });
+
+                // populate the sections with their fragments
+                var sections = module.fragments.getSections();
+                _.each(sections, function (section) {
+                    section.getSectionFragments();
+                });
             }
 
 
@@ -136,8 +142,6 @@ var createFragmentFromComment = require('./dom_utils').createFragmentFromComment
 
         function renderBody() {
             var sectionCount = 0, insertBackToTop;
-
-
 
             module.fragments.each(function (fragment, index) {
                 var type = fragment.get('type');

@@ -15,6 +15,16 @@ var Fragments = Backbone.Collection.extend({
         return this.filter(function (item) {
             return item.get('type') === Types.SECTION.name;
         });
+    },
+
+    getSectionIndex: function (section) {
+        var index;
+
+        if(section) {
+            index = this.indexOf(section);
+            return index;
+        }
+        return -1;
     }
 
 });
