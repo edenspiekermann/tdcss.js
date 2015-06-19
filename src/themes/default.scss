@@ -1,11 +1,10 @@
 @import url(http://fonts.googleapis.com/css?family=Raleway:400,700);
 
-@import 'tdcss-slab';
 @import 'tdcss-box';
-@import "your-custom-header";
+@import 'tdcss-nav';
+@import 'tdcss-slab';
+@import 'your-custom-header';
 
 .tdcss-font {
   font-family: 'Raleway', 'Helvetica', sans-serif;
 }
-
-

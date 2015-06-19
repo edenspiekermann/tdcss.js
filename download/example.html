@@ -22,12 +22,20 @@
 	</head>
 	<body>
 
-		<div class="tdcss-masthead tdcss-font">
-			
+		<header class="tdcss-masthead tdcss-font">
+
 			<div class="your-custom-header">
-				<h1 class="your-custom-header__title">tdcss.js demo</h1>
-				<nav class="your-custom-header__menu">
-					<a href="example.html" class="your-custom-header__link">example</a>
+				<h1 class="your-custom-header__title">TDCSS</h1>
+				<nav role="navigation" class="your-custom-header__nav">
+                    <ul class="your-custom-header__menu">
+                        <li class="your-custom-header__menu-item">
+                            <a href="#" class="your-custom-header__link tdcss-nav-item--primary">Colors</a>
+                        </li><li class="your-custom-header__menu-item">
+                            <a href="#" class="your-custom-header__link tdcss-nav-item--primary">Type</a>
+                        </li><li class="your-custom-header__menu-item">
+                            <a href="example.html" class="your-custom-header__link tdcss-nav-item--primary">Components</a>
+                        </li>
+                    </ul>
 				</nav>
 			</div>
 
@@ -37,7 +45,7 @@
 
 
 
-			<!-- 
+			<!--
 			  Hidden checkbox, responsible for the whole toggle thing
 			  Needs to be on top of the document, possibly right after opening `<body>`
 
@@ -45,42 +53,41 @@
 
 			  The `aria-hidden` attribute is for ARIA purpose, see: http://www.paciellogroup.com/blog/2012/05/html5-accessibility-chops-hidden-and-aria-hidden/
 			-->
-			<input 
-			   type="checkbox" 
-			   id="tdcssNavToggle" 
-			   aria-hidden="true">
-			<div class="tdcss-nav tdcss-box">
-				<label for="tdcssNavToggle" class="tdcss-nav__toggle" onclick><span class="tdcss-nav__toggle-label">groups</span></label>
+			<input  type="checkbox"  id="tdcssMenuToggle" aria-hidden="true">
+			<label for="tdcssMenuToggle" class="tdcss-nav__toggle tdcss-nav-toggle tdcss-nav-item--primary" onclick>
+                <span class="tdcss-nav__toggle-label">Groups</span>
+            </label>
+            <nav class="tdcss-nav tdcss-nav-border">
 				<ul class="tdcss-menu">
-					<li class="tdcss-menu__item">
-						<a class="tdcss-menu__link" href="#wip-javascript-test">WIP JavaScript Test</a>
+					<li class="tdcss-menu__item tdcss-nav-border">
+						<a class="tdcss-menu__link tdcss-nav-item--secondary" href="#wip-javascript-test">WIP JavaScript Test</a>
 					</li>
-					<li class="tdcss-menu__item">
-						<a class="tdcss-menu__link" href="#coffeescript-test">CoffeeScript Test</a>
+					<li class="tdcss-menu__item tdcss-nav-border">
+						<a class="tdcss-menu__link tdcss-nav-item--secondary" href="#coffeescript-test">CoffeeScript Test</a>
 					</li>
-					<li class="tdcss-menu__item">
-						<a class="tdcss-menu__link" href="#box-styles">Box styles</a>
+					<li class="tdcss-menu__item tdcss-nav-border">
+						<a class="tdcss-menu__link tdcss-nav-item--secondary" href="#box-styles">Box styles</a>
 					</li>
-					<li class="tdcss-menu__item typography">
-						<a class="tdcss-menu__link" href="#typography">Typography</a>
+					<li class="tdcss-menu__item tdcss-nav-border">
+						<a class="tdcss-menu__link tdcss-nav-item--secondary" href="#typography">Typography</a>
 						<ul class="tdcss-submenu">
 							<li class="tdcss-submenu__item">
-								<a href="#typography__headers">Headers</a>
+								<a href="#typography__headers" class="tdcss-nav-item--tertiary">Headers</a>
 							</li>
 							<li class="tdcss-submenu__item">
-								<a href="#typography__quotes">Quotes</a>
+								<a href="#typography__quotes" class="tdcss-nav-item--tertiary">Quotes</a>
 							</li>
 						</ul>
 					</li>
-					<li class="tdcss-menu__item">
-						<a class="tdcss-menu__link" href="#no-snippet">No Snippet</a>
+					<li class="tdcss-menu__item tdcss-nav-border">
+						<a class="tdcss-menu__link tdcss-nav-item--secondary" href="#no-snippet">No Snippet</a>
 					</li>
-					<li class="tdcss-menu__item">
-						<a class="tdcss-menu__link" href="#custom-height">Custom height</a>
+					<li class="tdcss-menu__item tdcss-nav-border">
+						<a class="tdcss-menu__link tdcss-nav-item--secondary" href="#custom-height">Custom height</a>
 					</li>
 				</ul>
-			</div>
-		</div>
+			</nav>
+		</header>
 
 		<main class="tdcss-main tdcss-nav__neighbour" role="main">
 			<div class="tdcss-elements">
@@ -297,7 +304,7 @@
 					</div>
 				</div>
 			</div>
-		</div>
-		
+		</main>
+
 	</body>
 </html>

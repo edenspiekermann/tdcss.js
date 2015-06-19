@@ -1,20 +1,44 @@
-.your-custom-header {
-  float: left;
-  width: 100%;
+@import '../config/variables';
 
-  background-color: white;
-  color: #222;
+.your-custom-header * {
+  box-sizing: border-box;
+}
+
+.your-custom-header {
+  height: $header-height;
+  line-height: $header-height;
+  padding-left: 16px;
+  padding-right: 16px;
+  overflow-y: hidden;
+
+  background-color: #111;
+  color: white;
 }
 
 .your-custom-header__title {
   float: left;
   margin: 0;
+  font-size: 1.5em;
+}
+
+.your-custom-header__nav {
+  float: right;
 }
 
 .your-custom-header__menu {
-  float: right;
+  margin-top: 0;
+  margin-bottom: 0;
+  list-style: none;
+}
+
+.your-custom-header__menu-item {
+  display: inline-block;
 
   a {
+    display: block;
+    padding-left: 24px;
+    padding-right: 24px;
+    text-decoration: none;
     color: inherit;
   }
 }

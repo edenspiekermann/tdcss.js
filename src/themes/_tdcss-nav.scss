@@ -1,0 +1,39 @@
+.tdcss-nav {
+  background-color: white;
+}
+
+.tdcss-nav-border {
+  border-color: #f3f3f3;
+}
+
+.tdcss-nav-item--primary {
+  color: white;
+
+  &:hover,
+  &:active,
+  &:focus {
+    background-color: #00b4f1;
+  }
+}
+
+.tdcss-nav-item--secondary {
+  color: #00b4f1;
+
+  &:hover,
+  &:active,
+  &:focus {
+    color: white;
+    background-color: #00b4f1;
+  }
+}
+
+.tdcss-nav-item--tertiary {
+  color: #333;
+
+  &:hover,
+  &:active,
+  &:focus {
+    color: #00b4f1;
+  }
+}
+

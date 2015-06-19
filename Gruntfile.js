@@ -92,15 +92,11 @@ module.exports = function (grunt) {
 
         browserify: {
             client: {
-                src: ['src/tdcss.js'],
-                dest: 'download/tdcss.js',
+                src: ['<%= dirs.source %>/tdcss.js'],
+                dest: '<%= dirs.build %>/tdcss.js',
                 options: {
                     transform: ['hbsfy'],
-                    banner: '/* <%= pkg.title || pkg.name %> - v<%= pkg.version %> - ' +
-                        '<%= grunt.template.today("yyyy-mm-dd") %>\n' +
-                        '<%= pkg.homepage ? "* " + pkg.homepage + "\\n" : "" %>' +
-                        '* Copyright (c) <%= grunt.template.today("yyyy") %> <%= pkg.author %>;\n' +
-                        '* License: <%= pkg.license %> */\n\n\n',
+                    banner: '<%= banner %>',
                 }
             }
         },
