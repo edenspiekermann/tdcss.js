@@ -20332,7 +20332,7 @@ function createFragmentFromComment(commentNode) {
     var type = getFragmentType(commentNode);
     var customHeight;
     var fragmentTitle;
-    var fragmentDescription;
+    var description;
     var fragment;
     var fragmentHTML;
     var rawScript;
@@ -20341,33 +20341,36 @@ function createFragmentFromComment(commentNode) {
     if (type === FragmentTypes.SECTION.name) {
         identifier = FragmentTypes[type].identifier;
         fragmentTitle = getFragmentContent(commentNode, identifier);
+        description = $.trim(getCommentMeta(commentNode)[1]);
+
         return new Section({
             type: type,
-            name: fragmentTitle
+            name: fragmentTitle,
+            description: description
         });
     }
 
     if (type === FragmentTypes.DESCRIPTION.name) {
         identifier = FragmentTypes[type].identifier;
-        fragmentDescription = getFragmentContent(commentNode, identifier);
+        description = getFragmentContent(commentNode, identifier);
 
         return new Description({
             type: type,
-            description: fragmentDescription
+            description: description
         });
     }
 
     if (type === FragmentTypes.SNIPPET.name) {
         identifier = FragmentTypes[type].identifier;
         fragmentTitle = getFragmentContent(commentNode, identifier);
-        customHeight = $.trim(getCommentMeta(commentNode)[1]);
+        description = $.trim(getCommentMeta(commentNode)[1]);
         fragmentHTML = getFragmentHTML(commentNode);
 
         return new CodeSnippet({
             type: type,
             title: fragmentTitle,
             html: fragmentHTML,
-            customHeight: customHeight
+            description: description
         });
 
     }
@@ -20377,12 +20380,14 @@ function createFragmentFromComment(commentNode) {
         fragmentTitle = getFragmentContent(commentNode, identifier);
         rawScript = getFragmentScriptHTML(commentNode);
         fragmentHTML = getFragmentHTML(commentNode);
+        description = $.trim(getCommentMeta(commentNode)[1]);
 
         return new JSCodeSnippet({
             type: type,
             title: fragmentTitle,
             html: fragmentHTML,
-            rawScript: rawScript
+            rawScript: rawScript,
+            description: description
         });
     }
 
@@ -20394,12 +20399,14 @@ function createFragmentFromComment(commentNode) {
         fragmentTitle = getFragmentContent(commentNode, identifier);
         rawScript = getFragmentScriptHTML(commentNode);
         fragmentHTML = getFragmentHTML(commentNode);
+        description = $.trim(getCommentMeta(commentNode)[1]);
 
         return new JSCodeSnippet({
             type: type,
             title: fragmentTitle,
             html: fragmentHTML,
-            rawScript: rawScript
+            rawScript: rawScript,
+            description: description
         });
 
     }
@@ -20407,14 +20414,14 @@ function createFragmentFromComment(commentNode) {
     if (type === FragmentTypes.NO_SNIPPET.name) {
         identifier = FragmentTypes[type].identifier;
         fragmentTitle = getFragmentContent(commentNode, identifier);
-        customHeight = $.trim(getCommentMeta(commentNode)[1]);
+        description = $.trim(getCommentMeta(commentNode)[1]);
         fragmentHTML = getFragmentHTML(commentNode);
 
         return new CodeSnippet({
             type: type,
             title: fragmentTitle,
             html: fragmentHTML,
-            customHeight: customHeight
+            description: description
         });
     }
 
@@ -20512,6 +20519,7 @@ var Fragment = Backbone.Model.extend({
     defaults: {
         type: '',
         name: '',
+        description: '',
         wip: false
     },
 
@@ -20635,6 +20643,7 @@ var TDCSSElementsView = require('./views/tdcss-elements.js');
 var SectionView = require('./views/section.js');
 var FragmentView = require('./views/fragment.js');
 var NavigationView = require('./views/tdcss-nav.js');
+var HeaderView = require('./views/tdcss-masthead.js');
 
 var createFragmentFromComment = require('./dom_utils').createFragmentFromComment;
 
@@ -20686,7 +20695,6 @@ var createFragmentFromComment = require('./dom_utils').createFragmentFromComment
             bindSectionCollapseHandlers();
             restoreCollapsedSectionsFromUrl();
             highlightSyntax();
-            //makeTopBar();
 
             if (settings.diff) {
                 diff();
@@ -20746,6 +20754,7 @@ var createFragmentFromComment = require('./dom_utils').createFragmentFromComment
         // TODO: all of this is super hacky, should be moved into own view
 
         function render() {
+            renderHeader();
             renderNavigation();
             renderBody();
         }
@@ -20797,6 +20806,12 @@ var createFragmentFromComment = require('./dom_utils').createFragmentFromComment
             var navigationView = new NavigationView({collection: sections});
             var navigationMarkup = navigationView.render().$el.html();
             $('#nav-container').append(navigationMarkup);
+        }
+
+        function renderHeader() {
+            var headerView = new HeaderView();
+            var headerMarkup = headerView.render().$el.html();
+            $('body').prepend(headerMarkup);
         }
 
         function _spacesToLowerCasedHyphenated(str) {
@@ -21143,7 +21158,7 @@ var createFragmentFromComment = require('./dom_utils').createFragmentFromComment
 
 window.$ = $;
 
-},{"./collections":40,"./dom_utils":42,"./models":44,"./models/const.js":43,"./views/fragment.js":47,"./views/section.js":49,"./views/tdcss-elements.js":50,"./views/tdcss-nav.js":52,"jquery":37,"prismjs":38,"underscore":39}],46:[function(require,module,exports){
+},{"./collections":40,"./dom_utils":42,"./models":44,"./models/const.js":43,"./views/fragment.js":47,"./views/section.js":49,"./views/tdcss-elements.js":50,"./views/tdcss-masthead.js":52,"./views/tdcss-nav.js":54,"jquery":37,"prismjs":38,"underscore":39}],46:[function(require,module,exports){
 // hbsfy compiled Handlebars template
 var HandlebarsCompiler = require('hbsfy/runtime');
 module.exports = HandlebarsCompiler.template({"1":function(depth0,helpers,partials,data) {
@@ -21153,13 +21168,15 @@ module.exports = HandlebarsCompiler.template({"1":function(depth0,helpers,partia
     + this.escapeExpression(((helper = (helper = helpers.html || (depth0 != null ? depth0.html : depth0)) != null ? helper : helpers.helperMissing),(typeof helper === "function" ? helper.call(depth0,{"name":"html","hash":{},"data":data}) : helper)))
     + "\n          </code>\n        </pre>\n      </div>\n";
 },"compiler":[6,">= 2.0.0-beta.1"],"main":function(depth0,helpers,partials,data) {
-    var stack1, helper, alias1=helpers.helperMissing, alias2="function";
+    var stack1, helper, alias1=helpers.helperMissing, alias2="function", alias3=this.escapeExpression;
 
   return "<div class=\"tdcss-fragment tdcss-box tdcss-box--fragment tdcss-slab--primary\" id=\"fragment-1\">\n  <div class=\"tdcss-fragment__head tdcss-font\">\n    <button type=\"button\" class=\"tdcss-fragment__toggle\" onclick=\" this.parentNode.parentNode.classList.contains('is-fragment-details-expanded')?this.parentNode.parentNode.classList.remove('is-fragment-details-expanded'):this.parentNode.parentNode.classList.add('is-fragment-details-expanded'); return false;\" >\n      <h3 class=\"tdcss-fragment__title\">"
-    + this.escapeExpression(((helper = (helper = helpers.title || (depth0 != null ? depth0.title : depth0)) != null ? helper : alias1),(typeof helper === alias2 ? helper.call(depth0,{"name":"title","hash":{},"data":data}) : helper)))
+    + alias3(((helper = (helper = helpers.title || (depth0 != null ? depth0.title : depth0)) != null ? helper : alias1),(typeof helper === alias2 ? helper.call(depth0,{"name":"title","hash":{},"data":data}) : helper)))
     + "</h3>\n    </button>\n    \n    <div class=\"tdcss-fragment__details\">\n"
     + ((stack1 = helpers['if'].call(depth0,(depth0 != null ? depth0.renderSnippet : depth0),{"name":"if","hash":{},"fn":this.program(1, data, 0),"inverse":this.noop,"data":data})) != null ? stack1 : "")
-    + "\n      these are details\n\n    </div>\n  </div>\n  <div class=\"tdcss-fragment__preview tdcss-slab tdcss-slab--secondary\">\n    <div class=\"tdcss-dom-example\">\n      "
+    + "\n      "
+    + alias3(((helper = (helper = helpers.description || (depth0 != null ? depth0.description : depth0)) != null ? helper : alias1),(typeof helper === alias2 ? helper.call(depth0,{"name":"description","hash":{},"data":data}) : helper)))
+    + "\n\n    </div>\n  </div>\n  <div class=\"tdcss-fragment__preview tdcss-slab tdcss-slab--secondary\">\n    <div class=\"tdcss-dom-example\">\n      "
     + ((stack1 = ((helper = (helper = helpers.html || (depth0 != null ? depth0.html : depth0)) != null ? helper : alias1),(typeof helper === alias2 ? helper.call(depth0,{"name":"html","hash":{},"data":data}) : helper))) != null ? stack1 : "")
     + "\n    </div>\n  </div>\n</div>\n";
 },"useData":true});
@@ -21218,7 +21235,7 @@ module.exports = TDCSSView.extend({
     },
 });
 
-},{"../models/const.js":43,"./fragment.hbs":46,"./tdcss-view":53,"jquery":37,"underscore":39}],48:[function(require,module,exports){
+},{"../models/const.js":43,"./fragment.hbs":46,"./tdcss-view":55,"jquery":37,"underscore":39}],48:[function(require,module,exports){
 // hbsfy compiled Handlebars template
 var HandlebarsCompiler = require('hbsfy/runtime');
 module.exports = HandlebarsCompiler.template({"compiler":[6,">= 2.0.0-beta.1"],"main":function(depth0,helpers,partials,data) {
@@ -21229,7 +21246,7 @@ module.exports = HandlebarsCompiler.template({"compiler":[6,">= 2.0.0-beta.1"],"
     + "\">\n  <header class=\"tdcss-group__head tdcss-font\">\n    <h1 class=\"tdcss-group__title\">"
     + alias3(((helper = (helper = helpers.name || (depth0 != null ? depth0.name : depth0)) != null ? helper : alias1),(typeof helper === alias2 ? helper.call(depth0,{"name":"name","hash":{},"data":data}) : helper)))
     + "</h1>\n    <div class=\"tdcss-group__description tdcss-slab tdcss-slab--description tdcss-slab--dimmed tdcss-font\">\n      "
-    + alias3(((helper = (helper = helpers.text || (depth0 != null ? depth0.text : depth0)) != null ? helper : alias1),(typeof helper === alias2 ? helper.call(depth0,{"name":"text","hash":{},"data":data}) : helper)))
+    + alias3(((helper = (helper = helpers.description || (depth0 != null ? depth0.description : depth0)) != null ? helper : alias1),(typeof helper === alias2 ? helper.call(depth0,{"name":"description","hash":{},"data":data}) : helper)))
     + "\n    </div>\n  </header>\n\n  "
     + ((stack1 = ((helper = (helper = helpers.content || (depth0 != null ? depth0.content : depth0)) != null ? helper : alias1),(typeof helper === alias2 ? helper.call(depth0,{"name":"content","hash":{},"data":data}) : helper))) != null ? stack1 : "")
     + "\n\n  <div class=\"tdcss-group__to-top\">\n    <a class=\"tdcss-group__to-top-link\" href=\"#\">Back to Top</a>\n  </div>\n</section>\n";
@@ -21252,7 +21269,7 @@ module.exports = TDCSSView.extend({
 
     render: function() {
         var data = this.getTemplateData ? this.getTemplateData() : this.model.toJSON();
-        data.content = this.renderChildren();
+        data.content = this.renderChildren().join('\n');
         this.$el.append(this.template(data));
         if (this.postRender) {
             this.postRender();
@@ -21274,7 +21291,7 @@ module.exports = TDCSSView.extend({
     }
 });
 
-},{"./fragment":47,"./section.hbs":48,"./tdcss-view":53}],50:[function(require,module,exports){
+},{"./fragment":47,"./section.hbs":48,"./tdcss-view":55}],50:[function(require,module,exports){
 var Backbone = require('backbone');
 
 module.exports = Backbone.View.extend({
@@ -21282,6 +21299,33 @@ module.exports = Backbone.View.extend({
 });
 
 },{"backbone":1}],51:[function(require,module,exports){
+// hbsfy compiled Handlebars template
+var HandlebarsCompiler = require('hbsfy/runtime');
+module.exports = HandlebarsCompiler.template({"compiler":[6,">= 2.0.0-beta.1"],"main":function(depth0,helpers,partials,data) {
+    return "<header class=\"tdcss-masthead tdcss-font\">\n  <div class=\"your-custom-header\">\n    <h1 class=\"your-custom-header__title\">TDCSS</h1>\n    <nav role=\"navigation\" class=\"your-custom-header__nav\">\n        <ul class=\"your-custom-header__menu\">\n            <li class=\"your-custom-header__menu-item\">\n                <a href=\"#\" class=\"your-custom-header__link tdcss-nav-item--primary\">Colors</a>\n            </li><li class=\"your-custom-header__menu-item\">\n                <a href=\"#\" class=\"your-custom-header__link tdcss-nav-item--primary\">Type</a>\n            </li><li class=\"your-custom-header__menu-item\">\n                <a href=\"example.html\" class=\"your-custom-header__link tdcss-nav-item--primary\">Components</a>\n            </li>\n        </ul>\n    </nav>\n  </div>\n  <div id=\"nav-container\"></div>\n</header>\n";
+},"useData":true});
+
+},{"hbsfy/runtime":36}],52:[function(require,module,exports){
+var Backbone = require('backbone');
+var _ = require('underscore');
+var $ = require('jquery');
+
+
+module.exports = Backbone.View.extend({
+    className: "tdcss-masthead",
+    template: require('./tdcss-masthead.hbs'),
+
+    render: function() {
+        var data = {};
+
+        this.$el.append(this.template(data));
+
+        return this;
+    }
+
+});
+
+},{"./tdcss-masthead.hbs":51,"backbone":1,"jquery":37,"underscore":39}],53:[function(require,module,exports){
 // hbsfy compiled Handlebars template
 var HandlebarsCompiler = require('hbsfy/runtime');
 module.exports = HandlebarsCompiler.template({"1":function(depth0,helpers,partials,data) {
@@ -21300,7 +21344,7 @@ module.exports = HandlebarsCompiler.template({"1":function(depth0,helpers,partia
     + "    </ul>\n</div>\n";
 },"useData":true});
 
-},{"hbsfy/runtime":36}],52:[function(require,module,exports){
+},{"hbsfy/runtime":36}],54:[function(require,module,exports){
 var _ = require('underscore');
 var TDCSSView = require('./tdcss-view');
 var FacetTypes = require ('../models/const.js');
@@ -21326,7 +21370,7 @@ module.exports = TDCSSView.extend({
 
 });
 
-},{"../models/const.js":43,"./tdcss-nav.hbs":51,"./tdcss-view":53,"jquery":37,"underscore":39}],53:[function(require,module,exports){
+},{"../models/const.js":43,"./tdcss-nav.hbs":53,"./tdcss-view":55,"jquery":37,"underscore":39}],55:[function(require,module,exports){
 var Backbone = require('backbone');
 var Handlebars = require('handlebars');
 

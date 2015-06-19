@@ -25,6 +25,7 @@ var TDCSSElementsView = require('./views/tdcss-elements.js');
 var SectionView = require('./views/section.js');
 var FragmentView = require('./views/fragment.js');
 var NavigationView = require('./views/tdcss-nav.js');
+var HeaderView = require('./views/tdcss-masthead.js');
 
 var createFragmentFromComment = require('./dom_utils').createFragmentFromComment;
 
@@ -76,7 +77,6 @@ var createFragmentFromComment = require('./dom_utils').createFragmentFromComment
             bindSectionCollapseHandlers();
             restoreCollapsedSectionsFromUrl();
             highlightSyntax();
-            //makeTopBar();
 
             if (settings.diff) {
                 diff();
@@ -136,6 +136,7 @@ var createFragmentFromComment = require('./dom_utils').createFragmentFromComment
         // TODO: all of this is super hacky, should be moved into own view
 
         function render() {
+            renderHeader();
             renderNavigation();
             renderBody();
         }
@@ -187,6 +188,12 @@ var createFragmentFromComment = require('./dom_utils').createFragmentFromComment
             var navigationView = new NavigationView({collection: sections});
             var navigationMarkup = navigationView.render().$el.html();
             $('#nav-container').append(navigationMarkup);
+        }
+
+        function renderHeader() {
+            var headerView = new HeaderView();
+            var headerMarkup = headerView.render().$el.html();
+            $('body').prepend(headerMarkup);
         }
 
         function _spacesToLowerCasedHyphenated(str) {
