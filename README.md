@@ -1,3 +1,9 @@
+About this fork:
+================
+
+At ESPI we really like this dead simple tool to build living styleguides in the client. As part of our latest Maker Days, on June 18-19th, a small team of us wanted to contribute back with some of the feedback we received while using the tool in our daily work. We got a little ambitious for 1.5 days of work (classic), so we are still in progress and not quite ready to merge back yet. If you'd like to have a peek at the current state, you can get the latest version on the branch that we lovingly named "backboneify-new-wraps"
+
+
 [![Build Status](https://travis-ci.org/jakobloekke/tdcss.js.png?branch=master)](https://travis-ci.org/jakobloekke/tdcss.js)
 
 tdcss.js - Super simple styleguide tool
