@@ -13,11 +13,13 @@ var _ = require('underscore');
 // models
 var FragmentTypes = require('./models/const.js');
 var Models = require('./models');
+var Page = Models.Page;
 var Section = Models.Section;
 var Description = Models.Description;
 var CodeSnippet = Models.CodeSnippet;
 var JSCodeSnippet = Models.JSCodeSnippet;
 // collections
+var Pages = require('./collections').Pages;
 var Fragments = require('./collections').Fragments;
 var Sections = require('./collections').Sections;
 // views
@@ -192,7 +194,8 @@ var createFragmentFromComment = require('./dom_utils').createFragmentFromComment
         }
 
         function renderHeader() {
-            var headerView = new HeaderView();
+            var pages = new Pages(settings.mainMenuItems);
+            var headerView = new HeaderView({collection: pages});
             var headerMarkup = headerView.render().$el.html();
             $('body').prepend(headerMarkup);
         }

@@ -1,6 +1,12 @@
 var Backbone = require('backbone');
 var _ = require('underscore');
 
+var Page = Backbone.Model.extend({
+    defaults: {
+        name: 'index',
+        href: 'index.html'
+    }
+});
 
 var Fragment = Backbone.Model.extend({
     defaults: {
@@ -95,6 +101,7 @@ var Description = Fragment.extend({
 });
 
 module.exports = {
+    Page: Page,
     Fragment: Fragment,
     Section: Section,
     Description: Description,

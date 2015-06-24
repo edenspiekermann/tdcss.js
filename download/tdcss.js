@@ -20269,9 +20269,14 @@ arguments[4][2][0].apply(exports,arguments)
 },{"dup":2}],41:[function(require,module,exports){
 var Backbone = require('backbone');
 var Types = require('../models/const.js');
+var Page = require('../models/').Page;
 var Section = require('../models/').Section;
 var Fragment = require('../models/').Fragment;
 
+
+var Pages = Backbone.Collection.extend({
+    model: Page
+});
 
 var Sections = Backbone.Collection.extend({
     model: Section
@@ -20299,6 +20304,7 @@ var Fragments = Backbone.Collection.extend({
 });
 
 module.exports = {
+    Pages: Pages,
     Sections: Sections,
     Fragments: Fragments
 }
@@ -20518,6 +20524,12 @@ module.exports = types;
 var Backbone = require('backbone');
 var _ = require('underscore');
 
+var Page = Backbone.Model.extend({
+    defaults: {
+        name: 'index',
+        href: 'index.html'
+    }
+});
 
 var Fragment = Backbone.Model.extend({
     defaults: {
@@ -20612,6 +20624,7 @@ var Description = Fragment.extend({
 });
 
 module.exports = {
+    Page: Page,
     Fragment: Fragment,
     Section: Section,
     Description: Description,
@@ -20635,11 +20648,14 @@ var _ = require('underscore');
 // models
 var FragmentTypes = require('./models/const.js');
 var Models = require('./models');
+var Page = Models.Page;
+var Pages = Models.Pages;
 var Section = Models.Section;
 var Description = Models.Description;
 var CodeSnippet = Models.CodeSnippet;
 var JSCodeSnippet = Models.JSCodeSnippet;
 // collections
+var Pages = require('./collections').Pages;
 var Fragments = require('./collections').Fragments;
 var Sections = require('./collections').Sections;
 // views
@@ -20814,7 +20830,8 @@ var createFragmentFromComment = require('./dom_utils').createFragmentFromComment
         }
 
         function renderHeader() {
-            var headerView = new HeaderView();
+            var pages = new Pages(settings.mainMenuItems);
+            var headerView = new HeaderView({collection: pages});
             var headerMarkup = headerView.render().$el.html();
             $('body').prepend(headerMarkup);
         }
@@ -21307,8 +21324,20 @@ module.exports = Backbone.View.extend({
 },{"backbone":1}],52:[function(require,module,exports){
 // hbsfy compiled Handlebars template
 var HandlebarsCompiler = require('hbsfy/runtime');
-module.exports = HandlebarsCompiler.template({"compiler":[6,">= 2.0.0-beta.1"],"main":function(depth0,helpers,partials,data) {
-    return "<input type=\"checkbox\" id=\"tdcssMenuToggle\" aria-hidden=\"true\">\n<header class=\"tdcss-header tdcss-font\">\n    <input type=\"checkbox\" id=\"tdcssSectionsToggle\" aria-hidden=\"true\">\n    <nav role=\"navigation\" class=\"tdcss-sections\">\n        <ul class=\"tdcss-mainmenu\">\n            <li class=\"tdcss-mainmenu__item tdcss-nav-border\">\n                <a href=\"index.html\" class=\"tdcss-nav-item--primary\">Basic</a>\n            </li><li class=\"tdcss-mainmenu__item tdcss-nav-border\">\n                <a href=\"components.html\" class=\"tdcss-nav-item--primary\">Components</a>\n            </li>\n        </ul>\n    </nav>\n    <label for=\"tdcssSectionsToggle\" class=\"tdcss-sections__toggle tdcss-nav-item--primary\">\n        <span class=\"tdcss-nav__toggle-label\">Sections</span>\n    </label>\n    <label for=\"tdcssMenuToggle\" class=\"tdcss-nav__toggle tdcss-nav-item--primary\">\n        <span class=\"tdcss-nav__toggle-label\">Groups</span>\n    </label>\n    <h1 class=\"tdcss-header__title\">TDCSS</h1>\n    <div class=\"nav-container\"></div>\n</header>\n";
+module.exports = HandlebarsCompiler.template({"1":function(depth0,helpers,partials,data) {
+    var alias1=this.lambda, alias2=this.escapeExpression;
+
+  return "                <li class=\"tdcss-mainmenu__item tdcss-nav-border\">\n                    <a class=\"tdcss-nav-item--primary\" href=\""
+    + alias2(alias1((depth0 != null ? depth0.href : depth0), depth0))
+    + "\">"
+    + alias2(alias1((depth0 != null ? depth0.name : depth0), depth0))
+    + "</a>\n                </li>\n";
+},"compiler":[6,">= 2.0.0-beta.1"],"main":function(depth0,helpers,partials,data) {
+    var stack1;
+
+  return "<input type=\"checkbox\" id=\"tdcssMenuToggle\" aria-hidden=\"true\">\n<header class=\"tdcss-header tdcss-font\">\n    <input type=\"checkbox\" id=\"tdcssSectionsToggle\" aria-hidden=\"true\">\n    <nav role=\"navigation\" class=\"tdcss-sections\">\n        <ul class=\"tdcss-mainmenu\">\n"
+    + ((stack1 = helpers.each.call(depth0,(depth0 != null ? depth0.mainMenuItems : depth0),{"name":"each","hash":{},"fn":this.program(1, data, 0),"inverse":this.noop,"data":data})) != null ? stack1 : "")
+    + "        </ul>\n    </nav>\n    <label for=\"tdcssSectionsToggle\" class=\"tdcss-sections__toggle tdcss-nav-item--primary\">\n        <span class=\"tdcss-nav__toggle-label\">Sections</span>\n    </label>\n    <label for=\"tdcssMenuToggle\" class=\"tdcss-nav__toggle tdcss-nav-item--primary\">\n        <span class=\"tdcss-nav__toggle-label\">Groups</span>\n    </label>\n    <h1 class=\"tdcss-header__title\">TDCSS</h1>\n    <div class=\"nav-container\"></div>\n</header>\n";
 },"useData":true});
 
 },{"hbsfy/runtime":37}],53:[function(require,module,exports){
@@ -21322,7 +21351,14 @@ module.exports = Backbone.View.extend({
     template: require('./tdcss-header.hbs'),
 
     render: function() {
-        var data = {};
+        var mainMenuData = this.collection.map(function (item) {
+            return item.toJSON();
+        });
+        var data = {
+          mainMenuItems: mainMenuData
+        };
+
+        // debugger
 
         this.$el.append(this.template(data));
 

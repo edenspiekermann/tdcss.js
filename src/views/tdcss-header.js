@@ -8,7 +8,12 @@ module.exports = Backbone.View.extend({
     template: require('./tdcss-header.hbs'),
 
     render: function() {
-        var data = {};
+        var mainMenuData = this.collection.map(function (item) {
+            return item.toJSON();
+        });
+        var data = {
+          mainMenuItems: mainMenuData
+        };
 
         this.$el.append(this.template(data));
 

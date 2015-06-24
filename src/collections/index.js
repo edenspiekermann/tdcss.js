@@ -1,8 +1,13 @@
 var Backbone = require('backbone');
 var Types = require('../models/const.js');
+var Page = require('../models/').Page;
 var Section = require('../models/').Section;
 var Fragment = require('../models/').Fragment;
 
+
+var Pages = Backbone.Collection.extend({
+    model: Page
+});
 
 var Sections = Backbone.Collection.extend({
     model: Section
@@ -30,6 +35,7 @@ var Fragments = Backbone.Collection.extend({
 });
 
 module.exports = {
+    Pages: Pages,
     Sections: Sections,
     Fragments: Fragments
 }
