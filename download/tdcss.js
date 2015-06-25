@@ -1,4 +1,4 @@
-/* tdcss.js - v0.7.0 - 2015-06-24
+/* tdcss.js - v0.7.0 - 2015-06-25
 * http://jakobloekke.github.io/tdcss.js/
 * Copyright (c) 2015 Jakob Løkke Madsen;
 * License: MIT */
@@ -20328,6 +20328,7 @@ var fragmentInfoSplitter = config.fragmentInfoSplitter;
 // models
 var Models = require('../models');
 var Section = Models.Section;
+var Subsection = Models.Subsection;
 var Description = Models.Description;
 var CodeSnippet = Models.CodeSnippet;
 var JSCodeSnippet = Models.JSCodeSnippet;
@@ -20352,6 +20353,18 @@ function createFragmentFromComment(commentNode) {
         description = $.trim(getCommentMeta(commentNode)[1]);
 
         return new Section({
+            type: type,
+            name: fragmentTitle,
+            description: description
+        });
+    }
+
+    if (type === FragmentTypes.SUBSECTION.name) {
+        identifier = FragmentTypes[type].identifier;
+        fragmentTitle = getFragmentContent(commentNode, identifier);
+        description = $.trim(getCommentMeta(commentNode)[1]);
+
+        return new Subsection({
             type: type,
             name: fragmentTitle,
             description: description
@@ -20494,27 +20507,31 @@ module.exports = {
 var types = {
     SECTION: {
         name: 'SECTION',
-        identifier: "#"
+        identifier: "# "
+    },
+    SUBSECTION: {
+        name: 'SUBSECTION',
+        identifier: "## "
     },
     SNIPPET: {
         name: 'SNIPPET',
-        identifier: ":"
+        identifier: ": "
     },
     JS_SNIPPET: {
         name: 'JS_SNIPPET',
-        identifier: "_"
+        identifier: "_ "
     },
     COFFEE_SNIPPET: {
         name: 'COFFEE_SNIPPET',
-        identifier: "->"
+        identifier: "-> "
     },
     NO_SNIPPET: {
         name: 'NO_SNIPPET',
-        identifier: "="
+        identifier: "= "
     },
     DESCRIPTION: {
         name: 'DESCRIPTION',
-        identifier: "&"
+        identifier: "& "
     }
 };
 
@@ -20601,6 +20618,12 @@ var Section = Fragment.extend({
     }
 });
 
+var Subsection = Fragment.extend({
+    defaults: {
+        title: ''
+    }
+});
+
 
 var CodeSnippet = Fragment.extend({
     defaults: {
@@ -20627,6 +20650,7 @@ module.exports = {
     Page: Page,
     Fragment: Fragment,
     Section: Section,
+    Subsection: Subsection,
     Description: Description,
     CodeSnippet: CodeSnippet,
     JSCodeSnippet: JSCodeSnippet
@@ -20649,8 +20673,8 @@ var _ = require('underscore');
 var FragmentTypes = require('./models/const.js');
 var Models = require('./models');
 var Page = Models.Page;
-var Pages = Models.Pages;
 var Section = Models.Section;
+var Subsection = Models.Subsection;
 var Description = Models.Description;
 var CodeSnippet = Models.CodeSnippet;
 var JSCodeSnippet = Models.JSCodeSnippet;
@@ -20661,6 +20685,7 @@ var Sections = require('./collections').Sections;
 // views
 var TDCSSElementsView = require('./views/tdcss-elements.js');
 var SectionView = require('./views/section.js');
+var SubsectionView = require('./views/subsection.js');
 var FragmentView = require('./views/fragment.js');
 var NavigationView = require('./views/tdcss-nav.js');
 var HeaderView = require('./views/tdcss-header.js');
@@ -20675,12 +20700,13 @@ var createFragmentFromComment = require('./dom_utils').createFragmentFromComment
         var settings = $.extend({
                 diff: false,
                 fragment_types: {
-                    section: {identifier: "#"},
-                    snippet: {identifier: ":"},
-                    jssnippet: {identifier: "_"},
-                    coffeesnippet: {identifier: "->"},
-                    no_snippet: {identifier: "="},
-                    description: {identifier: "&"}
+                    section: {identifier: "# "},
+                    subsection: {identifier: "## "},
+                    snippet: {identifier: ": "},
+                    jssnippet: {identifier: "_ "},
+                    coffeesnippet: {identifier: "-> "},
+                    no_snippet: {identifier: "= "},
+                    description: {identifier: "& "}
                 },
                 fragment_info_splitter: ";",
                 replacementContent: "...",
@@ -21181,7 +21207,7 @@ var createFragmentFromComment = require('./dom_utils').createFragmentFromComment
 
 window.$ = $;
 
-},{"./collections":41,"./dom_utils":43,"./models":45,"./models/const.js":44,"./views/fragment.js":48,"./views/section.js":50,"./views/tdcss-elements.js":51,"./views/tdcss-header.js":53,"./views/tdcss-nav.js":55,"jquery":38,"prismjs":39,"underscore":40}],47:[function(require,module,exports){
+},{"./collections":41,"./dom_utils":43,"./models":45,"./models/const.js":44,"./views/fragment.js":48,"./views/section.js":50,"./views/subsection.js":52,"./views/tdcss-elements.js":53,"./views/tdcss-header.js":55,"./views/tdcss-nav.js":57,"jquery":38,"prismjs":39,"underscore":40}],47:[function(require,module,exports){
 // hbsfy compiled Handlebars template
 var HandlebarsCompiler = require('hbsfy/runtime');
 module.exports = HandlebarsCompiler.template({"1":function(depth0,helpers,partials,data) {
@@ -21258,7 +21284,7 @@ module.exports = TDCSSView.extend({
     },
 });
 
-},{"../models/const.js":44,"./fragment.hbs":47,"./tdcss-view":56,"jquery":38,"underscore":40}],49:[function(require,module,exports){
+},{"../models/const.js":44,"./fragment.hbs":47,"./tdcss-view":58,"jquery":38,"underscore":40}],49:[function(require,module,exports){
 // hbsfy compiled Handlebars template
 var HandlebarsCompiler = require('hbsfy/runtime');
 module.exports = HandlebarsCompiler.template({"compiler":[6,">= 2.0.0-beta.1"],"main":function(depth0,helpers,partials,data) {
@@ -21277,7 +21303,9 @@ module.exports = HandlebarsCompiler.template({"compiler":[6,">= 2.0.0-beta.1"],"
 
 },{"hbsfy/runtime":37}],50:[function(require,module,exports){
 var TDCSSView = require('./tdcss-view');
+var FacetTypes = require ('../models/const.js');
 var FragmentView = require('./fragment');
+var SubsectionView = require('./subsection');
 
 module.exports = TDCSSView.extend({
     className: "tdcss-section",
@@ -21302,7 +21330,12 @@ module.exports = TDCSSView.extend({
 
     renderChildren: function () {
         var childMarkup = this.model.children.map(function (child) {
-            var view = new FragmentView({model: child});
+            var view;
+            if (child.get('type') === FacetTypes.SUBSECTION.name) {
+                view = new SubsectionView({model: child});
+            } else {
+                view = new FragmentView({model: child});
+            }
             return view.render().$el.html();
         });
         return childMarkup;
@@ -21314,14 +21347,56 @@ module.exports = TDCSSView.extend({
     }
 });
 
-},{"./fragment":48,"./section.hbs":49,"./tdcss-view":56}],51:[function(require,module,exports){
+},{"../models/const.js":44,"./fragment":48,"./section.hbs":49,"./subsection":52,"./tdcss-view":58}],51:[function(require,module,exports){
+// hbsfy compiled Handlebars template
+var HandlebarsCompiler = require('hbsfy/runtime');
+module.exports = HandlebarsCompiler.template({"compiler":[6,">= 2.0.0-beta.1"],"main":function(depth0,helpers,partials,data) {
+    var helper, alias1=helpers.helperMissing, alias2="function", alias3=this.escapeExpression;
+
+  return "<div class=\"tdcss-subgroup tdcss-font\" id=\""
+    + alias3(((helper = (helper = helpers.href || (depth0 != null ? depth0.href : depth0)) != null ? helper : alias1),(typeof helper === alias2 ? helper.call(depth0,{"name":"href","hash":{},"data":data}) : helper)))
+    + "\">\n  <h2 class=\"tdcss-subgroup__title\">"
+    + alias3(((helper = (helper = helpers.name || (depth0 != null ? depth0.name : depth0)) != null ? helper : alias1),(typeof helper === alias2 ? helper.call(depth0,{"name":"name","hash":{},"data":data}) : helper)))
+    + "</h2>\n  <div class=\"tdcss-subgroup__description tdcss-text--dimmed\">\n    "
+    + alias3(((helper = (helper = helpers.description || (depth0 != null ? depth0.description : depth0)) != null ? helper : alias1),(typeof helper === alias2 ? helper.call(depth0,{"name":"description","hash":{},"data":data}) : helper)))
+    + "\n  </div>\n</div>\n";
+},"useData":true});
+
+},{"hbsfy/runtime":37}],52:[function(require,module,exports){
+var _ = require('underscore');
+var TDCSSView = require('./tdcss-view');
+var FacetTypes = require ('../models/const.js');
+var $ = require('jquery');
+
+
+module.exports = TDCSSView.extend({
+    className: "tdcss-subsection",
+    template: require('./subsection.hbs'),
+
+    attributes: function() {
+        var attributes = {
+          id: 'subsection-lol' // TODO: this needs to be the index inside collection?
+        }
+
+        return attributes;
+    },
+
+    getTemplateData: function() {
+      return _.extend ({
+            // TODO: this should be equivalent to https://github.com/edenspiekermann/tdcss.js/blob/5155de2d607f9353b0873046def3158221650bc4/src/tdcss.js#L203
+            renderSnippet: true
+        }, this.model.attributes);
+    },
+});
+
+},{"../models/const.js":44,"./subsection.hbs":51,"./tdcss-view":58,"jquery":38,"underscore":40}],53:[function(require,module,exports){
 var Backbone = require('backbone');
 
 module.exports = Backbone.View.extend({
     className: 'tdcss-elements'
 });
 
-},{"backbone":1}],52:[function(require,module,exports){
+},{"backbone":1}],54:[function(require,module,exports){
 // hbsfy compiled Handlebars template
 var HandlebarsCompiler = require('hbsfy/runtime');
 module.exports = HandlebarsCompiler.template({"1":function(depth0,helpers,partials,data) {
@@ -21340,7 +21415,7 @@ module.exports = HandlebarsCompiler.template({"1":function(depth0,helpers,partia
     + "        </ul>\n    </nav>\n    <label for=\"tdcssSectionsToggle\" class=\"tdcss-sections__toggle tdcss-nav-item--primary\">\n        <span class=\"tdcss-nav__toggle-label\">Sections</span>\n    </label>\n    <label for=\"tdcssMenuToggle\" class=\"tdcss-nav__toggle tdcss-nav-item--primary\">\n        <span class=\"tdcss-nav__toggle-label\">Groups</span>\n    </label>\n    <h1 class=\"tdcss-header__title\">TDCSS</h1>\n    <div class=\"nav-container\"></div>\n</header>\n";
 },"useData":true});
 
-},{"hbsfy/runtime":37}],53:[function(require,module,exports){
+},{"hbsfy/runtime":37}],55:[function(require,module,exports){
 var Backbone = require('backbone');
 var _ = require('underscore');
 var $ = require('jquery');
@@ -21358,8 +21433,6 @@ module.exports = Backbone.View.extend({
           mainMenuItems: mainMenuData
         };
 
-        // debugger
-
         this.$el.append(this.template(data));
 
         return this;
@@ -21367,7 +21440,7 @@ module.exports = Backbone.View.extend({
 
 });
 
-},{"./tdcss-header.hbs":52,"backbone":1,"jquery":38,"underscore":40}],54:[function(require,module,exports){
+},{"./tdcss-header.hbs":54,"backbone":1,"jquery":38,"underscore":40}],56:[function(require,module,exports){
 // hbsfy compiled Handlebars template
 var HandlebarsCompiler = require('hbsfy/runtime');
 module.exports = HandlebarsCompiler.template({"1":function(depth0,helpers,partials,data) {
@@ -21386,7 +21459,7 @@ module.exports = HandlebarsCompiler.template({"1":function(depth0,helpers,partia
     + "    </ul>\n</div>\n";
 },"useData":true});
 
-},{"hbsfy/runtime":37}],55:[function(require,module,exports){
+},{"hbsfy/runtime":37}],57:[function(require,module,exports){
 var _ = require('underscore');
 var TDCSSView = require('./tdcss-view');
 var FacetTypes = require ('../models/const.js');
@@ -21412,7 +21485,7 @@ module.exports = TDCSSView.extend({
 
 });
 
-},{"../models/const.js":44,"./tdcss-nav.hbs":54,"./tdcss-view":56,"jquery":38,"underscore":40}],56:[function(require,module,exports){
+},{"../models/const.js":44,"./tdcss-nav.hbs":56,"./tdcss-view":58,"jquery":38,"underscore":40}],58:[function(require,module,exports){
 var Backbone = require('backbone');
 var Handlebars = require('handlebars');
 

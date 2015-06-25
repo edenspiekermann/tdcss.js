@@ -1,5 +1,7 @@
 var TDCSSView = require('./tdcss-view');
+var FacetTypes = require ('../models/const.js');
 var FragmentView = require('./fragment');
+var SubsectionView = require('./subsection');
 
 module.exports = TDCSSView.extend({
     className: "tdcss-section",
@@ -24,7 +26,12 @@ module.exports = TDCSSView.extend({
 
     renderChildren: function () {
         var childMarkup = this.model.children.map(function (child) {
-            var view = new FragmentView({model: child});
+            var view;
+            if (child.get('type') === FacetTypes.SUBSECTION.name) {
+                view = new SubsectionView({model: child});
+            } else {
+                view = new FragmentView({model: child});
+            }
             return view.render().$el.html();
         });
         return childMarkup;

@@ -9,6 +9,7 @@ var fragmentInfoSplitter = config.fragmentInfoSplitter;
 // models
 var Models = require('../models');
 var Section = Models.Section;
+var Subsection = Models.Subsection;
 var Description = Models.Description;
 var CodeSnippet = Models.CodeSnippet;
 var JSCodeSnippet = Models.JSCodeSnippet;
@@ -33,6 +34,18 @@ function createFragmentFromComment(commentNode) {
         description = $.trim(getCommentMeta(commentNode)[1]);
 
         return new Section({
+            type: type,
+            name: fragmentTitle,
+            description: description
+        });
+    }
+
+    if (type === FragmentTypes.SUBSECTION.name) {
+        identifier = FragmentTypes[type].identifier;
+        fragmentTitle = getFragmentContent(commentNode, identifier);
+        description = $.trim(getCommentMeta(commentNode)[1]);
+
+        return new Subsection({
             type: type,
             name: fragmentTitle,
             description: description

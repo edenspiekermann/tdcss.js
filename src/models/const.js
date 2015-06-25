@@ -1,27 +1,31 @@
 var types = {
     SECTION: {
         name: 'SECTION',
-        identifier: "#"
+        identifier: "# "
+    },
+    SUBSECTION: {
+        name: 'SUBSECTION',
+        identifier: "## "
     },
     SNIPPET: {
         name: 'SNIPPET',
-        identifier: ":"
+        identifier: ": "
     },
     JS_SNIPPET: {
         name: 'JS_SNIPPET',
-        identifier: "_"
+        identifier: "_ "
     },
     COFFEE_SNIPPET: {
         name: 'COFFEE_SNIPPET',
-        identifier: "->"
+        identifier: "-> "
     },
     NO_SNIPPET: {
         name: 'NO_SNIPPET',
-        identifier: "="
+        identifier: "= "
     },
     DESCRIPTION: {
         name: 'DESCRIPTION',
-        identifier: "&"
+        identifier: "& "
     }
 };
 

@@ -1,4 +1,13 @@
 .tdcss-subgroup {
+  font-size: 18px;
+
+
   /* this is a crappy solution to evade the fixed top bar */
   padding-top: 3.8em;
+
+  padding-bottom: 2em;
+}
+
+.tdcss-subgroup__description {
+  font-size: 18px;
 }

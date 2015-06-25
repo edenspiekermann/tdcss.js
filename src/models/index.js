@@ -78,6 +78,12 @@ var Section = Fragment.extend({
     }
 });
 
+var Subsection = Fragment.extend({
+    defaults: {
+        title: ''
+    }
+});
+
 
 var CodeSnippet = Fragment.extend({
     defaults: {
@@ -104,6 +110,7 @@ module.exports = {
     Page: Page,
     Fragment: Fragment,
     Section: Section,
+    Subsection: Subsection,
     Description: Description,
     CodeSnippet: CodeSnippet,
     JSCodeSnippet: JSCodeSnippet

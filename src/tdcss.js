@@ -15,6 +15,7 @@ var FragmentTypes = require('./models/const.js');
 var Models = require('./models');
 var Page = Models.Page;
 var Section = Models.Section;
+var Subsection = Models.Subsection;
 var Description = Models.Description;
 var CodeSnippet = Models.CodeSnippet;
 var JSCodeSnippet = Models.JSCodeSnippet;
@@ -25,6 +26,7 @@ var Sections = require('./collections').Sections;
 // views
 var TDCSSElementsView = require('./views/tdcss-elements.js');
 var SectionView = require('./views/section.js');
+var SubsectionView = require('./views/subsection.js');
 var FragmentView = require('./views/fragment.js');
 var NavigationView = require('./views/tdcss-nav.js');
 var HeaderView = require('./views/tdcss-header.js');
@@ -39,12 +41,13 @@ var createFragmentFromComment = require('./dom_utils').createFragmentFromComment
         var settings = $.extend({
                 diff: false,
                 fragment_types: {
-                    section: {identifier: "#"},
-                    snippet: {identifier: ":"},
-                    jssnippet: {identifier: "_"},
-                    coffeesnippet: {identifier: "->"},
-                    no_snippet: {identifier: "="},
-                    description: {identifier: "&"}
+                    section: {identifier: "# "},
+                    subsection: {identifier: "## "},
+                    snippet: {identifier: ": "},
+                    jssnippet: {identifier: "_ "},
+                    coffeesnippet: {identifier: "-> "},
+                    no_snippet: {identifier: "= "},
+                    description: {identifier: "& "}
                 },
                 fragment_info_splitter: ";",
                 replacementContent: "...",
