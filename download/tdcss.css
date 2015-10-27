@@ -10,7 +10,7 @@
  * Based on dabblet (http://dabblet.com)
  * @author Lea Verou
  */
-/* line 8, /Users/lmadsen/Sites/tdcss/src/vendor/prism/prism.css */
+/* line 7, /Users/smartzoukos/Projects/ESPI/tdcss.js/src/vendor/prism/prism.css */
 code[class*="language-"],
 pre[class*="language-"] {
   color: black;
@@ -29,52 +29,52 @@ pre[class*="language-"] {
   hyphens: none; }
 
 /* Code blocks */
-/* line 28, /Users/lmadsen/Sites/tdcss/src/vendor/prism/prism.css */
+/* line 28, /Users/smartzoukos/Projects/ESPI/tdcss.js/src/vendor/prism/prism.css */
 pre[class*="language-"] {
   padding: 1em;
   margin: .5em 0;
   overflow: auto; }
 
-/* line 35, /Users/lmadsen/Sites/tdcss/src/vendor/prism/prism.css */
+/* line 34, /Users/smartzoukos/Projects/ESPI/tdcss.js/src/vendor/prism/prism.css */
 :not(pre) > code[class*="language-"],
 pre[class*="language-"] {
   background: #f5f2f0; }
 
 /* Inline code */
-/* line 40, /Users/lmadsen/Sites/tdcss/src/vendor/prism/prism.css */
+/* line 40, /Users/smartzoukos/Projects/ESPI/tdcss.js/src/vendor/prism/prism.css */
 :not(pre) > code[class*="language-"] {
   padding: .1em;
   border-radius: .3em; }
 
-/* line 48, /Users/lmadsen/Sites/tdcss/src/vendor/prism/prism.css */
+/* line 45, /Users/smartzoukos/Projects/ESPI/tdcss.js/src/vendor/prism/prism.css */
 .token.comment,
 .token.prolog,
 .token.doctype,
 .token.cdata {
   color: slategray; }
 
-/* line 52, /Users/lmadsen/Sites/tdcss/src/vendor/prism/prism.css */
+/* line 52, /Users/smartzoukos/Projects/ESPI/tdcss.js/src/vendor/prism/prism.css */
 .token.punctuation {
   color: #999; }
 
-/* line 56, /Users/lmadsen/Sites/tdcss/src/vendor/prism/prism.css */
+/* line 56, /Users/smartzoukos/Projects/ESPI/tdcss.js/src/vendor/prism/prism.css */
 .namespace {
   opacity: .7; }
 
-/* line 63, /Users/lmadsen/Sites/tdcss/src/vendor/prism/prism.css */
+/* line 60, /Users/smartzoukos/Projects/ESPI/tdcss.js/src/vendor/prism/prism.css */
 .token.property,
 .token.tag,
 .token.boolean,
 .token.number {
   color: #905; }
 
-/* line 69, /Users/lmadsen/Sites/tdcss/src/vendor/prism/prism.css */
+/* line 67, /Users/smartzoukos/Projects/ESPI/tdcss.js/src/vendor/prism/prism.css */
 .token.selector,
 .token.attr-name,
 .token.string {
   color: #690; }
 
-/* line 77, /Users/lmadsen/Sites/tdcss/src/vendor/prism/prism.css */
+/* line 73, /Users/smartzoukos/Projects/ESPI/tdcss.js/src/vendor/prism/prism.css */
 .token.operator,
 .token.entity,
 .token.url,
@@ -83,64 +83,64 @@ pre[class*="language-"] {
   color: #a67f59;
   background: rgba(255, 255, 255, 0.5); }
 
-/* line 84, /Users/lmadsen/Sites/tdcss/src/vendor/prism/prism.css */
+/* line 82, /Users/smartzoukos/Projects/ESPI/tdcss.js/src/vendor/prism/prism.css */
 .token.atrule,
 .token.attr-value,
 .token.keyword {
   color: #07a; }
 
-/* line 90, /Users/lmadsen/Sites/tdcss/src/vendor/prism/prism.css */
+/* line 89, /Users/smartzoukos/Projects/ESPI/tdcss.js/src/vendor/prism/prism.css */
 .token.regex,
 .token.important {
   color: #e90; }
 
-/* line 94, /Users/lmadsen/Sites/tdcss/src/vendor/prism/prism.css */
+/* line 94, /Users/smartzoukos/Projects/ESPI/tdcss.js/src/vendor/prism/prism.css */
 .token.important {
   font-weight: bold; }
 
-/* line 98, /Users/lmadsen/Sites/tdcss/src/vendor/prism/prism.css */
+/* line 98, /Users/smartzoukos/Projects/ESPI/tdcss.js/src/vendor/prism/prism.css */
 .token.entity {
   cursor: help; }
 
-/* line 1, /Users/lmadsen/Sites/tdcss/src/partials/_tdcss-code-example.scss */
+/* line 1, /Users/smartzoukos/Projects/ESPI/tdcss.js/src/partials/_tdcss-code-example.scss */
 .tdcss-code-example {
   float: right;
   width: 50%; }
-  /* line 5, /Users/lmadsen/Sites/tdcss/src/partials/_tdcss-code-example.scss */
+  /* line 5, /Users/smartzoukos/Projects/ESPI/tdcss.js/src/partials/_tdcss-code-example.scss */
   .tdcss-code-example pre {
     min-height: 6em;
     margin: 0;
     height: auto !important; }
-  /* line 13, /Users/lmadsen/Sites/tdcss/src/partials/_tdcss-code-example.scss */
+  /* line 12, /Users/smartzoukos/Projects/ESPI/tdcss.js/src/partials/_tdcss-code-example.scss */
   .tdcss-code-example :not(pre) > code[class*="language-"],
   .tdcss-code-example pre[class*="language-"] {
     background-color: inherit; }
 
-/* line 1, /Users/lmadsen/Sites/tdcss/src/partials/_tdcss-dom-example.scss */
+/* line 1, /Users/smartzoukos/Projects/ESPI/tdcss.js/src/partials/_tdcss-dom-example.scss */
 .tdcss-dom-example {
   float: left;
   position: relative;
   width: 100%;
   padding: 1em; }
 
-/* line 1, /Users/lmadsen/Sites/tdcss/src/partials/_tdcss-elements.scss */
+/* line 1, /Users/smartzoukos/Projects/ESPI/tdcss.js/src/partials/_tdcss-elements.scss */
 .tdcss-elements {
   padding: 0 5% 5%; }
-  /* line 4, /Users/lmadsen/Sites/tdcss/src/partials/_tdcss-elements.scss */
+  /* line 4, /Users/smartzoukos/Projects/ESPI/tdcss.js/src/partials/_tdcss-elements.scss */
   .tdcss-elements h1, .tdcss-elements h2, .tdcss-elements h3, .tdcss-elements p, .tdcss-elements ul {
     margin-top: 0; }
 
 @media (min-width: 701px) {
-  /* line 10, /Users/lmadsen/Sites/tdcss/src/partials/_tdcss-elements.scss */
+  /* line 10, /Users/smartzoukos/Projects/ESPI/tdcss.js/src/partials/_tdcss-elements.scss */
   .tdcss-elements {
     margin-left: 30%; } }
 
 @media (min-width: 850px) {
-  /* line 16, /Users/lmadsen/Sites/tdcss/src/partials/_tdcss-elements.scss */
+  /* line 16, /Users/smartzoukos/Projects/ESPI/tdcss.js/src/partials/_tdcss-elements.scss */
   .tdcss-elements {
     margin-left: 250px; } }
 
-/* line 1, /Users/lmadsen/Sites/tdcss/src/partials/_tdcss-fragment.scss */
+/* line 1, /Users/smartzoukos/Projects/ESPI/tdcss.js/src/partials/_tdcss-fragment.scss */
 .tdcss-fragment {
   position: relative;
   padding: 0;
@@ -148,65 +148,65 @@ pre[class*="language-"] {
   overflow: hidden;
   margin: 1em 0; }
 
-/* line 10, /Users/lmadsen/Sites/tdcss/src/partials/_tdcss-fragment.scss */
+/* line 10, /Users/smartzoukos/Projects/ESPI/tdcss.js/src/partials/_tdcss-fragment.scss */
 .tdcss-fragment__head {
   float: left;
   width: 100%; }
 
-/* line 16, /Users/lmadsen/Sites/tdcss/src/partials/_tdcss-fragment.scss */
+/* line 16, /Users/smartzoukos/Projects/ESPI/tdcss.js/src/partials/_tdcss-fragment.scss */
 .tdcss-fragment__toggle {
   float: left;
   border: 0;
   background: transparent;
   margin: .5em; }
-  /* line 22, /Users/lmadsen/Sites/tdcss/src/partials/_tdcss-fragment.scss */
+  /* line 22, /Users/smartzoukos/Projects/ESPI/tdcss.js/src/partials/_tdcss-fragment.scss */
   .tdcss-fragment__toggle:before {
     content: "\25b6";
     display: inline-block;
     font-size: .8em;
     width: 10px;
     vertical-align: text-top; }
-  /* line 30, /Users/lmadsen/Sites/tdcss/src/partials/_tdcss-fragment.scss */
+  /* line 30, /Users/smartzoukos/Projects/ESPI/tdcss.js/src/partials/_tdcss-fragment.scss */
   .is-fragment-details-expanded .tdcss-fragment__toggle:before {
     content: "\25bc"; }
 
-/* line 36, /Users/lmadsen/Sites/tdcss/src/partials/_tdcss-fragment.scss */
+/* line 36, /Users/smartzoukos/Projects/ESPI/tdcss.js/src/partials/_tdcss-fragment.scss */
 .tdcss-fragment__title {
   margin: 0;
   display: inline-block; }
 
-/* line 41, /Users/lmadsen/Sites/tdcss/src/partials/_tdcss-fragment.scss */
+/* line 41, /Users/smartzoukos/Projects/ESPI/tdcss.js/src/partials/_tdcss-fragment.scss */
 .tdcss-fragment__details {
   float: left;
   width: 100%;
   margin: 0;
   padding: .5em;
   display: none; }
-  /* line 48, /Users/lmadsen/Sites/tdcss/src/partials/_tdcss-fragment.scss */
+  /* line 48, /Users/smartzoukos/Projects/ESPI/tdcss.js/src/partials/_tdcss-fragment.scss */
   .is-fragment-details-expanded .tdcss-fragment__details {
     display: block; }
 
-/* line 53, /Users/lmadsen/Sites/tdcss/src/partials/_tdcss-fragment.scss */
+/* line 53, /Users/smartzoukos/Projects/ESPI/tdcss.js/src/partials/_tdcss-fragment.scss */
 .tdcss-fragment__usage {
   float: left;
   width: 48%;
   font-size: .9em;
   line-height: 1.4; }
 
-/* line 60, /Users/lmadsen/Sites/tdcss/src/partials/_tdcss-fragment.scss */
+/* line 60, /Users/smartzoukos/Projects/ESPI/tdcss.js/src/partials/_tdcss-fragment.scss */
 .tdcss-fragment__usage-heading {
   font-size: .9em;
   margin-bottom: .7em;
   font-weight: normal; }
 
-/* line 66, /Users/lmadsen/Sites/tdcss/src/partials/_tdcss-fragment.scss */
+/* line 66, /Users/smartzoukos/Projects/ESPI/tdcss.js/src/partials/_tdcss-fragment.scss */
 .tdcss-fragment__preview {
   float: left;
   width: 100%;
   margin: 0;
   padding: .5em; }
 
-/* line 1, /Users/lmadsen/Sites/tdcss/src/partials/_tdcss-group.scss */
+/* line 1, /Users/smartzoukos/Projects/ESPI/tdcss.js/src/partials/_tdcss-group.scss */
 .tdcss-group {
   width: 100%;
   padding: 1px 0 0 0;
@@ -216,42 +216,42 @@ pre[class*="language-"] {
   padding-top: 3.8em;
   position: relative; }
 
-/* line 15, /Users/lmadsen/Sites/tdcss/src/partials/_tdcss-group.scss */
+/* line 15, /Users/smartzoukos/Projects/ESPI/tdcss.js/src/partials/_tdcss-group.scss */
 .tdcss-group__head {
   display: block;
   padding: 1em 0;
   margin: 0;
   font-size: 2em; }
 
-/* line 24, /Users/lmadsen/Sites/tdcss/src/partials/_tdcss-group.scss */
+/* line 23, /Users/smartzoukos/Projects/ESPI/tdcss.js/src/partials/_tdcss-group.scss */
 .tdcss-group__title,
 .tdcss-group__description {
   margin-bottom: .5em; }
 
-/* line 28, /Users/lmadsen/Sites/tdcss/src/partials/_tdcss-group.scss */
+/* line 28, /Users/smartzoukos/Projects/ESPI/tdcss.js/src/partials/_tdcss-group.scss */
 .tdcss-group__description {
   font-size: .7em; }
 
-/* line 32, /Users/lmadsen/Sites/tdcss/src/partials/_tdcss-group.scss */
+/* line 32, /Users/smartzoukos/Projects/ESPI/tdcss.js/src/partials/_tdcss-group.scss */
 .tdcss-group__description strong {
   font-weight: bold; }
 
-/* line 36, /Users/lmadsen/Sites/tdcss/src/partials/_tdcss-group.scss */
+/* line 36, /Users/smartzoukos/Projects/ESPI/tdcss.js/src/partials/_tdcss-group.scss */
 .tdcss-group__description em {
   font-style: italic; }
 
-/* line 40, /Users/lmadsen/Sites/tdcss/src/partials/_tdcss-group.scss */
+/* line 40, /Users/smartzoukos/Projects/ESPI/tdcss.js/src/partials/_tdcss-group.scss */
 .tdcss-group__to-top {
   text-align: right; }
 
-/* line 44, /Users/lmadsen/Sites/tdcss/src/partials/_tdcss-group.scss */
+/* line 44, /Users/smartzoukos/Projects/ESPI/tdcss.js/src/partials/_tdcss-group.scss */
 .tdcss-group__to-top-link {
   display: inline-block;
   padding: 1em 0;
   color: inherit;
   text-decoration: none; }
 
-/* line 1, /Users/lmadsen/Sites/tdcss/src/partials/_tdcss-header.scss */
+/* line 1, /Users/smartzoukos/Projects/ESPI/tdcss.js/src/partials/_tdcss-header.scss */
 .tdcss-header {
   position: fixed;
   top: 0;
@@ -259,19 +259,19 @@ pre[class*="language-"] {
   z-index: 9999;
   overflow-y: hidden; }
   @media (min-width: 701px) {
-    /* line 1, /Users/lmadsen/Sites/tdcss/src/partials/_tdcss-header.scss */
+    /* line 1, /Users/smartzoukos/Projects/ESPI/tdcss.js/src/partials/_tdcss-header.scss */
     .tdcss-header {
       padding-right: 16px;
       height: 50px; } }
 
-/* line 14, /Users/lmadsen/Sites/tdcss/src/partials/_tdcss-header.scss */
+/* line 14, /Users/smartzoukos/Projects/ESPI/tdcss.js/src/partials/_tdcss-header.scss */
 .tdcss-header__title {
   font-size: 1.5em;
   padding-left: 16px;
   line-height: 50px;
   margin-bottom: 0; }
 
-/* line 1, /Users/lmadsen/Sites/tdcss/src/partials/_tdcss-mainmenu.scss */
+/* line 1, /Users/smartzoukos/Projects/ESPI/tdcss.js/src/partials/_tdcss-mainmenu.scss */
 .tdcss-mainmenu {
   padding-left: 0;
   margin-bottom: 0;
@@ -280,16 +280,16 @@ pre[class*="language-"] {
   line-height: 50px; }
 
 @media (min-width: 701px) {
-  /* line 9, /Users/lmadsen/Sites/tdcss/src/partials/_tdcss-mainmenu.scss */
+  /* line 9, /Users/smartzoukos/Projects/ESPI/tdcss.js/src/partials/_tdcss-mainmenu.scss */
   .tdcss-mainmenu__item {
     display: inline-block; } }
 
 @media (max-width: 701px) {
-  /* line 9, /Users/lmadsen/Sites/tdcss/src/partials/_tdcss-mainmenu.scss */
+  /* line 9, /Users/smartzoukos/Projects/ESPI/tdcss.js/src/partials/_tdcss-mainmenu.scss */
   .tdcss-mainmenu__item {
     border-bottom: 1px solid transparent; } }
 
-/* line 18, /Users/lmadsen/Sites/tdcss/src/partials/_tdcss-mainmenu.scss */
+/* line 18, /Users/smartzoukos/Projects/ESPI/tdcss.js/src/partials/_tdcss-mainmenu.scss */
 .tdcss-mainmenu__item a {
   display: block;
   padding-left: 24px;
@@ -297,7 +297,7 @@ pre[class*="language-"] {
   text-decoration: none;
   color: inherit; }
 
-/* line 1, /Users/lmadsen/Sites/tdcss/src/partials/_tdcss-menu.scss */
+/* line 1, /Users/smartzoukos/Projects/ESPI/tdcss.js/src/partials/_tdcss-menu.scss */
 .tdcss-menu {
   padding-left: 0;
   padding-top: 0;
@@ -305,14 +305,14 @@ pre[class*="language-"] {
   margin-top: 0;
   list-style: none; }
   @media (min-width: 701px) {
-    /* line 1, /Users/lmadsen/Sites/tdcss/src/partials/_tdcss-menu.scss */
+    /* line 1, /Users/smartzoukos/Projects/ESPI/tdcss.js/src/partials/_tdcss-menu.scss */
     .tdcss-menu {
       margin-right: -1px; } }
 
-/* line 13, /Users/lmadsen/Sites/tdcss/src/partials/_tdcss-menu.scss */
+/* line 13, /Users/smartzoukos/Projects/ESPI/tdcss.js/src/partials/_tdcss-menu.scss */
 .tdcss-menu__item {
   border-bottom: 1px solid transparent; }
-  /* line 16, /Users/lmadsen/Sites/tdcss/src/partials/_tdcss-menu.scss */
+  /* line 16, /Users/smartzoukos/Projects/ESPI/tdcss.js/src/partials/_tdcss-menu.scss */
   .tdcss-menu__item > a {
     padding: 16px;
     display: block;
@@ -325,11 +325,11 @@ pre[class*="language-"] {
  * 3. Off-canvas
  * 4. Responsible for opening/closing animation
  */
-/* line 8, /Users/lmadsen/Sites/tdcss/src/partials/_tdcss-nav.scss */
+/* line 8, /Users/smartzoukos/Projects/ESPI/tdcss.js/src/partials/_tdcss-nav.scss */
 .tdcss-nav {
   padding-top: 50px; }
   @media (max-width: 700px) {
-    /* line 8, /Users/lmadsen/Sites/tdcss/src/partials/_tdcss-nav.scss */
+    /* line 8, /Users/smartzoukos/Projects/ESPI/tdcss.js/src/partials/_tdcss-nav.scss */
     .tdcss-nav {
       -webkit-transform: translateX(-100%);
           -ms-transform: translateX(-100%);
@@ -346,7 +346,7 @@ pre[class*="language-"] {
       left: 0;
       z-index: 1; } }
   @media (min-width: 701px) {
-    /* line 8, /Users/lmadsen/Sites/tdcss/src/partials/_tdcss-nav.scss */
+    /* line 8, /Users/smartzoukos/Projects/ESPI/tdcss.js/src/partials/_tdcss-nav.scss */
     .tdcss-nav {
       position: fixed;
       height: 100%;
@@ -363,12 +363,12 @@ pre[class*="language-"] {
  * 2. ... on the right side of the nav (make sure overflow is visible)
  */
 @media (min-width: 701px) {
-  /* line 40, /Users/lmadsen/Sites/tdcss/src/partials/_tdcss-nav.scss */
+  /* line 40, /Users/smartzoukos/Projects/ESPI/tdcss.js/src/partials/_tdcss-nav.scss */
   .tdcss-nav__toggle {
     display: none; } }
 
 @media (max-width: 700px) {
-  /* line 40, /Users/lmadsen/Sites/tdcss/src/partials/_tdcss-nav.scss */
+  /* line 40, /Users/smartzoukos/Projects/ESPI/tdcss.js/src/partials/_tdcss-nav.scss */
   .tdcss-nav__toggle {
     float: right;
     line-height: 50px;
@@ -381,7 +381,7 @@ pre[class*="language-"] {
  * Checkbox responsible for the toggle hack
  * Hidden, no matter what
  */
-/* line 68, /Users/lmadsen/Sites/tdcss/src/partials/_tdcss-nav.scss */
+/* line 68, /Users/smartzoukos/Projects/ESPI/tdcss.js/src/partials/_tdcss-nav.scss */
 #tdcssMenuToggle {
   position: absolute;
   clip: rect(0 0 0 0);
@@ -390,7 +390,7 @@ pre[class*="language-"] {
 /**
  * When checkbox is checked, open the nav
  */
-/* line 77, /Users/lmadsen/Sites/tdcss/src/partials/_tdcss-nav.scss */
+/* line 77, /Users/smartzoukos/Projects/ESPI/tdcss.js/src/partials/_tdcss-nav.scss */
 #tdcssMenuToggle:checked ~ .tdcss-nav {
   -webkit-transform: translateX(0);
       -ms-transform: translateX(0);
@@ -405,7 +405,7 @@ pre[class*="language-"] {
  * See: http://timpietrusky.com/advanced-checkbox-hack
  * Beware, can be costly: http://codepen.io/HugoGiraudel/details/jPOREG#comment-id-89799
  */
-/* line 111, /Users/lmadsen/Sites/tdcss/src/partials/_tdcss-nav.scss */
+/* line 111, /Users/smartzoukos/Projects/ESPI/tdcss.js/src/partials/_tdcss-nav.scss */
 body {
   -webkit-animation: bugfix infinite 1s; }
 
@@ -419,11 +419,11 @@ body {
 /**
  * Provide a fallback for browsers that do not support CSS transforms
  */
-/* line 137, /Users/lmadsen/Sites/tdcss/src/partials/_tdcss-nav.scss */
+/* line 137, /Users/smartzoukos/Projects/ESPI/tdcss.js/src/partials/_tdcss-nav.scss */
 .no-csstransforms .tdcss-nav {
   left: -350px; }
 
-/* line 141, /Users/lmadsen/Sites/tdcss/src/partials/_tdcss-nav.scss */
+/* line 141, /Users/smartzoukos/Projects/ESPI/tdcss.js/src/partials/_tdcss-nav.scss */
 .no-csstransforms [id='tdcssMenuToggle']:checked ~ .tdcss-nav {
   left: 0; }
 
@@ -435,13 +435,13 @@ body {
  * 4. Responsible for opening/closing animation
  */
 @media (max-width: 700px) {
-  /* line 8, /Users/lmadsen/Sites/tdcss/src/partials/_tdcss-sections.scss */
+  /* line 8, /Users/smartzoukos/Projects/ESPI/tdcss.js/src/partials/_tdcss-sections.scss */
   .tdcss-sections {
     max-height: 0;
     overflow: hidden; } }
 
 @media (min-width: 701px) {
-  /* line 8, /Users/lmadsen/Sites/tdcss/src/partials/_tdcss-sections.scss */
+  /* line 8, /Users/smartzoukos/Projects/ESPI/tdcss.js/src/partials/_tdcss-sections.scss */
   .tdcss-sections {
     float: right; } }
 
@@ -451,12 +451,12 @@ body {
  * 2. ... on the right side of the nav (make sure overflow is visible)
  */
 @media (min-width: 701px) {
-  /* line 25, /Users/lmadsen/Sites/tdcss/src/partials/_tdcss-sections.scss */
+  /* line 25, /Users/smartzoukos/Projects/ESPI/tdcss.js/src/partials/_tdcss-sections.scss */
   .tdcss-sections__toggle {
     display: none; } }
 
 @media (max-width: 700px) {
-  /* line 25, /Users/lmadsen/Sites/tdcss/src/partials/_tdcss-sections.scss */
+  /* line 25, /Users/smartzoukos/Projects/ESPI/tdcss.js/src/partials/_tdcss-sections.scss */
   .tdcss-sections__toggle {
     float: right;
     line-height: 50px;
@@ -469,7 +469,7 @@ body {
  * Checkbox responsible for the toggle hack
  * Hidden, no matter what
  */
-/* line 52, /Users/lmadsen/Sites/tdcss/src/partials/_tdcss-sections.scss */
+/* line 52, /Users/smartzoukos/Projects/ESPI/tdcss.js/src/partials/_tdcss-sections.scss */
 #tdcssSectionsToggle {
   position: absolute;
   clip: rect(0 0 0 0);
@@ -478,7 +478,7 @@ body {
 /**
  * When checkbox is checked, open the nav
  */
-/* line 61, /Users/lmadsen/Sites/tdcss/src/partials/_tdcss-sections.scss */
+/* line 61, /Users/smartzoukos/Projects/ESPI/tdcss.js/src/partials/_tdcss-sections.scss */
 #tdcssSectionsToggle:checked ~ .tdcss-sections {
   max-height: 500px; }
 
@@ -491,7 +491,7 @@ body {
  * See: http://timpietrusky.com/advanced-checkbox-hack
  * Beware, can be costly: http://codepen.io/HugoGiraudel/details/jPOREG#comment-id-89799
  */
-/* line 96, /Users/lmadsen/Sites/tdcss/src/partials/_tdcss-sections.scss */
+/* line 96, /Users/smartzoukos/Projects/ESPI/tdcss.js/src/partials/_tdcss-sections.scss */
 body {
   -webkit-animation: bugfix infinite 1s; }
 
@@ -505,44 +505,37 @@ body {
 /**
  * Provide a fallback for browsers that do not support CSS transforms
  */
-/* line 122, /Users/lmadsen/Sites/tdcss/src/partials/_tdcss-sections.scss */
+/* line 122, /Users/smartzoukos/Projects/ESPI/tdcss.js/src/partials/_tdcss-sections.scss */
 .no-csstransforms .tdcss-sections {
   left: -350px; }
 
-/* line 126, /Users/lmadsen/Sites/tdcss/src/partials/_tdcss-sections.scss */
+/* line 126, /Users/smartzoukos/Projects/ESPI/tdcss.js/src/partials/_tdcss-sections.scss */
 .no-csstransforms [id='tdcssSectionsToggle']:checked ~ .tdcss-sections {
   left: 0; }
 
-/* line 1, /Users/lmadsen/Sites/tdcss/src/partials/_tdcss-subgroup.scss */
+/* line 1, /Users/smartzoukos/Projects/ESPI/tdcss.js/src/partials/_tdcss-subgroup.scss */
 .tdcss-subgroup {
-  font-size: 18px;
-  /* this is a crappy solution to evade the fixed top bar */
-  padding-top: 3.8em;
-  padding-bottom: 2em; }
-
-/* line 11, /Users/lmadsen/Sites/tdcss/src/partials/_tdcss-subgroup.scss */
-.tdcss-subgroup__description {
   font-size: 18px; }
 
-/* line 1, /Users/lmadsen/Sites/tdcss/src/partials/_tdcss-submenu.scss */
+/* line 1, /Users/smartzoukos/Projects/ESPI/tdcss.js/src/partials/_tdcss-submenu.scss */
 .tdcss-submenu {
   list-style: none;
   padding-left: 16px;
   padding-bottom: 8px; }
 
-/* line 7, /Users/lmadsen/Sites/tdcss/src/partials/_tdcss-submenu.scss */
+/* line 7, /Users/smartzoukos/Projects/ESPI/tdcss.js/src/partials/_tdcss-submenu.scss */
 .tdcss-submenu__item {
   padding-top: 8px;
   padding-bottom: 8px; }
-  /* line 11, /Users/lmadsen/Sites/tdcss/src/partials/_tdcss-submenu.scss */
+  /* line 11, /Users/smartzoukos/Projects/ESPI/tdcss.js/src/partials/_tdcss-submenu.scss */
   .tdcss-submenu__item > a {
     text-decoration: none; }
-    /* line 14, /Users/lmadsen/Sites/tdcss/src/partials/_tdcss-submenu.scss */
+    /* line 14, /Users/smartzoukos/Projects/ESPI/tdcss.js/src/partials/_tdcss-submenu.scss */
     .tdcss-submenu__item > a::before {
       content: '—';
       margin-right: 8px; }
 
-/* line 1, /Users/lmadsen/Sites/tdcss/src/partials/_tdcss-top.scss */
+/* line 1, /Users/smartzoukos/Projects/ESPI/tdcss.js/src/partials/_tdcss-top.scss */
 .tdcss-top {
   position: relative;
   padding: 0;
@@ -550,25 +543,25 @@ body {
   width: 100%;
   height: 2em; }
 
-/* line 9, /Users/lmadsen/Sites/tdcss/src/partials/_tdcss-top.scss */
+/* line 9, /Users/smartzoukos/Projects/ESPI/tdcss.js/src/partials/_tdcss-top.scss */
 .tddcss-top__link {
   float: right;
   margin-right: 1.25em;
   color: #558696; }
 
-/* line 15, /Users/lmadsen/Sites/tdcss/src/partials/_tdcss-top.scss */
+/* line 15, /Users/smartzoukos/Projects/ESPI/tdcss.js/src/partials/_tdcss-top.scss */
 .tddcss-top__link:hover {
   color: #96cddf; }
 
-/* line 29, /Users/lmadsen/Sites/tdcss/src/tdcss.scss */
+/* line 29, /Users/smartzoukos/Projects/ESPI/tdcss.js/src/tdcss.scss */
 body {
   margin: 0; }
 
-/* line 33, /Users/lmadsen/Sites/tdcss/src/tdcss.scss */
+/* line 33, /Users/smartzoukos/Projects/ESPI/tdcss.js/src/tdcss.scss */
 [class*='tdcss-'] {
   box-sizing: border-box; }
 
-/* line 39, /Users/lmadsen/Sites/tdcss/src/tdcss.scss */
+/* line 38, /Users/smartzoukos/Projects/ESPI/tdcss.js/src/tdcss.scss */
 .tdcss-diff-warning,
 .tdcss-fragment .tdcss-diff-stats {
   position: absolute;
@@ -580,26 +573,26 @@ body {
   color: white;
   background-color: red; }
 
-/* line 50, /Users/lmadsen/Sites/tdcss/src/tdcss.scss */
+/* line 50, /Users/smartzoukos/Projects/ESPI/tdcss.js/src/tdcss.scss */
 .tdcss-diff-warning {
   position: fixed;
   z-index: 10000;
   font-size: 12px; }
 
-/* line 56, /Users/lmadsen/Sites/tdcss/src/tdcss.scss */
+/* line 56, /Users/smartzoukos/Projects/ESPI/tdcss.js/src/tdcss.scss */
 .tdcss-diff-warning > a {
   padding-left: 0.25em;
   color: white; }
 
-/* line 61, /Users/lmadsen/Sites/tdcss/src/tdcss.scss */
+/* line 61, /Users/smartzoukos/Projects/ESPI/tdcss.js/src/tdcss.scss */
 .tdcss-diff-warning > a:hover {
   text-decoration: none; }
 
-/* line 65, /Users/lmadsen/Sites/tdcss/src/tdcss.scss */
+/* line 65, /Users/smartzoukos/Projects/ESPI/tdcss.js/src/tdcss.scss */
 .tdcss-fragment.tdcss-has-diff {
   outline: 1px dotted red; }
 
-/* line 69, /Users/lmadsen/Sites/tdcss/src/tdcss.scss */
+/* line 69, /Users/smartzoukos/Projects/ESPI/tdcss.js/src/tdcss.scss */
 .tdcss-diff-image {
   position: absolute;
   top: 0;
@@ -608,7 +601,7 @@ body {
   pointer-events: none;
   opacity: 0.5; }
 
-/* line 78, /Users/lmadsen/Sites/tdcss/src/tdcss.scss */
+/* line 78, /Users/smartzoukos/Projects/ESPI/tdcss.js/src/tdcss.scss */
 .tdcss-no-fragments {
   font-weight: 200;
   color: gray;
